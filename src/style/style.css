@@ -1,0 +1,43 @@
+:root {
+    --primary-color: #2d3033;
+    --secondary-color: #202122;
+    --accent-color: #4287f5;
+}
+
+* {
+    background-color: var(--primary-color);
+    color: white;
+    font-family: Arial;
+}
+
+h1 {
+    text-align: center;
+}
+
+div > * {
+    background-color: var(--secondary-color);
+}
+
+div {
+    background-color: var(--secondary-color);
+    max-width: 20em;
+    padding: 0.2em 1em;
+    margin: auto;
+    margin-bottom: 0.1em;
+    border-radius: 2em;
+}
+
+div.contact {
+    padding: 0.5em 1em 1.5em 1em;
+}
+
+a.button {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+    text-decoration: none;
+
+    border-radius: 1em;
+    padding: 0.4em 1em;
+    background-color: var(--accent-color);
+}
