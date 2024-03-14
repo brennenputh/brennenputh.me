@@ -20,7 +20,7 @@ jobs:
           node-version: 18
 
       - name: Build project
-        run: pnpm run build
+        run: npm run build
 
       - name: Upload production-ready build files
         uses: actions/upload-pages-artifact@v3
