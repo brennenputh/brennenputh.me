@@ -7,4 +7,18 @@
   width: 50%;
   display: flex;
   margin: 0px auto;
+  background-color: #1f1f1f;
+  color: #f3f3f3;
+}
+
+a:link {
+  color: #26a1ff;
+}
+
+a:visited {
+  color: #7340ff;
+}
+
+a:hover {
+  color: #36b1ff;
 }
