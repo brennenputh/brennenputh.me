@@ -1,0 +1,19 @@
+name: Zola Deploy
+
+on: 
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Publish site
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout main
+      uses: actions/checkout@v4
+    - name: Build and deploy
+      uses: shalzz/zola-deploy-action@v0.20.0
+      env:
+        CHECK_LINKS: true
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
