@@ -1,0 +1,18 @@
+{% extends "base.html" %} 
+
+{% block content %}
+<h1 class="title">Brennen Puth</h1>
+<p>
+  I'm currently a Computer Science student at Cedarville University. This is my
+  place to experiment and play, and perhaps produce something of value
+  occasionally.
+</p>
+<p>
+  My <a href="{{ get_url(path='@/blog/_index.md')}}">blog</a> is the primary
+  place you'll see new content from me.
+</p>
+<p>
+  I also have a list of <a href="{{ get_url(path='@/projects/_index.md')}}">projects</a> available, if you happen to be interested in
+  what I have worked on in the past.
+</p>
+{% endblock content %}

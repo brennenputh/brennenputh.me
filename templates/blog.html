@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block head %}
+  {{ super() }}
+  <link rel="stylesheet" href="/blog/list.css" />
+{% endblock head %}
+
+{% block title %}
+  <title>Blog</title>
+{% endblock title %}
+
+{% block content %}
+<h1 class="title">
+  {{ section.title }}
+</h1>
+<!-- If you are using pagination, section.pages will be empty.
+     You need to use the paginator object -->  
+{% for page in section.pages %}
+<a href="{{ page.permalink | safe }}">
+  <div class="page-item">
+    <h3 class="page-title">{{ page.title }}</h3>
+    <div class="page-info">
+      {{ page.date }} | Reading Time: {{ page.reading_time }}m
+    </div>
+  </div>
+</a>
+{% endfor %}
+{% endblock content %}
