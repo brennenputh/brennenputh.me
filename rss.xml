@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+      <title></title>
+      <link>https://brennenputh.me</link>
+      <description></description>
+      <generator>Zola</generator>
+      <language>en</language>
+      <atom:link href="https://brennenputh.me/rss.xml" rel="self" type="application/rss+xml"/>
+      <lastBuildDate>Wed, 19 Mar 2025 00:00:00 +0000</lastBuildDate>
+      <item>
+          <title>Thoughts on Teaching Text Editing</title>
+          <pubDate>Wed, 19 Mar 2025 00:00:00 +0000</pubDate>
+          <author>themerebagatelle@gmail.com (Brennen Puth)</author>
+          <link>https://brennenputh.me/blog/teaching-text-editing/</link>
+          <guid>https://brennenputh.me/blog/teaching-text-editing/</guid>
+          <description xml:base="https://brennenputh.me/blog/teaching-text-editing/">&lt;h3 id=&quot;why&quot;&gt;Why?&lt;&#x2F;h3&gt;
+&lt;p&gt;A friend recently asked me the question that&#x27;s been around since the dawn of editors: &quot;Is it best to teach someone programming with a pure text editor or with an IDE?&quot;
+There is some bias to the formation of the question.
+No one who did not believe a text editor was objectively better for one reason or another would ask it with that wording.
+In response, I tried to take a reasonable position allowing both IDEs and text editors for teaching.
+Our short discussion spawned another in my opinion more interesting question in my mind, however.&lt;&#x2F;p&gt;
+&lt;p&gt;What editing tools &lt;strong&gt;should&lt;&#x2F;strong&gt; be taught to programming students?&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;how&quot;&gt;How?&lt;&#x2F;h3&gt;
+&lt;p&gt;My mind immediately cries out that they should start with the basics.
+Nothing but a empty Vim buffer and a small cheatsheet for whatever language they&#x27;re being taught first.
+Then, they learn the fundamentals of exactly which character goes where, and they have a deep understanding of the syntax.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;Wait.&lt;&#x2F;strong&gt; Of the &lt;em&gt;syntax&lt;&#x2F;em&gt;?&lt;&#x2F;p&gt;
+&lt;p&gt;Perhaps I&#x27;ll write up my full opinions on this later, but suffice it to say for now that syntax should not be the goal of teaching programming.
+Of course, you need a framework, so you teach someone how to express something in syntax.
+I&#x27;m not insane enough (yet) to propose a pure pseudocode curriculum, and besides, that would only swap one sort of syntax for another.&lt;&#x2F;p&gt;
+&lt;p&gt;What I want is for the syntax and design of the language not to get in the way of learning.
+Unfortunately, there is no way around syntax at a fundamental level.
+At some point the language must be in the learning programmer&#x27;s way, and I don&#x27;t think that&#x27;s a bad thing.
+So if we can&#x27;t improve the language, the tooling is the next best thing.
+I believe there exist a few tools which both do not inhibit learning and are ubiquitous among languages (unless you write your own, I suppose).&lt;&#x2F;p&gt;
+&lt;h4 id=&quot;in-editor-code-analysis&quot;&gt;In-Editor Code Analysis&lt;&#x2F;h4&gt;
+&lt;p&gt;I can hear the comments now. &quot;You&#x27;ve practically just allowed an IDE!&quot;
+Look. There comes a time to make people watch their syntax carefully as they write it.
+It&#x27;s not while you&#x27;re learning how a computer thinks.&lt;&#x2F;p&gt;
+&lt;p&gt;The faster the feedback loop, the better the learning.
+The amount of people I&#x27;ve helped who waited to compile until they were done typing a whole bunch of incorrect code, simply because compiling takes a lot of keystrokes, is insane.
+While teaching &quot;compile and test often&quot; is good, &lt;em&gt;it should not take 20 keystrokes to check your syntax is right&lt;&#x2F;em&gt;.&lt;&#x2F;p&gt;
+&lt;h4 id=&quot;code-formatter&quot;&gt;Code Formatter&lt;&#x2F;h4&gt;
+&lt;p&gt;Cedarville (where I&#x27;m getting my bachelors), at the very least, has a C++ and Java programming format policy.
+I highly appreciate the effort.
+Only, code formatters solved that problem a while ago.
+There&#x27;s an opinionated formatter for basically every commonly taught language, and it should be standard to leave most of the formatting to it.&lt;&#x2F;p&gt;
+&lt;p&gt;Some examples in modern (and not modern) programming languages:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;docs.kernel.org&#x2F;dev-tools&#x2F;clang-format.html&quot;&gt;clang-format&lt;&#x2F;a&gt; for C++.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;rust-lang&#x2F;rustfmt&quot;&gt;rustfmt&lt;&#x2F;a&gt; for Rust.  It&#x27;s inbuilt into the Rust install, anyways.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;psf&#x2F;black&quot;&gt;black&lt;&#x2F;a&gt; for Python.&lt;&#x2F;li&gt;
+&lt;li&gt;Go just has a inbuilt &lt;a href=&quot;https:&#x2F;&#x2F;go.dev&#x2F;blog&#x2F;gofmt&quot;&gt;command&lt;&#x2F;a&gt;. No need to even install anything.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;I omitted Java, because there is no good argument for not using a Java IDE, which should come with all of the tools I mention here and more.&lt;&#x2F;p&gt;
+&lt;p&gt;The point is, formatting is something to give to tools.
+Standardize a config for your clang-format, not a formal specification document (specifically in the context of teaching).
+Especially when languages have begun to bundle these sorts of tools, it&#x27;s absolutely silly to insist that your format is better.&lt;&#x2F;p&gt;
+&lt;p&gt;From a teaching and grading perspective, the formatters also can help.
+Most of these tools also have a validate mode to ensure the input code is already formatted.&lt;&#x2F;p&gt;
+&lt;h4 id=&quot;code-formatter-pt-2&quot;&gt;Code Formatter, pt 2&lt;&#x2F;h4&gt;
+&lt;p&gt;A tool which closes a bracket for you, or maybe spaces out your brackets as you hit &lt;code&gt;Enter&lt;&#x2F;code&gt; instead of afterwards.
+This is something I went without for a while on my Neovim config, and it was incredibly painful.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;xkcd.com&#x2F;comics&#x2F;(.png&quot; alt=&quot;Opening brackets need closed.&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;sup&gt;Credit XKCD for the image.&lt;&#x2F;sup&gt;&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;an-ending&quot;&gt;An Ending&lt;&#x2F;h3&gt;
+&lt;p&gt;I consider this document to be a &quot;standard of living&quot; for a new programmer.
+Vim and Vim alone is a terrible strategy when we have tools to help.
+So long as those tools teach good behavior and get out of the programmer&#x27;s way as much as possible, I see no reason not to use them.&lt;&#x2F;p&gt;
+&lt;p&gt;I will admit, it&#x27;s also a personal preference.
+Helping people who don&#x27;t format their code nicely until they submit pains every programming instinct I have.&lt;&#x2F;p&gt;
+</description>
+      </item>
+      <item>
+          <title>590 Thousand If Statements, For the Web</title>
+          <pubDate>Sun, 11 Aug 2024 00:00:00 +0000</pubDate>
+          <author>themerebagatelle@gmail.com (Brennen Puth)</author>
+          <link>https://brennenputh.me/blog/590-thousand-if-statements/</link>
+          <guid>https://brennenputh.me/blog/590-thousand-if-statements/</guid>
+          <description xml:base="https://brennenputh.me/blog/590-thousand-if-statements/">&lt;p&gt;This post was almost entirely inspired by &lt;a href=&quot;https:&#x2F;&#x2F;andreasjhkarlsson.github.io&#x2F;jekyll&#x2F;update&#x2F;2023&#x2F;12&#x2F;27&#x2F;4-billion-if-statements.html&quot;&gt;Andreas Karlson&#x27;s blog post&lt;&#x2F;a&gt; where he details how he created the worst version of an &lt;code&gt;isOdd&lt;&#x2F;code&gt; function ever to visit this land.
+Andreas&#x27;s 4 billion if statements cover the whole of 32-bit integers, and ultimately were written in Assembly to avoid compiler limits from C++.
+Of course, when I saw this post, I wondered, how crippled would a browser be to read a 4 billion if statement WASM program?&lt;&#x2F;p&gt;
+&lt;p&gt;I started my exploration in a similar way: I attempted to write a Rust program that compiled to WASM for the simplest solution.
+Using a Python script to generate the if statements, I used the first wasm-pack base I found and gave Rust a shot.
+This went well for smaller numbers (under 2^20 or so).  After reaching 2^20, the Rust compile times became absurdly long.
+The file with 2^8 if statements compiled in about 10 seconds.  The file with 2^16 took about 8 minutes.
+When I tried the file with 2^24 if statements, the Rust compiler still tried, but ultimately I had to go to bed and shut it down after about three hours.
+This isn&#x27;t too surprising, since the Rust compiler is optimized for safety, but I did want a WASM file with 4 billion if statements before the end of the millenia still.&lt;&#x2F;p&gt;
+&lt;p&gt;When Rust took too long, I decided the C&#x2F;C++ to WASM route was probably also improbable for the same reason as in the original rendition.  The compiler won&#x27;t like a 330GB code file.
+I may also have decided this because I really wanted to mess with writing binaries, but that&#x27;s not the point here.
+The point here is that the plan was to write the WASM by hand.&lt;&#x2F;p&gt;
+&lt;p&gt;Since I didn&#x27;t have any prior experience with working with binary formats, I started by compiling a simple WASM program which did a single comparison, and parsed that in order to understand what was going on.
+With a single if statement, I was able to begin understanding the binary format.  Here&#x27;s the quick explanation:&lt;&#x2F;p&gt;
+&lt;p&gt;WASM files all start with the following bytes, the first four are a special sequence (equivalent to &lt;code&gt;\0asm&lt;&#x2F;code&gt;) and the latter four are a version number.  WASM is on version one at the time of writing.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;00 61 73 6D 01 00 00 00
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The next step is the types section.  Quick detour about sections, every one starts with a id and then a &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;LEB128&quot;&gt;LEB128 encoded number&lt;&#x2F;a&gt; which defines the length of the section.
+The type section has an id of &lt;code&gt;3&lt;&#x2F;code&gt; and will contain a single function type, taking a i32 parameter and returning a i32.  Booleans in WASM are represented by i32, returning a &lt;code&gt;0&lt;&#x2F;code&gt; or &lt;code&gt;1&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;01 06 01 60 01 7F 01 7F
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;I won&#x27;t go too far into the details of the type here, you can take a look at the &lt;a href=&quot;https:&#x2F;&#x2F;webassembly.github.io&#x2F;spec&#x2F;core&#x2F;appendix&#x2F;index-instructions.html&quot;&gt;WASM instruction list&lt;&#x2F;a&gt; yourself if you get curious.&lt;&#x2F;p&gt;
+&lt;p&gt;The function also has to be defined separately in the function section, which is simple enough.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;03 02 01 00
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;To translate, we are declaring we are in section id 3, giving it a length of 2, and reporting which types the function has in the func section of the module.
+I don&#x27;t fully understand this bit either, don&#x27;t worry.  All that&#x27;s important here is that the compiler expects it.&lt;&#x2F;p&gt;
+&lt;p&gt;Finally, the function needs a name, given in the export section.  This is also the section that makes the function available from JavaScript.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;07 09 01 05 69 73 4F 64 64 00 00
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The gist of this one is that the ASCII for the function name &lt;code&gt;isOdd&lt;&#x2F;code&gt; is encoded into the bytes of the section.&lt;&#x2F;p&gt;
+&lt;p&gt;All of this can come together into a simple Python script to write the preamble for our code.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;py&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-py &quot;&gt;&lt;code class=&quot;language-py&quot; data-lang=&quot;py&quot;&gt;&lt;span&gt;filename = &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;isodd.wasm&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;start_bin = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;bytes&lt;&#x2F;span&gt;&lt;span&gt;([&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x00&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x61&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x73&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x6D&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x01&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x00&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x00&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x00&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;                   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x01&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x06&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x01&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x60&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x01&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x7F&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x01&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x7F&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;                   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x03&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x02&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x01&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x00&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;                   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x07&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x09&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x01&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x05&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x69&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x73&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x4F&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x64&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x64&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x00&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x00&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;                   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x0A&lt;&#x2F;span&gt;&lt;span&gt;])
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;with &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;open&lt;&#x2F;span&gt;&lt;span&gt;(filename, &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;wb+&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;as &lt;&#x2F;span&gt;&lt;span&gt;f:
+&lt;&#x2F;span&gt;&lt;span&gt;    f.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;write&lt;&#x2F;span&gt;&lt;span&gt;(start_bin)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The final &lt;code&gt;0A&lt;&#x2F;code&gt; byte is to start the code section.&lt;&#x2F;p&gt;
+&lt;p&gt;With all that tedious work out of the way, now comes the fun part.  Unlike in raw Assembly, the resulting WASM file is exporting a function.  WASM doesn&#x27;t have anything to the effect of &lt;code&gt;return true&lt;&#x2F;code&gt; that we can use.
+The easy version of the code in a sane language would&#x27;ve looked like this.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;c++&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c++ &quot;&gt;&lt;code class=&quot;language-c++&quot; data-lang=&quot;c++&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;(x == &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;true&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;(x == &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2&lt;&#x2F;span&gt;&lt;span&gt;) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;false&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;...
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Instead, WASM forces us into a paradigm that looks more like this.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;c++&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c++ &quot;&gt;&lt;code class=&quot;language-c++&quot; data-lang=&quot;c++&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;(x == &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;true&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;else &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;(x == &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2&lt;&#x2F;span&gt;&lt;span&gt;) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;false&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;else &lt;&#x2F;span&gt;&lt;span&gt;{ ... }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;This isn&#x27;t a huge issue, but it forces a slightly different code structure where we have to end all of those else statements at some point.&lt;&#x2F;p&gt;
+&lt;p&gt;The other issue is that we can&#x27;t have all 4 billion if statements in memory at once, or my Linux environment likes to freeze up and kill the process.  Instead, we write byte by byte appending into the file.
+This doesn&#x27;t seem like an issue until you remember that we don&#x27;t really know how long the code is until we generate it, and I don&#x27;t want to go back and write into a specific byte of the file because I&#x27;m lazy and don&#x27;t feel like it.
+We&#x27;ll solve that issue later, though, and just focus on getting the code written for now.  I&#x27;ll pretend I have it solved by making a variable and dealing with it later.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;py&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-py &quot;&gt;&lt;code class=&quot;language-py&quot; data-lang=&quot;py&quot;&gt;&lt;span&gt;function_size = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;32 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# This is incredibly wrong
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;For the actual code part, the concept is simple.  WASM is a stack-based language, which means you do operations by pushing values onto the stack.
+To do the simple comparison (&lt;code&gt;if (x == 1)&lt;&#x2F;code&gt;), it takes four steps.  First, grab the local variable (&lt;code&gt;x&lt;&#x2F;code&gt;) with the bytes &lt;code&gt;20 00&lt;&#x2F;code&gt;, &lt;code&gt;20&lt;&#x2F;code&gt; meaning get a local variable, and &lt;code&gt;00&lt;&#x2F;code&gt; being the first one.
+Second, push the constant value to compare with onto the stack with &lt;code&gt;41 ??&lt;&#x2F;code&gt;, &lt;code&gt;41&lt;&#x2F;code&gt; being load constant and &lt;code&gt;??&lt;&#x2F;code&gt; being our number to load.  The number is encoded in LEB128 format, which will make life a little harder later, but not much.
+Third, compare the two and leave that value on the stack with &lt;code&gt;46&lt;&#x2F;code&gt;, which is the instruction for &lt;code&gt;==&lt;&#x2F;code&gt; in WASM.
+Fourth, the if statement is represented with &lt;code&gt;04 7F&lt;&#x2F;code&gt;, with &lt;code&gt;04&lt;&#x2F;code&gt; being the if and &lt;code&gt;7F&lt;&#x2F;code&gt; being the return type of i32.
+Fifth, to write our code inside this if statement, &lt;code&gt;41 ??&lt;&#x2F;code&gt; returns whether the value resulted in true or false.
+Finally, the end of the if statement is capped off with a &lt;code&gt;else&lt;&#x2F;code&gt;, with &lt;code&gt;05&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;The only thing left to do then is create one more branch for anything that doesn&#x27;t fit these values, and cap off all those if statements with end statements.
+The full code for all of this is below.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;py&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-py &quot;&gt;&lt;code class=&quot;language-py&quot; data-lang=&quot;py&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;with &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;open&lt;&#x2F;span&gt;&lt;span&gt;(filename, &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;ab&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;as &lt;&#x2F;span&gt;&lt;span&gt;f:
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# section size
+&lt;&#x2F;span&gt;&lt;span&gt;    f.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;write&lt;&#x2F;span&gt;&lt;span&gt;(leb128.u.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;encode&lt;&#x2F;span&gt;&lt;span&gt;(function_size + &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1 &lt;&#x2F;span&gt;&lt;span&gt;+ &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;len&lt;&#x2F;span&gt;&lt;span&gt;(leb128.u.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;encode&lt;&#x2F;span&gt;&lt;span&gt;(function_size))))
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# locals passed
+&lt;&#x2F;span&gt;&lt;span&gt;    f.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;write&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;bytes&lt;&#x2F;span&gt;&lt;span&gt;([&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x01&lt;&#x2F;span&gt;&lt;span&gt;]))
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# function size
+&lt;&#x2F;span&gt;&lt;span&gt;    f.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;write&lt;&#x2F;span&gt;&lt;span&gt;(leb128.u.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;encode&lt;&#x2F;span&gt;&lt;span&gt;(function_size))
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# no-op
+&lt;&#x2F;span&gt;&lt;span&gt;    f.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;write&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;bytes&lt;&#x2F;span&gt;&lt;span&gt;([&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x00&lt;&#x2F;span&gt;&lt;span&gt;]))
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;for &lt;&#x2F;span&gt;&lt;span&gt;i &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;in &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;range&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;, limit):
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# local.get 0
+&lt;&#x2F;span&gt;&lt;span&gt;        f.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;write&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;bytes&lt;&#x2F;span&gt;&lt;span&gt;([&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x20&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x00&lt;&#x2F;span&gt;&lt;span&gt;]))
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# i32.const i
+&lt;&#x2F;span&gt;&lt;span&gt;        f.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;write&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;bytes&lt;&#x2F;span&gt;&lt;span&gt;([&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x41&lt;&#x2F;span&gt;&lt;span&gt;]) + leb128.u.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;encode&lt;&#x2F;span&gt;&lt;span&gt;(i))
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# i32.eq
+&lt;&#x2F;span&gt;&lt;span&gt;        f.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;write&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;bytes&lt;&#x2F;span&gt;&lt;span&gt;([&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x46&lt;&#x2F;span&gt;&lt;span&gt;]))
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# if (return i32)
+&lt;&#x2F;span&gt;&lt;span&gt;        f.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;write&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;bytes&lt;&#x2F;span&gt;&lt;span&gt;([&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x04&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x7F&lt;&#x2F;span&gt;&lt;span&gt;]))
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# if block
+&lt;&#x2F;span&gt;&lt;span&gt;        f.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;write&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;bytes&lt;&#x2F;span&gt;&lt;span&gt;([&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x41&lt;&#x2F;span&gt;&lt;span&gt;]) + leb128.u.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;encode&lt;&#x2F;span&gt;&lt;span&gt;((i) % &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2&lt;&#x2F;span&gt;&lt;span&gt;))
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# else
+&lt;&#x2F;span&gt;&lt;span&gt;        f.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;write&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;bytes&lt;&#x2F;span&gt;&lt;span&gt;([&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x05&lt;&#x2F;span&gt;&lt;span&gt;]))
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# else block is the next if
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    f.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;write&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;bytes&lt;&#x2F;span&gt;&lt;span&gt;([&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x41&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x02&lt;&#x2F;span&gt;&lt;span&gt;]))
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;for &lt;&#x2F;span&gt;&lt;span&gt;i &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;in &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;range&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;, limit + &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;):
+&lt;&#x2F;span&gt;&lt;span&gt;        f.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;write&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;bytes&lt;&#x2F;span&gt;&lt;span&gt;([&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x0B&lt;&#x2F;span&gt;&lt;span&gt;]))
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Now it is time to return to the issue earlier of figuring out the code size before we&#x27;ve written the code.  Turns out, this is a simple enough problem to solve iteratively, and since I&#x27;m lazy, I did that.
+There might be a smarter mathematical way of doing this.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;py&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-py &quot;&gt;&lt;code class=&quot;language-py&quot; data-lang=&quot;py&quot;&gt;&lt;span&gt;function_size = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;4
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;for &lt;&#x2F;span&gt;&lt;span&gt;i &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;in &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;range&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;, limit):
+&lt;&#x2F;span&gt;&lt;span&gt;    function_size += &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;10
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;i != &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;        function_size += &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1 &lt;&#x2F;span&gt;&lt;span&gt;+ math.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;floor&lt;&#x2F;span&gt;&lt;span&gt;((math.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;log2&lt;&#x2F;span&gt;&lt;span&gt;(i)) &#x2F; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;7&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;else&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;        function_size += &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The reason for the &lt;code&gt;math.floor&lt;&#x2F;code&gt; bit is because of the LEB128 encoding.  Every time the number grows by 7 powers of 2, it gains an extra byte of code size per if statement.&lt;&#x2F;p&gt;
+&lt;p&gt;After all this, I finally have a Python script capable of writing the program I want.
+You&#x27;ll notice I have a &lt;code&gt;limit&lt;&#x2F;code&gt; variable used in the earlier two snippets for convenience, so I can quickly change the number of if statements.&lt;&#x2F;p&gt;
+&lt;p&gt;Let&#x27;s start with a size of 2^8 if statements, just to make sure it&#x27;s working.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span&gt;&amp;gt; python &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;generator.py
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Calculating&lt;&#x2F;span&gt;&lt;span&gt; function size...
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Total&lt;&#x2F;span&gt;&lt;span&gt; time for calculating function size: 5.4430000091088004e-05s
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Writing&lt;&#x2F;span&gt;&lt;span&gt; file...
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Writing&lt;&#x2F;span&gt;&lt;span&gt; file... progress: 32&#x2F;2980 bytes
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;When I run it using a quick index.js I whipped up with &lt;code&gt;isOdd(1)&lt;&#x2F;code&gt;, I get a value of &lt;code&gt;true&lt;&#x2F;code&gt;.  Exactly what I wanted, and the WASM parses correctly!
+A quick test with 2^16 gives the same result, so I decide to go ahead and try a value of 2^32.
+After an hour, it&#x27;s still running.  Must be stuck writing the file, right?  Nope, it&#x27;s stuck in the &lt;code&gt;function_size&lt;&#x2F;code&gt; bit.&lt;&#x2F;p&gt;
+&lt;p&gt;I tried in vain to optimize it to the point where it won&#x27;t take many hours to calculate the function size, but while testing, I stumbled across something unfortunate.
+A limit of 2^24 causes the WASM compiler within Firefox to give up.  Turns out, WASM has a hard limit on the size of a function body.
+There was no need to finish optimizing so that I could have my 2^32 WASM file, my dreams have been dashed.
+I did some playing to reach the exact number, and the max limit I could reach via this strategy was &lt;code&gt;590063&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;Within the time I set aside for this project, I couldn&#x27;t quite solve this.  The only idea I have to get around this hard limit is to start dividing into multiple functions.
+For that, though, you have to dynamically generate the functions as well, so I decided to let this one rest for now.  Perhaps I shall return someday, and a browser will load a WASM file containing all 4 billion if statements.&lt;&#x2F;p&gt;
+</description>
+      </item>
+      <item>
+          <title>My Blog</title>
+          <pubDate>Tue, 25 Jun 2024 00:00:00 +0000</pubDate>
+          <author>themerebagatelle@gmail.com (Brennen Puth)</author>
+          <link>https://brennenputh.me/blog/my-blog/</link>
+          <guid>https://brennenputh.me/blog/my-blog/</guid>
+          <description xml:base="https://brennenputh.me/blog/my-blog/">&lt;p&gt;If you are reading this, you have reached far back in time (or you&#x27;re very early to reading my blog, hi bots!).
+I thought I might as well have a blog around somewhere, and it seemed simple enough to set up.
+Despite my general dislike of webdev, I managed to put together a Hugo site.&lt;&#x2F;p&gt;
+&lt;p&gt;My hopes for this blog are fairly simple, to have a place to contain my thoughts.
+Usually it will be on things related to computing, but perhaps I&#x27;ll also foray into other things I want to study.
+For the most part, however, it will be silent.  Until I have something to say, that&#x27;s alright, I suppose.&lt;&#x2F;p&gt;
+</description>
+      </item>
+    </channel>
+</rss>
