@@ -43,10 +43,10 @@ While teaching "compile and test often" is good, _it should not take 20 keystrok
 
 #### Code Formatter
 
-Cedarville (my university), at the very least, has a C++ and Java programming format policy.
+Cedarville (where I'm getting my bachelors), at the very least, has a C++ and Java programming format policy.
 I highly appreciate the effort.
 Only, code formatters solved that problem a while ago.
-There's an opinionated formatter for basically every language taught in schools, and it should be standard to leave most of the formatting to it.
+There's an opinionated formatter for basically every commonly taught language, and it should be standard to leave most of the formatting to it.
 
 Some examples in modern (and not modern) programming languages:
 
