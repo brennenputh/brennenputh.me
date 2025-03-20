@@ -1,5 +1,5 @@
 +++
-title = "Teaching Text Editing"
+title = "Thoughts on Teaching Text Editing"
 date = 2025-03-19
 +++
 
