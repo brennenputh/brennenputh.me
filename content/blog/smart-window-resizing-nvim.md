@@ -7,6 +7,8 @@ The last day or two, I've been refitting my Neovim windowing config.
 Nothing too wild, just fixing a few warts here and there.
 What follows is a few different snippets for different behaviors I wanted.
 Hopefully one of these is useful to someone, even if only as a reference (something *definitely* needs said about the Neovim documentation searchability situation).
+If you want to see these in their context, links will be left below each example.
+The links may fall out of date, so I've linked them to the specific commit.
 
 Also, if you're interested in this, I will drop a link to [Nano Tips For Vim](https://nanotipsforvim.prose.sh/), which has been immensely helpful to me in figuring out all of my Neovim configs.
 
@@ -32,6 +34,8 @@ vim.api.nvim_create_autocmd("WinResized", {
 	end,
 })
 ```
+[See it in context!](https://github.com/brennenputh/dotfiles/blob/cf2246d3eea2f0b1a14ca31be448d00a74fe16ae/nvim/lua/autocmds.lua#L67-L86)
+
 ## Bring Window Into Focus
 
 ```lua
@@ -55,6 +59,7 @@ keymap("n", "<leader>rs", function()
 end)
 keymap("n", "<leader>rf", win_focus)
 ```
+[See it in context!](https://github.com/brennenputh/dotfiles/blob/cf2246d3eea2f0b1a14ca31be448d00a74fe16ae/nvim/lua/keymaps.lua#L50-L73)
 
 ## Resizing Mappings
 
@@ -74,3 +79,4 @@ keymap("n", "<leader>rk", win_resize(0, 3, "up"))
 keymap("n", "<leader>rl", win_resize(0, 10, "right"))
 keymap("n", "<leader>r=", "<C-w>=", { desc = "Equalize Windows" })
 ```
+[See it in context!](https://github.com/brennenputh/dotfiles/blob/cf2246d3eea2f0b1a14ca31be448d00a74fe16ae/nvim/lua/keymaps.lua#L43-L68)
