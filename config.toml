@@ -17,5 +17,12 @@ feed_filenames = ["rss.xml"]
 # Theme can be customised by setting the `highlight_theme` variable to a theme supported by Zola
 highlight_code = true
 
+# Configuration of the link checker.
+[link_checker]
+# Skip anchor checking for external URLs that start with these prefixes
+skip_anchor_prefixes = [
+    "https://github.com/",
+]
+
 [extra]
 # Put all your custom variables here
