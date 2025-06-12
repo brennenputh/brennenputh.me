@@ -10,7 +10,7 @@ Hopefully one of these is useful to someone, even if only as a reference (someth
 If you want to see these in their context, links will be left below each example.
 The links may fall out of date, so I've linked them to the specific commit.
 
-Also, if you're interested in this, I will drop a link to [Nano Tips For Vim](https://nanotipsforvim.prose.sh/), which has been immensely helpful to me in figuring out all of my Neovim configs.
+Also, if you're interested in this, I credit [chrisgrieser](https://github.com/chrisgrieser) who used to run a blog called Nano Tips For Vim, which was immensely helpful to me in figuring out all of my Neovim configs but was sadly taken offline as of 2025-06-12.
 
 ## Turn Off Line Numbers for Small Windows
 
