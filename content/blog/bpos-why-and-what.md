@@ -28,6 +28,10 @@ The source is [here](https://github.com/brennenputh/bpOS), although honestly it'
 Which is exactly how I wanted it, because the more boring my image setup is, the less work I'll have to do.
 I haven't had a single day where my computer breaks entirely yet, because if it ever breaks, I just roll back to the last deployment (or, if it doesn't boot, it does that itself).
 
+Quick sidenote to mention, desktop files are awesome, and now that I have a proper place I can store them, I will be making *far* more.
+I now have all sorts of shortcuts that I can launch right from my desktop with my application launcher.
+If you look in the repository, you'll see I have a few set up for different web services I use.
+
 I really don't have that much more to say about all of this, I just hope some more people take a look at the awesome work all the members of Universal Blue are doing, and this is my encouragement to continue on for all of them.
 If you want to check out their images for yourself, their [website](https://universal-blue.org/) is a good place to start.
 If you want to build your own image like I have, check out the [image-template](https://github.com/ublue-os/image-template) repository they set up.
