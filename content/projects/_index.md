@@ -19,9 +19,13 @@ Includes a definition of the field AprilTag JSON layout in C++ and Java.
 
 ## Personal
 
+### [bpOS](https://github.com/brennenputh/bpOS)
+
+A bootc container image based on Universal Blue's offerings customized for my own personal needs. I run this on my personal computers.
+
 ### [Dotfiles](https://github.com/brennenputh/dotfiles)
 
-My personal dotfiles collection. Supports both my Arch Linux setup and my WSL Ubuntu setup.
+My personal dotfiles collection. Supports my Fedora-based WSL installation and my bpOS installation.
 
 ### [cedarcal-fmt](https://github.com/brennenputh/cedarcal-fmt)
 
