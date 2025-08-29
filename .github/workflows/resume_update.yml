@@ -1,9 +1,5 @@
 name: Update Resume
 
-permissions:
-  contents: write
-  pull-requests: write
-
 on:
   repository_dispatch:
     types: [website-pull]
@@ -21,3 +17,5 @@ jobs:
         working-directory: ${{ github.workspace }}
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.PAT }}
