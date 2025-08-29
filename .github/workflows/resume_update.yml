@@ -1,0 +1,19 @@
+name: Update Resume
+
+on:
+  repository_dispatch:
+    types: [website-pull]
+
+jobs:
+  pull-request:
+    name: Create PR for Resume Changes
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v5
+      - name: Update Resume Document
+        run: |
+          curl https://raw.githubusercontent.com/brennenputh/resume/refs/heads/main/out/resume.html --output ./static/resume.html
+        working-directory: ${{ github.workspace }}
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v7
