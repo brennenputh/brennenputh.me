@@ -1,12 +1,15 @@
 $primary-color: #222
 $font-color: #fff
-$font-stack: Roboto, sans-serif
-$width: 800px
+$font-stack: Inter, Roboto, sans-serif
+$width: 1000px
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap')
 
 :root
   background-color: $primary-color
   color: $font-color
   font: 100% $font-stack
+  font-size: 14pt
 
 body
   max-width: $width
@@ -44,3 +47,12 @@ code
   display: flex
   color: #aaa
   font-size: 75%
+
+blockquote
+  margin-left: 0px
+  padding: 10px 10px
+  border-left: 2px solid gray
+
+blockquote > p
+  padding: 0px 0px
+  margin: 0px
