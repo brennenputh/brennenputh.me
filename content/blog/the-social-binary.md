@@ -65,7 +65,5 @@ Ignore my digression into solutions though, and consider that reducing the frict
 
 ---
 
-Some of this I want to experiment with when I get the chance, and other pieces will lay by the wayside.
-Certainly though, this will not be an idea I lay down completely.
-Deeply considering whether the map fits the territory well enough remains a useful tool in my toolbox for analysing solutions.
-Of course, my words are neither exhaustive nor inerrant - I deeply hope that this will at least spark some discussion and perhaps begin to push the needle toward a true human-centric design for instant messaging.
+My words are neither exhaustive nor inerrant - I deeply hope that this will spark some discussion and perhaps begin to push the needle toward a human-centric design for instant messaging.
+I also hope that, even if you disagree with me on every point or think I wrote this poorly (to which I say, you're probably right), you'll use this as an opportunity for reflection on how you use these chat systems and how they influence the relationships you care about most.
