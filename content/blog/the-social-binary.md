@@ -17,6 +17,8 @@ I never know who might come to any given event, nor do I particularly care. The 
 Throughout this experience, I understood deeper how community works, and specifically how technology has broken it.
 There are so many thoughts which race through my head on this topic, but I'll restrict myself to one road for today.
 
+## Problem
+
 Computers work using 1s and 0s. On or off. A binary system.
 Humans are "squishy". They have friends for one task, but don't necessarily always want them around. Opinions drift over time.
 Why do we treat humans as if they will perfectly map onto computers?
@@ -27,6 +29,8 @@ Pulling on the thread of common sense, a finite number of 1s and 0s cannot accur
 As a programmer, I hope to be making good representations of reality knowing this is true.
 Since I cannot perfectly represent the territory (human conversation) on the map (computer), I should be considering which capabilities I need in order to represent the important parts, hopefully cheaply.
 The rest of this post shifts to look at which features I think have mapped technology well, and which ones are conveniences that don't actually fit the reality of the territory.
+
+## Observations
 
 ### Quick Replies
 
@@ -63,7 +67,7 @@ For good reason, friendships form and dissolve all the time. If the solution to 
 This is the one category for which I have an experiment I want to try. Perhaps, one could create a social service where no group chats will stick around, making The Group Chat impossible to create. Of course, one would need a full text search of good quality, which sounds like a fun challenge to me.
 Ignore my digression into solutions though, and consider that reducing the friction to tracking these drifting changes in my opinion is the best way to solve this natural drift.
 
----
+## Conclusion
 
 My words are neither exhaustive nor inerrant - I deeply hope that this will spark some discussion and perhaps begin to push the needle toward a human-centric design for instant messaging.
 I also hope that, even if you disagree with me on every point or think I wrote this poorly (to which I say, you're probably right), you'll use this as an opportunity for reflection on how you use these chat systems and how they influence the relationships you care about most.
