@@ -3,11 +3,11 @@
 <html lang="en">
   <head>
     {% block head %}
-    <meta charset="utf-8" />
-    <link rel="stylesheet" href="/main.css" />
+      <meta charset="utf-8" />
+      <link rel="stylesheet" href="/main.css" />
     {% endblock head %}
     {% block title %}
-    <title>Brennen Puth</title>
+      <title>Brennen Puth</title>
     {% endblock title %}
     {% block rss %}
       <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ get_url(path="rss.xml", trailing_slash=false) }}">
@@ -16,10 +16,8 @@
 
   <body>
     <div class="header" style="display: flex; flex-direction: row; gap: 5px">
-      BP
-      -
+      <h4>Brennen Puth</h4>
       <a href="/">Home</a>
-      -
       <a href="{{ get_url(path='@/projects/_index.md')}}">Projects</a>
     </div>
     <section class="section">
