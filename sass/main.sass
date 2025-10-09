@@ -10,11 +10,16 @@ $width: 1000px
   background-color: $primary-color
   color: $font-color
   font: 100% $font-stack
-  font-size: 14pt
+
+main
+  max-width: min(70ch, 100% - 4rem)
+  margin-inline: auto
 
 body
-  max-width: $width
+  font: 100% $font-stack
+  font-size: 1.25rem
   margin: 0px auto
+  line-height: 1.4
 
 a
   text-decoration: none
