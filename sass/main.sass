@@ -1,5 +1,6 @@
 $primary-color: #222
 $font-color: #fff
+$background-color: #1d1d1d
 $font-stack: Inter, Roboto, sans-serif
 $width: 1000px
 
@@ -29,12 +30,26 @@ a:hover
   color: #c0c0ff
 
 pre
-  padding: 10px
+  padding: 3px
   border-radius: 5px
+  overflow: auto
 
 code
   display: inline-block
-  padding: 0.5px 2px
+  padding: 0.5px 1px
+
+pre table td
+  padding: 0
+
+pre table td:nth-of-type(1)
+  vertical-align: top
+  user-select: none
+  padding-right: 0.3rem
+  filter: brightness(50%)
+
+pre table
+  width: 100%
+  border-collapse: collapse
 
 .title
   margin: 10px 0px

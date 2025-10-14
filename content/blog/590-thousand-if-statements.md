@@ -47,7 +47,7 @@ Finally, the function needs a name, given in the export section.  This is also t
 The gist of this one is that the ASCII for the function name `isOdd` is encoded into the bytes of the section.
 
 All of this can come together into a simple Python script to write the preamble for our code.
-```py
+```py,linenos
 filename = 'isodd.wasm'
 
 start_bin = bytes([0x00, 0x61, 0x73, 0x6D, 0x01, 0x00, 0x00, 0x00,
@@ -95,7 +95,7 @@ Finally, the end of the if statement is capped off with a `else`, with `05`.
 
 The only thing left to do then is create one more branch for anything that doesn't fit these values, and cap off all those if statements with end statements.
 The full code for all of this is below.
-```py
+```py,linenos
 with open(filename, 'ab') as f:
     # section size
     f.write(leb128.u.encode(function_size + 1 + len(leb128.u.encode(function_size))))
@@ -129,7 +129,7 @@ with open(filename, 'ab') as f:
 
 Now it is time to return to the issue earlier of figuring out the code size before we've written the code.  Turns out, this is a simple enough problem to solve iteratively, and since I'm lazy, I did that.
 There might be a smarter mathematical way of doing this.
-```py
+```py,linenos
 function_size = 4
 for i in range(0, limit):
     function_size += 10
@@ -144,7 +144,7 @@ After all this, I finally have a Python script capable of writing the program I 
 You'll notice I have a `limit` variable used in the earlier two snippets for convenience, so I can quickly change the number of if statements.
 
 Let's start with a size of 2^8 if statements, just to make sure it's working.
-```bash
+```bash,linenos
 > python generator.py
 Calculating function size...
 Total time for calculating function size: 5.4430000091088004e-05s
