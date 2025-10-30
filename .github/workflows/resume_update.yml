@@ -18,7 +18,6 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
         with:
-          token: ${{ secrets.PAT }}
           title: '[Resume] Update Resume' 
           body: |
             Update resume with latest changes from [repository](https://github.com/brennenputh/resume).
