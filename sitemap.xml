@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>https://brennenputh.me/</loc>
+    </url>
+    <url>
+        <loc>https://brennenputh.me/blog/590-thousand-if-statements/</loc>
+        <lastmod>2024-08-11</lastmod>
+    </url>
+    <url>
+        <loc>https://brennenputh.me/blog/bpos-why-and-what/</loc>
+        <lastmod>2025-08-06</lastmod>
+    </url>
+    <url>
+        <loc>https://brennenputh.me/blog/local-digital-economy/</loc>
+        <lastmod>2025-10-29</lastmod>
+    </url>
+    <url>
+        <loc>https://brennenputh.me/blog/my-blog/</loc>
+        <lastmod>2024-06-25</lastmod>
+    </url>
+    <url>
+        <loc>https://brennenputh.me/blog/smart-window-resizing-nvim/</loc>
+        <lastmod>2025-04-12</lastmod>
+    </url>
+    <url>
+        <loc>https://brennenputh.me/blog/teaching-text-editing/</loc>
+        <lastmod>2025-03-19</lastmod>
+    </url>
+    <url>
+        <loc>https://brennenputh.me/blog/the-social-binary/</loc>
+        <lastmod>2025-09-13</lastmod>
+    </url>
+    <url>
+        <loc>https://brennenputh.me/projects/</loc>
+    </url>
+</urlset>
