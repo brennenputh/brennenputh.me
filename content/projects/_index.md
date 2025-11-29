@@ -4,7 +4,7 @@ sort_by = "date"
 template = "projects.html"
 +++
 
-## Professional & Volunteer
+## Volunteer
 
 ### [Prayer Wheels for Covered Ministries](https://app-new.prayerwheel.coveredministries.com)
 
