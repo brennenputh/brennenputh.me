@@ -16,10 +16,17 @@
   </head>
 
   <body>
-    <div class="header" style="display: flex; flex-direction: row; gap: 5px">
-      <h4>Brennen Puth</h4>
-      <a href="/">Home</a>
-      <a href="{{ get_url(path='@/projects/_index.md')}}">Projects</a>
+    <div class="header">
+      <div class="header-left">
+        <h4>Brennen Puth</h4>
+        <a href="/">Home</a>
+        <a href="{{ get_url(path='@/projects/_index.md')}}">Projects</a>
+      </div>
+      <div class="header-right">
+        <a href="https://github.com/brennenputh">GitHub</a>
+        <a href="mailto:bputh.blog@gmail.com">Email</a>
+        <a href="{{ get_url(path="rss.xml", trailing_slash=false) }}">RSS</a>
+      </div>
     </div>
     <main>
       <div class="container">{% block content %} {% endblock %}</div>
