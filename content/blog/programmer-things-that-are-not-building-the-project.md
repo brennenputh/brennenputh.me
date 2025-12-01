@@ -5,7 +5,7 @@ date = 2025-12-01
 
 Written as an extension to _[things that aren't doing the thing](https://strangestloop.io/essays/things-that-arent-doing-the-thing)_ because there are a lot of things that I tend to think are building the project which are in reality not building the project[^1].
 
-Naming a thing is not building the project.
+Naming the project is not building the project.
 
 Fixing your broken Arch install is not building the project.
 
