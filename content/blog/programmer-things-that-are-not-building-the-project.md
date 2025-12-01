@@ -9,7 +9,7 @@ Naming a thing is not building the project.
 
 Fixing your broken Arch install is not building the project.
 
-Considering how your project fits with other things is not building the project.
+Considering how your project fits with other projects is not building the project.
 
 Writing a blog post about how the project could be done is not building the project.
 
