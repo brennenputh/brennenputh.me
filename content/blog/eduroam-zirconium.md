@@ -19,4 +19,4 @@ The steps are as follows:
 
 3. Bring the connection up with `nmcli connection up eduroam --ask`.
 
-Hopefully this goes out to help someone, because this took me *far* too long yesterday to debug.
+Hopefully this helps someone, because this took me *far* too long yesterday to debug.
