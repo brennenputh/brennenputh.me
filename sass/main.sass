@@ -1,15 +1,25 @@
 $primary-color: #222
 $font-color: #fff
-$font-stack: Roboto, sans-serif
-$width: 800px
+$background-color: #1d1d1d
+$font-stack: Consolas, monospace
+$width: 1000px
+
+@use "header"
 
 :root
   background-color: $primary-color
   color: $font-color
   font: 100% $font-stack
 
+main
+  max-width: min($width, 100% - 4rem)
+  margin-inline: auto
+
 body
-  max-width: $width
+  font: 100% $font-stack
+  font-size: 1.25rem
+  margin: 0px auto
+  line-height: 1.4
 
 a
   text-decoration: none
@@ -19,9 +29,56 @@ a:hover
   color: #c0c0ff
 
 pre
-  padding: 10px
+  padding: 3px
   border-radius: 5px
+  overflow: auto
 
 code
   display: inline-block
-  padding: 0.5px 2px
+  padding: 0.5px 1px
+
+pre table td
+  padding: 0
+
+pre table td:nth-of-type(1)
+  vertical-align: top
+  user-select: none
+  padding-right: 0.3rem
+  filter: brightness(50%)
+
+pre table
+  width: 100%
+  border-collapse: collapse
+
+.title
+  margin: 10px 0px
+
+.page-item
+  margin: 5px 0px
+  background-color: #3a3a3a
+  padding: 10px 20px
+  border-radius: 5px
+
+.page-item:hover
+  background-color: #4a4a4a
+
+.page-item > *
+  margin: 2px 0
+
+.page-title
+  color: #fff
+
+.page-info
+  display: flex
+  color: #aaa
+  font-size: 75%
+
+
+blockquote
+  margin-left: 0px
+  padding: 10px 10px
+  border-left: 2px solid gray
+
+blockquote > p
+  padding: 0px 0px
+  margin: 0px

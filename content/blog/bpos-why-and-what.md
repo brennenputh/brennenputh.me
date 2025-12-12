@@ -3,9 +3,6 @@ title = "bpOS: Why and how I made my own bootable container"
 date = 2025-08-06
 +++
 
-That title sounds dramatic, right?
-I like it, at least.
-
 I previously ran primarily Arch on all my systems.
 I don't think that it was particularly thoughtful on my part, I followed the "cool kids" of Linux.
 Experiences of breakage were rare for me, but I realized I was doing too much playing sysadmin on my own computer.

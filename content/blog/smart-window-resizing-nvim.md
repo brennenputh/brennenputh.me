@@ -14,7 +14,7 @@ Also, if you're interested in this, I credit [chrisgrieser](https://github.com/c
 
 ## Turn Off Line Numbers for Small Windows
 
-```lua
+```lua,linenos
 local set_numbers = function(value, window)
 	vim.api.nvim_set_option_value("number", value, { win = window })
 	vim.api.nvim_set_option_value("relativenumber", value, { win = window })
@@ -38,7 +38,7 @@ vim.api.nvim_create_autocmd("WinResized", {
 
 ## Bring Window Into Focus
 
-```lua
+```lua,linenos
 local win_focus = function()
     -- Uncomment if you use either of these plugins
 	-- require("dapui").close()
@@ -65,7 +65,7 @@ keymap("n", "<leader>rf", win_focus)
 
 This requires the [winresize.nvim](https://github.com/pogyomo/winresize.nvim) plugin.
 
-```lua
+```lua,linenos
 local win_resize = function(win, amt, dir)
 	return function()
 		require("winresize").resize(win, amt, dir)

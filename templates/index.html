@@ -2,22 +2,41 @@
 <!-- vim: set ft=tera: -->
 
 {% block content %}
-<h1 class="title">Brennen Puth</h1>
 <p>
-  I'm currently a Computer Science student at Cedarville University. This is my
-  place to experiment and play, and perhaps produce something of value
-  occasionally.
+  Welcome to my corner of the internet!
+  I currently study Computer Science and Cyber Operations at Cedarville University.
 </p>
 <p>
-  My <a href="{{ get_url(path='@/blog/_index.md') }}">blog</a> is the primary
-  place you'll see new content from me (in the rare case I take free time to do something releasable).
+  My blog is where I write up whatever I'm excited about at the moment.
+  That could be any number of things, depending on the day.  Technology, philosophy, theology, or cardistry, everything's on the table!
+  I want to return to an intentional internet, so I encourage following along via <a href="{{ get_url(path="rss.xml", trailing_slash=false) }}">RSS</a>.
 </p>
 <p>
+  I make a habit of giving back to open source projects I use.
   You can find what I've worked on at my list of <a href="{{ get_url(path='@/projects/_index.md') }}">projects</a>.
+  Alternatively, you can take a look at my <a href="https://github.com/brennenputh">GitHub</a> to see what I've been up to most recently.
 </p>
 <p>
   If you'd like to reach out for any reason, you can use <a href="mailto:bputh.blog@gmail.com">bputh.blog@gmail.com</a>.
-  When I say anything, I do mean anything - technology I've written about, cool books to read, even just to make a connection.
+  When I say anything, I do mean anything: technology I've written about, cool books to read, even just to make a connection.
   I can't promise I'll get to anything I recieve immediately, but I'll be checking the inbox regularly.
 </p>
+
+<hr/>
+
+<h3 class="title">
+  Blog
+</h3>
+{% set blog_section = get_section(path="blog/_index.md") %}
+{% for page in blog_section.pages %}
+<a href="{{ page.permalink | safe }}">
+  <div class="page-item">
+    <h3 class="page-title">{{ page.title }}</h3>
+    <div class="page-info">
+      {{ page.date }} | Reading Time: {{ page.reading_time }}m
+    </div>
+  </div>
+</a>
+{% endfor %}
+
 {% endblock content %}
