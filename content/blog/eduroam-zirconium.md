@@ -9,7 +9,7 @@ When I booted into Zirconium after switching, the wifi no longer worked.
 
 When trying to connect manually via nmtui, it would give me a message along the lines of "AP security could not be confirmed" and stop connecting.
 Other, non-enterprise networks worked fine.
-To fix this, I finally found [https://campus-rover.gitbook.io/lab-notebook/fiiva/infrastructure/linux_terminal_eduroam_setup] this post which describes how to connect to eduroam from a terminal.
+To fix this, I finally found [this post](https://campus-rover.gitbook.io/lab-notebook/fiiva/infrastructure/linux_terminal_eduroam_setup) which describes how to connect to eduroam from a terminal.
 
 The steps are as follows:
 
