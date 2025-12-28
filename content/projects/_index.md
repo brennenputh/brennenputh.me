@@ -6,7 +6,7 @@ template = "projects.html"
 
 ## Volunteer
 
-### [Prayer Wheels for Covered Ministries](https://app-new.prayerwheel.coveredministries.com)
+### Prayer Wheels for Covered Ministries
 
 An app to facilitate focused and intentional prayer, providing a timer and instructions.
 Written in React and TypeScript.
