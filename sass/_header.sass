@@ -1,8 +1,6 @@
-$background-color: #1d1d1d
 
 .header
-  background-color: $background-color
-  padding: 10px 5px
+  padding: 10px 0px
   font-size: 16pt
   display: flex
   justify-content: space-between
@@ -15,3 +13,10 @@ $background-color: #1d1d1d
 .header-left > *,.header-right > *
   margin: 0px
   padding: 0px 5px
+
+.header-left > *:first-child
+  padding-left: 0px
+
+
+.header-right > *:last-child
+  padding-right: 0px

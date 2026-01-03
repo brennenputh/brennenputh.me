@@ -1,7 +1,7 @@
 $primary-color: #222
 $font-color: #fff
 $background-color: #1d1d1d
-$font-stack: Consolas, monospace
+$font-stack: sans-serif
 $width: 1000px
 
 @use "header"
@@ -12,10 +12,10 @@ $width: 1000px
   font: 100% $font-stack
 
 main
-  max-width: min($width, 100% - 4rem)
   margin-inline: auto
 
 body
+  max-width: min($width, 100% - 4rem)
   font: 100% $font-stack
   font-size: 1.25rem
   margin: 0px auto 50px
