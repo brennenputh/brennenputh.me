@@ -1,0 +1,65 @@
+:root {
+  font-family: sans-serif;
+}
+
+body {
+  max-width: 60vw;
+  margin-inline: auto;
+}
+
+#header {
+  text-align: center;
+}
+
+#modules {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5px;
+}
+
+.module-card {
+  background-color: #eee;
+  border-radius: 10px;
+  padding: 5px;
+  min-width: fit-content;
+}
+
+.module-header {
+  display: flex;
+  justify-content: space-between;
+  height: 50px;
+}
+
+.module-header > * {
+  margin: auto 0;
+  padding: 0;
+}
+
+.module-card .indicator-circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 25px;
+
+  margin: auto 5px;
+  background-color: red;
+}
+
+.module-card.active .indicator-circle {
+  background-color: green;
+}
+
+.stat-card {
+  background-color: #ddd;
+  border-radius: 10px;
+}
+
+.module-content {
+  display: flex;
+  gap: 5px;
+}
+
+.stat-card {
+  width: 100%;
+  text-align: center;
+}

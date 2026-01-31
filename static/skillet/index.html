@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Skillet</title>
+    <link rel="stylesheet" href="./style.css" />
+    <script src="./script.js" defer></script>
+  </head>
+
+  <body>
+    <div>
+      <div id="header">
+        <h1>Skillet</h1>
+      </div>
+      <div id="modules">
+        <div id="passfail" class="module-card">
+          <div class="module-header">
+            <h2>Pass/Fail Module</h2>
+          </div>
+          <div class="module-description">
+            <p>
+              Press <code>p</code> to mark a pass, and <code>f</code> to mark a
+              fail.
+            </p>
+          </div>
+          <div class="module-content">
+            <div class="stat-card">
+              <p class="stat-description">Passes</p>
+              <p class="stat-value passes">0</p>
+            </div>
+            <div class="stat-card">
+              <p class="stat-description">Fails</p>
+              <p class="stat-value fails">0</p>
+            </div>
+            <div class="stat-card">
+              <p class="stat-description">Ratio</p>
+              <p class="stat-value ratio">0</p>
+            </div>
+          </div>
+        </div>
+        <div id="timer" class="module-card">
+          <div class="module-header">
+            <h2>Timer Module</h2>
+          </div>
+          <div class="module-description">
+            <p>
+              Press <code>space</code> to start the timer, and <code>p</code> or
+              <code>f</code> to mark a pass or fail.
+            </p>
+          </div>
+          <div class="module-content">
+            <div class="stat-card">
+              <p class="stat-description">Current Time</p>
+              <p class="stat-value curTime">0.00s</p>
+            </div>
+            <div class="stat-card">
+              <p class="stat-description">Best Time</p>
+              <p class="stat-value bestTime">0.00s</p>
+            </div>
+            <div class="stat-card">
+              <p class="stat-description">Average Time</p>
+              <p class="stat-value averageTime">0.00s</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
