@@ -1,5 +1,5 @@
 +++
-title = "Connecting to eduroam with NetworkManager"
+title = "Connecting to eduroam with NetworkManager on the CLI"
 date = 2025-12-12
 +++
 
