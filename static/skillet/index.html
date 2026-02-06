@@ -7,60 +7,91 @@
   </head>
 
   <body>
-    <div>
-      <div id="header">
-        <h1>Skillet</h1>
-      </div>
-      <div id="modules">
-        <div id="passfail" class="module-card">
-          <div class="module-header">
-            <h2>Pass/Fail Module</h2>
-          </div>
-          <div class="module-description">
-            <p>
-              Press <code>p</code> to mark a pass, and <code>f</code> to mark a
-              fail.
-            </p>
-          </div>
-          <div class="module-content">
-            <div class="stat-card">
-              <p class="stat-description">Passes</p>
-              <p class="stat-value passes">0</p>
+    <div id="header">
+      <h1>Skillet</h1>
+      <button id="about-button">About</button>
+      <dialog id="about-dialog">
+        <h2>Welcome to Skillet!</h2>
+        <p>
+          Skillet is a personal project made to help me with practicing various
+          skills.
+        </p>
+        <p>
+          The most obvious question it helps me solve is: How often am I doing
+          something right or wrong? I used to answer it with a stopwatch and a
+          piece of paper, but it was unnecessarily tedious. I thought about
+          using my flashcard program to help, but it would spread out the review
+          a bit too much for my taste when I'm trying to drill some new skill.
+        </p>
+        <p>
+          If you like this project, and want to see more from me, visit
+          <a href="https://brennenputh.me" class="dialog-button">my website</a>!
+        </p>
+        <form method="dialog">
+          <button class="dialog-close">Close</button>
+        </form>
+      </dialog>
+      <button id="controls-button">Controls</button>
+      <dialog id="controls-dialog">
+        <h2>Controls</h2>
+        <p>p: Success (you did the thing).</p>
+        <p>f: Failure (you didn't do the thing).</p>
+        <p>
+          spacebar: Start the timer. If timer is already started, stop the timer
+          and succeed the run.
+        </p>
+        <p>
+          a: Abort the timer without failing (use when something out of your
+          control goes wrong).
+        </p>
+        <p>u: Undo the last pass/fail event.</p>
+        <form method="dialog">
+          <button class="dialog-close">Close</button>
+        </form>
+      </dialog>
+    </div>
+    <div id="modules">
+      <div id="passfail" class="module">
+        <div class="stat-card">
+          <h3 class="stat-description">Success/Failure Ratio</h3>
+          <div class="stat-content">
+            <div class="divider">
+              <div class="labeled-number">
+                <p class="label">Passes</p>
+                <p class="stat-value passes">0</p>
+              </div>
+              <div class="h-line"></div>
+              <div class="labeled-number">
+                <p class="stat-value fails">0</p>
+                <p class="label">Total</p>
+              </div>
             </div>
-            <div class="stat-card">
-              <p class="stat-description">Fails</p>
-              <p class="stat-value fails">0</p>
+            <!-- 
+              This solution will require a lot of work to get right when you start scaling.
+            -->
+            <div class="stat-value equality">
+              <div class="h-line"></div>
+              <div class="h-line"></div>
             </div>
-            <div class="stat-card">
-              <p class="stat-description">Ratio</p>
-              <p class="stat-value ratio">0</p>
+            <div class="labeled-number ratio-box">
+              <p class="label">Ratio</p>
+              <p class="stat-value ratio">0.00</p>
             </div>
           </div>
         </div>
-        <div id="timer" class="module-card">
-          <div class="module-header">
-            <h2>Timer Module</h2>
-          </div>
-          <div class="module-description">
-            <p>
-              Press <code>space</code> to start the timer, and <code>p</code> or
-              <code>f</code> to mark a pass or fail.
-            </p>
-          </div>
-          <div class="module-content">
-            <div class="stat-card">
-              <p class="stat-description">Current Time</p>
-              <p class="stat-value curTime">0.00s</p>
-            </div>
-            <div class="stat-card">
-              <p class="stat-description">Best Time</p>
-              <p class="stat-value bestTime">0.00s</p>
-            </div>
-            <div class="stat-card">
-              <p class="stat-description">Average Time</p>
-              <p class="stat-value averageTime">0.00s</p>
-            </div>
-          </div>
+      </div>
+      <div id="timer" class="module">
+        <div class="stat-card">
+          <h3 class="stat-description">Current Time</h3>
+          <p class="stat-value curTime">0.00s</p>
+        </div>
+        <div class="stat-card">
+          <h3 class="stat-description">Best Time</h3>
+          <p class="stat-value bestTime">0.00s</p>
+        </div>
+        <div class="stat-card">
+          <h3 class="stat-description">Average Time</h3>
+          <p class="stat-value averageTime">0.00s</p>
         </div>
       </div>
     </div>

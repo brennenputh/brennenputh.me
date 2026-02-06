@@ -1,13 +1,27 @@
+const aboutButton = document.getElementById('about-button')
+const aboutDialog = document.getElementById('about-dialog')
+
+aboutButton.addEventListener('click', () => {
+  aboutDialog.showModal();
+})
+
+const controlsButton = document.getElementById('controls-button')
+const controlsDialog = document.getElementById('controls-dialog')
+
+controlsButton.addEventListener('click', () => {
+  controlsDialog.showModal();
+})
+
 const modules = document.getElementsByClassName("module-card");
 
 const updateCards = () => {
   const passfail = document.getElementById("passfail");
   passfail.getElementsByClassName("passes")[0].textContent = passes;
-  passfail.getElementsByClassName("fails")[0].textContent = total - passes;
+  passfail.getElementsByClassName("fails")[0].textContent = total;
   const ratio = !isNaN(passes / total)
     ? Math.round((passes / total) * 100) / 100
     : 0;
-  passfail.getElementsByClassName("ratio")[0].textContent = ratio;
+  passfail.getElementsByClassName("ratio")[0].textContent = ratio.toFixed(2);
 
   const timerEl = document.getElementById("timer");
 
@@ -31,10 +45,6 @@ function triggerTimerPass() {
   timerIntervalId = null;
 
   pastTimes.push(currentTime);
-  if (pastTimes.length > 10) {
-    delete pastTimes[0];
-  }
-
   if (currentTime < bestTime) {
     bestTime = currentTime;
   }
@@ -79,6 +89,7 @@ document.addEventListener("keyup", (event) => {
       total -= 1;
       break;
     case " ":
+      event.preventDefault();
       if (timerIntervalId != null) {
         passes += 1;
         total += 1;
