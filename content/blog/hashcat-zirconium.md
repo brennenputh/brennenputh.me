@@ -49,3 +49,7 @@ additional_packages="systemd"
 ### Step 3
 
 Use `hashcat` as you normally would from your host system!  `distrobox` should take care of exporting the binary such that it's available to your terminal.
+
+---
+
+Hopefully these steps helped.  If they didn't work, shoot me an [email](mailto:bputh.blog@gmail.com) and I'll see what I can do to help!
