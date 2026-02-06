@@ -24,10 +24,13 @@ TL;DR: Use a container!
 Create a container which has Nvidia integration.
 The one I chose to use is [dizcza/docker-hashcat](https://hub.docker.com/r/dizcza/docker-hashcat), which includes `hashcat` and provides images for all the types of GPUs. The tag I'm interested in is `cuda`.
 
-My strategy was to use `distrobox` to set up nice host integration. Use the following command.
+My strategy was to use `distrobox` to set up nice host integration. Use the following commands.
 
 ```sh
 distrobox create --nvidia --image dizcza/docker-hashcat:cuda hashcat
+distrobox enter hashcat
+# Inside the container
+distrobox-export /usr/local/bin/hashcat
 ```
 
 Alternatively, use the below `distrobox-assemble` config.
