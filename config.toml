@@ -1,7 +1,10 @@
 # The URL the site will be built for
 base_url = "https://brennenputh.me"
 
-author = "themerebagatelle@gmail.com (Brennen Puth)"
+title = "Brennen Puth"
+description = "A place for the personal blog, projects, and wanderings of Brennen Puth."
+
+author = "bputh.blog@gmail.com (Brennen Puth)"
 
 # Whether to automatically compile all Sass files in the sass directory
 compile_sass = true
