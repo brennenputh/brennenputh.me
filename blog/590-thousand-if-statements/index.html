@@ -1,0 +1,179 @@
+<!doctype html>
+<!-- vim: set ft=tera: -->
+<html lang="en">
+  <head>
+    
+  
+      <meta charset="utf-8" />
+      <link rel="stylesheet" href="/main.css" />
+      <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    
+  <link rel="stylesheet" href="/blog/post.css" />
+
+    
+  <title>590 Thousand If Statements, For the Web</title>
+
+    
+      <meta name="description" content="A place for the personal blog, projects, and wanderings of Brennen Puth.">
+      <meta property="og:title" content="Brennen Puth">
+      <meta property="og:description" content="A place for the personal blog, projects, and wanderings of Brennen Puth.">
+    
+    
+      <link rel="alternate" type="application/rss+xml" title="RSS" href="https://brennenputh.me/rss.xml">
+    
+  </head>
+
+  <body>
+    <div class="header">
+      <div class="header-left">
+        <h4>Brennen Puth</h4>
+        <a href="/">Home</a>
+        <a href="https://brennenputh.me/projects/">Projects</a>
+      </div>
+      <div class="header-right">
+        <a href="https://github.com/brennenputh">GitHub</a>
+        <a href="https://brennenputh.me/rss.xml">RSS</a>
+      </div>
+    </div>
+    <main>
+      <div class="container">
+<h1 class="title">
+  590 Thousand If Statements, For the Web
+</h1>
+<p class="subtitle">2024-08-11</p>
+<p>This post was almost entirely inspired by <a href="https://andreasjhkarlsson.github.io/jekyll/update/2023/12/27/4-billion-if-statements.html">Andreas Karlson's blog post</a> where he details how he created the worst version of an <code>isOdd</code> function ever to visit this land.
+Andreas's 4 billion if statements cover the whole of 32-bit integers, and ultimately were written in Assembly to avoid compiler limits from C++.
+Of course, when I saw this post, I wondered, how crippled would a browser be to read a 4 billion if statement WASM program?</p>
+<p>I started my exploration in a similar way: I attempted to write a Rust program that compiled to WASM for the simplest solution.
+Using a Python script to generate the if statements, I used the first wasm-pack base I found and gave Rust a shot.
+This went well for smaller numbers (under 2^20 or so).  After reaching 2^20, the Rust compile times became absurdly long.
+The file with 2^8 if statements compiled in about 10 seconds.  The file with 2^16 took about 8 minutes.
+When I tried the file with 2^24 if statements, the Rust compiler still tried, but ultimately I had to go to bed and shut it down after about three hours.
+This isn't too surprising, since the Rust compiler is optimized for safety, but I did want a WASM file with 4 billion if statements before the end of the millenia still.</p>
+<p>When Rust took too long, I decided the C/C++ to WASM route was probably also improbable for the same reason as in the original rendition.  The compiler won't like a 330GB code file.
+I may also have decided this because I really wanted to mess with writing binaries, but that's not the point here.
+The point here is that the plan was to write the WASM by hand.</p>
+<p>Since I didn't have any prior experience with working with binary formats, I started by compiling a simple WASM program which did a single comparison, and parsed that in order to understand what was going on.
+With a single if statement, I was able to begin understanding the binary format.  Here's the quick explanation:</p>
+<p>WASM files all start with the following bytes, the first four are a special sequence (equivalent to <code>\0asm</code>) and the latter four are a version number.  WASM is on version one at the time of writing.</p>
+<pre><code>00 61 73 6D 01 00 00 00
+</code></pre>
+<p>The next step is the types section.  Quick detour about sections, every one starts with a id and then a <a href="https://en.wikipedia.org/wiki/LEB128">LEB128 encoded number</a> which defines the length of the section.
+The type section has an id of <code>3</code> and will contain a single function type, taking a i32 parameter and returning a i32.  Booleans in WASM are represented by i32, returning a <code>0</code> or <code>1</code>.</p>
+<pre><code>01 06 01 60 01 7F 01 7F
+</code></pre>
+<p>I won't go too far into the details of the type here, you can take a look at the <a href="https://webassembly.github.io/spec/core/appendix/index-instructions.html">WASM instruction list</a> yourself if you get curious.</p>
+<p>The function also has to be defined separately in the function section, which is simple enough.</p>
+<pre><code>03 02 01 00
+</code></pre>
+<p>To translate, we are declaring we are in section id 3, giving it a length of 2, and reporting which types the function has in the func section of the module.
+I don't fully understand this bit either, don't worry.  All that's important here is that the compiler expects it.</p>
+<p>Finally, the function needs a name, given in the export section.  This is also the section that makes the function available from JavaScript.</p>
+<pre><code>07 09 01 05 69 73 4F 64 64 00 00
+</code></pre>
+<p>The gist of this one is that the ASCII for the function name <code>isOdd</code> is encoded into the bytes of the section.</p>
+<p>All of this can come together into a simple Python script to write the preamble for our code.</p>
+<pre data-linenos data-lang="py" class="language-py "><code class="language-py" data-lang="py"><table><tbody><tr><td>1</td><td>filename = &#x27;isodd.wasm&#x27;
+</td></tr><tr><td>2</td><td>
+</td></tr><tr><td>3</td><td>start_bin = bytes([0x00, 0x61, 0x73, 0x6D, 0x01, 0x00, 0x00, 0x00,
+</td></tr><tr><td>4</td><td>                   0x01, 0x06, 0x01, 0x60, 0x01, 0x7F, 0x01, 0x7F,
+</td></tr><tr><td>5</td><td>                   0x03, 0x02, 0x01, 0x00,
+</td></tr><tr><td>6</td><td>                   0x07, 0x09, 0x01, 0x05, 0x69, 0x73, 0x4F, 0x64, 0x64, 0x00, 0x00,
+</td></tr><tr><td>7</td><td>                   0x0A])
+</td></tr><tr><td>8</td><td>
+</td></tr><tr><td>9</td><td>with open(filename, &#x27;wb+&#x27;) as f:
+</td></tr><tr><td>10</td><td>    f.write(start_bin)
+</td></tr></tbody></table></code></pre>
+<p>The final <code>0A</code> byte is to start the code section.</p>
+<p>With all that tedious work out of the way, now comes the fun part.  Unlike in raw Assembly, the resulting WASM file is exporting a function.  WASM doesn't have anything to the effect of <code>return true</code> that we can use.
+The easy version of the code in a sane language would've looked like this.</p>
+<pre data-lang="c++" class="language-c++ "><code class="language-c++" data-lang="c++">if (x == 1) return true;
+if (x == 2) return false;
+...
+</code></pre>
+<p>Instead, WASM forces us into a paradigm that looks more like this.</p>
+<pre data-lang="c++" class="language-c++ "><code class="language-c++" data-lang="c++">if (x == 1) return true;
+else {
+    if (x == 2) return false;
+    else { ... }
+}
+</code></pre>
+<p>This isn't a huge issue, but it forces a slightly different code structure where we have to end all of those else statements at some point.</p>
+<p>The other issue is that we can't have all 4 billion if statements in memory at once, or my Linux environment likes to freeze up and kill the process.  Instead, we write byte by byte appending into the file.
+This doesn't seem like an issue until you remember that we don't really know how long the code is until we generate it, and I don't want to go back and write into a specific byte of the file because I'm lazy and don't feel like it.
+We'll solve that issue later, though, and just focus on getting the code written for now.  I'll pretend I have it solved by making a variable and dealing with it later.</p>
+<pre data-lang="py" class="language-py "><code class="language-py" data-lang="py">function_size = 32 # This is incredibly wrong
+</code></pre>
+<p>For the actual code part, the concept is simple.  WASM is a stack-based language, which means you do operations by pushing values onto the stack.
+To do the simple comparison (<code>if (x == 1)</code>), it takes four steps.  First, grab the local variable (<code>x</code>) with the bytes <code>20 00</code>, <code>20</code> meaning get a local variable, and <code>00</code> being the first one.
+Second, push the constant value to compare with onto the stack with <code>41 ??</code>, <code>41</code> being load constant and <code>??</code> being our number to load.  The number is encoded in LEB128 format, which will make life a little harder later, but not much.
+Third, compare the two and leave that value on the stack with <code>46</code>, which is the instruction for <code>==</code> in WASM.
+Fourth, the if statement is represented with <code>04 7F</code>, with <code>04</code> being the if and <code>7F</code> being the return type of i32.
+Fifth, to write our code inside this if statement, <code>41 ??</code> returns whether the value resulted in true or false.
+Finally, the end of the if statement is capped off with a <code>else</code>, with <code>05</code>.</p>
+<p>The only thing left to do then is create one more branch for anything that doesn't fit these values, and cap off all those if statements with end statements.
+The full code for all of this is below.</p>
+<pre data-linenos data-lang="py" class="language-py "><code class="language-py" data-lang="py"><table><tbody><tr><td>1</td><td>with open(filename, &#x27;ab&#x27;) as f:
+</td></tr><tr><td>2</td><td>    # section size
+</td></tr><tr><td>3</td><td>    f.write(leb128.u.encode(function_size + 1 + len(leb128.u.encode(function_size))))
+</td></tr><tr><td>4</td><td>    # locals passed
+</td></tr><tr><td>5</td><td>    f.write(bytes([0x01]))
+</td></tr><tr><td>6</td><td>    # function size
+</td></tr><tr><td>7</td><td>    f.write(leb128.u.encode(function_size))
+</td></tr><tr><td>8</td><td>    # no-op
+</td></tr><tr><td>9</td><td>    f.write(bytes([0x00]))
+</td></tr><tr><td>10</td><td>
+</td></tr><tr><td>11</td><td>    for i in range(0, limit):
+</td></tr><tr><td>12</td><td>        # local.get 0
+</td></tr><tr><td>13</td><td>        f.write(bytes([0x20, 0x00]))
+</td></tr><tr><td>14</td><td>        # i32.const i
+</td></tr><tr><td>15</td><td>        f.write(bytes([0x41]) + leb128.u.encode(i))
+</td></tr><tr><td>16</td><td>        # i32.eq
+</td></tr><tr><td>17</td><td>        f.write(bytes([0x46]))
+</td></tr><tr><td>18</td><td>        # if (return i32)
+</td></tr><tr><td>19</td><td>        f.write(bytes([0x04, 0x7F]))
+</td></tr><tr><td>20</td><td>        # if block
+</td></tr><tr><td>21</td><td>        f.write(bytes([0x41]) + leb128.u.encode((i) % 2))
+</td></tr><tr><td>22</td><td>        # else
+</td></tr><tr><td>23</td><td>        f.write(bytes([0x05]))
+</td></tr><tr><td>24</td><td>        # else block is the next if
+</td></tr><tr><td>25</td><td>
+</td></tr><tr><td>26</td><td>    f.write(bytes([0x41, 0x02]))
+</td></tr><tr><td>27</td><td>
+</td></tr><tr><td>28</td><td>    for i in range(0, limit + 1):
+</td></tr><tr><td>29</td><td>        f.write(bytes([0x0B]))
+</td></tr></tbody></table></code></pre>
+<p>Now it is time to return to the issue earlier of figuring out the code size before we've written the code.  Turns out, this is a simple enough problem to solve iteratively, and since I'm lazy, I did that.
+There might be a smarter mathematical way of doing this.</p>
+<pre data-linenos data-lang="py" class="language-py "><code class="language-py" data-lang="py"><table><tbody><tr><td>1</td><td>function_size = 4
+</td></tr><tr><td>2</td><td>for i in range(0, limit):
+</td></tr><tr><td>3</td><td>    function_size += 10
+</td></tr><tr><td>4</td><td>    if i != 0:
+</td></tr><tr><td>5</td><td>        function_size += 1 + math.floor((math.log2(i)) &#x2F; 7)
+</td></tr><tr><td>6</td><td>    else:
+</td></tr><tr><td>7</td><td>        function_size += 1
+</td></tr></tbody></table></code></pre>
+<p>The reason for the <code>math.floor</code> bit is because of the LEB128 encoding.  Every time the number grows by 7 powers of 2, it gains an extra byte of code size per if statement.</p>
+<p>After all this, I finally have a Python script capable of writing the program I want.
+You'll notice I have a <code>limit</code> variable used in the earlier two snippets for convenience, so I can quickly change the number of if statements.</p>
+<p>Let's start with a size of 2^8 if statements, just to make sure it's working.</p>
+<pre data-linenos data-lang="bash" class="language-bash "><code class="language-bash" data-lang="bash"><table><tbody><tr><td>1</td><td>&gt; python generator.py
+</td></tr><tr><td>2</td><td>Calculating function size...
+</td></tr><tr><td>3</td><td>Total time for calculating function size: 5.4430000091088004e-05s
+</td></tr><tr><td>4</td><td>Writing file...
+</td></tr><tr><td>5</td><td>Writing file... progress: 32&#x2F;2980 bytes
+</td></tr></tbody></table></code></pre>
+<p>When I run it using a quick index.js I whipped up with <code>isOdd(1)</code>, I get a value of <code>true</code>.  Exactly what I wanted, and the WASM parses correctly!
+A quick test with 2^16 gives the same result, so I decide to go ahead and try a value of 2^32.
+After an hour, it's still running.  Must be stuck writing the file, right?  Nope, it's stuck in the <code>function_size</code> bit.</p>
+<p>I tried in vain to optimize it to the point where it won't take many hours to calculate the function size, but while testing, I stumbled across something unfortunate.
+A limit of 2^24 causes the WASM compiler within Firefox to give up.  Turns out, WASM has a hard limit on the size of a function body.
+There was no need to finish optimizing so that I could have my 2^32 WASM file, my dreams have been dashed.
+I did some playing to reach the exact number, and the max limit I could reach via this strategy was <code>590063</code>.</p>
+<p>Within the time I set aside for this project, I couldn't quite solve this.  The only idea I have to get around this hard limit is to start dividing into multiple functions.
+For that, though, you have to dynamically generate the functions as well, so I decided to let this one rest for now.  Perhaps I shall return someday, and a browser will load a WASM file containing all 4 billion if statements.</p>
+
+</div>
+    </main>
+  </body>
+</html>
