@@ -1,13 +1,15 @@
 {% extends "base.html" %}
 <!-- vim: set ft=tera: -->
 
+{% block head %}
+  {{ super() }}
+  <link rel="stylesheet" href="/projects/projects.css" />
+{% endblock head %}
+
 {% block title %}
   <title>Projects</title>
 {% endblock title %}
 
 {% block content %}
-<h1 class="title">
-  {{ section.title }}
-</h1>
 {{ section.content | safe }}
 {% endblock content %}
