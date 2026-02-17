@@ -1,0 +1,13 @@
+@use "sass:color";
+
+.title {
+  margin-bottom: 0px;
+  margin-top: 10px;
+  font-size: 18pt;
+}
+
+p.subtitle {
+  margin-top: 0px;
+  font-size: 12pt;
+  color: color-mix(in srgb, var(--secondary-text-color), white 30%);
+}

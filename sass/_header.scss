@@ -1,0 +1,37 @@
+.header {
+  padding: 10px 10px;
+  font-size: 16pt;
+  display: flex;
+  justify-content: space-between;
+
+  border-radius: 0px 0px 10px 10px;
+  border: 5px var(--secondary-color) solid;
+  border-top: none;
+
+  > * {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+  }
+}
+
+.header-left,
+.header-right {
+  > * {
+    margin: 0px;
+    padding: 0px 5px;
+  }
+}
+
+.header-left {
+  > *:first-child {
+    padding-left: 0px;
+  }
+}
+
+.header-right {
+  > *:last-child {
+    padding-right: 0px;
+  }
+}
+

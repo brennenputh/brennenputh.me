@@ -70,7 +70,7 @@ Includes a definition of the field AprilTag JSON layout in C++ and Java.
 ### Distrobox Completions for Fish Shell 
 
 I highly recommend making fish shell completions for any tool you use often.
-The PR process was simple and easy, and fish's inbuilt primitives for suggestions were awesome.
+The PR process was simple and easy, and fish's inbuilt primitives for suggestions are awesome.
 
 <a class="action" href="https://github.com/fish-shell/fish-shell/pull/11715">See the PR</a>
 

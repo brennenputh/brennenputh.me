@@ -1,0 +1,121 @@
+@use "header";
+
+:root {
+  --primary-color: light-dark(#fff, #222);
+  --secondary-color: light-dark(#dadada, #3a3a3a);
+  --codeblock-color: #1e1e1e;
+
+  --accent-color: light-dark(#4545ff, #7575ff);
+  --accent-color-focus: light-dark(#2525ff, #9595ff);
+
+  // For elements which need the extra style
+  --text-color: light-dark(black, white);
+  --secondary-text-color: light-dark(#222, #aaa);
+
+  color-scheme: light dark;
+  background-color: var(--primary-color);
+  font: 100% sans-serif;
+}
+
+main {
+  margin-inline: auto;
+}
+
+body {
+  max-width: min(1000px, 100% - 4rem);
+  font-size: 1.25rem;
+  margin: 0px auto 50px;
+  line-height: 1.4;
+}
+
+a {
+  color: var(--accent-color);
+  transition: color 0.1s linear;
+
+  &:hover {
+    color: var(--accent-color-focus);
+  }
+}
+
+.giallo-ln {
+  padding-right: 10px;
+}
+
+.giallo {
+  padding: 3px;
+  border-radius: 5px;
+  background-color: var(--codeblock-color) !important;
+  overflow: auto;
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+
+    td {
+      padding: 0;
+
+      &:nth-of-type(1) {
+        vertical-align: top;
+        user-select: none;
+        padding-right: 0.3rem;
+        filter: brightness(50%);
+      }
+    }
+  }
+}
+
+code {
+  display: inline-block;
+  padding: 1px 5px;
+  background-color: #1e1e1e;
+  border-radius: 1px;
+}
+
+p > code {
+  background-color: var(--secondary-color);
+}
+
+.title {
+  margin: 10px 0px;
+}
+
+a:has(.page-item) {
+  text-decoration: none;
+}
+
+.page-item {
+  margin: 5px 0px;
+  background-color: var(--secondary-color);
+  padding: 10px 20px;
+  border-radius: 5px;
+
+  &:hover {
+    background-color: color-mix(in srgb, var(--secondary-color), white 20%);
+  }
+
+  > * {
+    margin: 2px 0;
+  }
+}
+
+.page-title {
+  color: var(--text-color);
+}
+
+.page-info {
+  display: flex;
+
+  color: var(--secondary-text-color);
+  font-size: 75%;
+}
+
+blockquote {
+  margin-left: 0px;
+  padding: 10px 10px;
+  border-left: 2px solid gray;
+
+  > p {
+    padding: 0px 0px;
+    margin: 0px;
+  }
+}
