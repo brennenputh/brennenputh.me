@@ -22,7 +22,7 @@ A bootc container image based on Universal Blue's offerings customized for my ow
 
 ### Dotfiles
 
-My personal dotfiles collection. Supports my Fedora-based WSL installation and my bpOS installation.
+My personal dotfiles collection.
 
 <a class="action" href="https://github.com/brennenputh/dotfiles">View the Repo</a>
 
