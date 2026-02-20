@@ -1,0 +1,114 @@
+<!doctype html>
+<!-- vim: set ft=tera: -->
+<html lang="en">
+  <head>
+    
+  
+      <meta charset="utf-8" />
+      <link rel="stylesheet" href="/main.css" />
+      <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    
+  <link rel="stylesheet" href="/blog/post.css" />
+
+    
+  <title>Smart Window Resizing in Neovim</title>
+
+    
+      <meta name="description" content="A place for the personal blog, projects, and wanderings of Brennen Puth.">
+      <meta property="og:title" content="Brennen Puth">
+      <meta property="og:description" content="A place for the personal blog, projects, and wanderings of Brennen Puth.">
+    
+    
+      <link rel="alternate" type="application/rss+xml" title="RSS" href="https://brennenputh.me/rss.xml">
+    
+  </head>
+
+  <body>
+    <div class="header">
+      <div class="header-left">
+        <h4>Brennen Puth</h4>
+        <a href="/">Home</a>
+        <a href="https://brennenputh.me/projects/">Projects</a>
+      </div>
+      <div class="header-right">
+        <a href="https://github.com/brennenputh">GitHub</a>
+        <a href="https://brennenputh.me/rss.xml">RSS</a>
+      </div>
+    </div>
+    <main>
+      <div class="container">
+<h1 class="title">
+  Smart Window Resizing in Neovim
+</h1>
+<p class="subtitle">2025-04-12</p>
+<p>The last day or two, I've been refitting my Neovim windowing config.
+Nothing too wild, just fixing a few warts here and there.
+What follows is a few different snippets for different behaviors I wanted.
+Hopefully one of these is useful to someone, even if only as a reference (something <em>definitely</em> needs said about the Neovim documentation searchability situation).
+If you want to see these in their context, links will be left below each example.
+The links may fall out of date, so I've linked them to the specific commit.</p>
+<p>Also, if you're interested in this, I credit <a href="https://github.com/chrisgrieser">chrisgrieser</a> who used to run a blog called Nano Tips For Vim, which was immensely helpful to me in figuring out all of my Neovim configs but was sadly taken offline as of 2025-06-12.</p>
+<h2 id="turn-off-line-numbers-for-small-windows">Turn Off Line Numbers for Small Windows</h2>
+<pre data-linenos data-lang="lua" class="language-lua "><code class="language-lua" data-lang="lua"><table><tbody><tr><td>1</td><td>local set_numbers = function(value, window)
+</td></tr><tr><td>2</td><td>	vim.api.nvim_set_option_value(&quot;number&quot;, value, { win = window })
+</td></tr><tr><td>3</td><td>	vim.api.nvim_set_option_value(&quot;relativenumber&quot;, value, { win = window })
+</td></tr><tr><td>4</td><td>end
+</td></tr><tr><td>5</td><td>local window_size_threshold = 40
+</td></tr><tr><td>6</td><td>
+</td></tr><tr><td>7</td><td>vim.api.nvim_create_autocmd(&quot;WinResized&quot;, {
+</td></tr><tr><td>8</td><td>	callback = function()
+</td></tr><tr><td>9</td><td>		for _, win in ipairs(vim.api.nvim_list_wins()) do
+</td></tr><tr><td>10</td><td>			local width = vim.api.nvim_win_get_width(win)
+</td></tr><tr><td>11</td><td>			if width &lt; window_size_threshold then
+</td></tr><tr><td>12</td><td>				set_numbers(false, win)
+</td></tr><tr><td>13</td><td>			else
+</td></tr><tr><td>14</td><td>				set_numbers(true, win)
+</td></tr><tr><td>15</td><td>			end
+</td></tr><tr><td>16</td><td>		end
+</td></tr><tr><td>17</td><td>	end,
+</td></tr><tr><td>18</td><td>})
+</td></tr></tbody></table></code></pre>
+<p><a href="https://github.com/brennenputh/dotfiles/blob/cf2246d3eea2f0b1a14ca31be448d00a74fe16ae/nvim/lua/autocmds.lua#L67-L86">See it in context!</a></p>
+<h2 id="bring-window-into-focus">Bring Window Into Focus</h2>
+<pre data-linenos data-lang="lua" class="language-lua "><code class="language-lua" data-lang="lua"><table><tbody><tr><td>1</td><td>local win_focus = function()
+</td></tr><tr><td>2</td><td>    -- Uncomment if you use either of these plugins
+</td></tr><tr><td>3</td><td>	-- require(&quot;dapui&quot;).close()
+</td></tr><tr><td>4</td><td>	-- require(&quot;nvim-tree.api&quot;).tree.close()
+</td></tr><tr><td>5</td><td>
+</td></tr><tr><td>6</td><td>	local current_win = vim.api.nvim_get_current_win()
+</td></tr><tr><td>7</td><td>	local windows = vim.api.nvim_list_wins()
+</td></tr><tr><td>8</td><td>	vim.api.nvim_win_set_width(0, vim.o.columns - (#windows * 20))
+</td></tr><tr><td>9</td><td>	for _, win in ipairs(windows) do
+</td></tr><tr><td>10</td><td>		if win ~= current_win then
+</td></tr><tr><td>11</td><td>			vim.api.nvim_win_set_width(win, 20)
+</td></tr><tr><td>12</td><td>		end
+</td></tr><tr><td>13</td><td>	end
+</td></tr><tr><td>14</td><td>end
+</td></tr><tr><td>15</td><td>
+</td></tr><tr><td>16</td><td>keymap(&quot;n&quot;, &quot;&lt;leader&gt;rs&quot;, function()
+</td></tr><tr><td>17</td><td>	vim.api.nvim_win_set_width(0, 20)
+</td></tr><tr><td>18</td><td>end)
+</td></tr><tr><td>19</td><td>keymap(&quot;n&quot;, &quot;&lt;leader&gt;rf&quot;, win_focus)
+</td></tr></tbody></table></code></pre>
+<p><a href="https://github.com/brennenputh/dotfiles/blob/cf2246d3eea2f0b1a14ca31be448d00a74fe16ae/nvim/lua/keymaps.lua#L50-L73">See it in context!</a></p>
+<h2 id="resizing-mappings">Resizing Mappings</h2>
+<p>This requires the <a href="https://github.com/pogyomo/winresize.nvim">winresize.nvim</a> plugin.</p>
+<pre data-linenos data-lang="lua" class="language-lua "><code class="language-lua" data-lang="lua"><table><tbody><tr><td>1</td><td>local win_resize = function(win, amt, dir)
+</td></tr><tr><td>2</td><td>	return function()
+</td></tr><tr><td>3</td><td>		require(&quot;winresize&quot;).resize(win, amt, dir)
+</td></tr><tr><td>4</td><td>	end
+</td></tr><tr><td>5</td><td>end
+</td></tr><tr><td>6</td><td>
+</td></tr><tr><td>7</td><td>wk_add(&quot;&lt;leader&gt;r&quot;, &quot;Window Resize&quot;)
+</td></tr><tr><td>8</td><td>keymap(&quot;n&quot;, &quot;&lt;leader&gt;rh&quot;, win_resize(0, 10, &quot;left&quot;))
+</td></tr><tr><td>9</td><td>keymap(&quot;n&quot;, &quot;&lt;leader&gt;rj&quot;, win_resize(0, 3, &quot;down&quot;))
+</td></tr><tr><td>10</td><td>keymap(&quot;n&quot;, &quot;&lt;leader&gt;rk&quot;, win_resize(0, 3, &quot;up&quot;))
+</td></tr><tr><td>11</td><td>keymap(&quot;n&quot;, &quot;&lt;leader&gt;rl&quot;, win_resize(0, 10, &quot;right&quot;))
+</td></tr><tr><td>12</td><td>keymap(&quot;n&quot;, &quot;&lt;leader&gt;r=&quot;, &quot;&lt;C-w&gt;=&quot;, { desc = &quot;Equalize Windows&quot; })
+</td></tr></tbody></table></code></pre>
+<p><a href="https://github.com/brennenputh/dotfiles/blob/cf2246d3eea2f0b1a14ca31be448d00a74fe16ae/nvim/lua/keymaps.lua#L43-L68">See it in context!</a></p>
+
+</div>
+    </main>
+  </body>
+</html>

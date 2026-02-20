@@ -1,0 +1,104 @@
+<!doctype html>
+<!-- vim: set ft=tera: -->
+<html lang="en">
+  <head>
+    
+  
+      <meta charset="utf-8" />
+      <link rel="stylesheet" href="/main.css" />
+      <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    
+  <link rel="stylesheet" href="/blog/post.css" />
+
+    
+  <title>Thoughts on Teaching Text Editing</title>
+
+    
+      <meta name="description" content="A place for the personal blog, projects, and wanderings of Brennen Puth.">
+      <meta property="og:title" content="Brennen Puth">
+      <meta property="og:description" content="A place for the personal blog, projects, and wanderings of Brennen Puth.">
+    
+    
+      <link rel="alternate" type="application/rss+xml" title="RSS" href="https://brennenputh.me/rss.xml">
+    
+  </head>
+
+  <body>
+    <div class="header">
+      <div class="header-left">
+        <h4>Brennen Puth</h4>
+        <a href="/">Home</a>
+        <a href="https://brennenputh.me/projects/">Projects</a>
+      </div>
+      <div class="header-right">
+        <a href="https://github.com/brennenputh">GitHub</a>
+        <a href="https://brennenputh.me/rss.xml">RSS</a>
+      </div>
+    </div>
+    <main>
+      <div class="container">
+<h1 class="title">
+  Thoughts on Teaching Text Editing
+</h1>
+<p class="subtitle">2025-03-19</p>
+<h3 id="why">Why?</h3>
+<p>A friend recently asked me the question that's been around since the dawn of editors: "Is it best to teach someone programming with a pure text editor or with an IDE?"
+There is some bias to the formation of the question.
+No one who did not believe a text editor was objectively better for one reason or another would ask it with that wording.
+In response, I tried to take a reasonable position allowing both IDEs and text editors for teaching.
+Our short discussion spawned another in my opinion more interesting question in my mind, however.</p>
+<p>What editing tools <strong>should</strong> be taught to programming students?</p>
+<h3 id="how">How?</h3>
+<p>My mind immediately cries out that they should start with the basics.
+Nothing but a empty Vim buffer and a small cheatsheet for whatever language they're being taught first.
+Then, they learn the fundamentals of exactly which character goes where, and they have a deep understanding of the syntax.</p>
+<p><strong>Wait.</strong> Of the <em>syntax</em>?</p>
+<p>Perhaps I'll write up my full opinions on this later, but suffice it to say for now that syntax should not be the goal of teaching programming.
+Of course, you need a framework, so you teach someone how to express something in syntax.
+I'm not insane enough (yet) to propose a pure pseudocode curriculum, and besides, that would only swap one sort of syntax for another.</p>
+<p>What I want is for the syntax and design of the language not to get in the way of learning.
+Unfortunately, there is no way around syntax at a fundamental level.
+At some point the language must be in the learning programmer's way, and I don't think that's a bad thing.
+So if we can't improve the language, the tooling is the next best thing.
+I believe there exist a few tools which both do not inhibit learning and are ubiquitous among languages (unless you write your own, I suppose).</p>
+<h4 id="in-editor-code-analysis">In-Editor Code Analysis</h4>
+<p>I can hear the comments now. "You've practically just allowed an IDE!"
+Look. There comes a time to make people watch their syntax carefully as they write it.
+It's not while you're learning how a computer thinks.</p>
+<p>The faster the feedback loop, the better the learning.
+The amount of people I've helped who waited to compile until they were done typing a whole bunch of incorrect code, simply because compiling takes a lot of keystrokes, is insane.
+While teaching "compile and test often" is good, <em>it should not take 20 keystrokes to check your syntax is right</em>.</p>
+<h4 id="code-formatter">Code Formatter</h4>
+<p>Cedarville (where I'm getting my bachelors), at the very least, has a C++ and Java programming format policy.
+I highly appreciate the effort.
+Only, code formatters solved that problem a while ago.
+There's an opinionated formatter for basically every commonly taught language, and it should be standard to leave most of the formatting to it.</p>
+<p>Some examples in modern (and not modern) programming languages:</p>
+<ul>
+<li><a href="https://docs.kernel.org/dev-tools/clang-format.html">clang-format</a> for C++.</li>
+<li><a href="https://github.com/rust-lang/rustfmt">rustfmt</a> for Rust.  It's inbuilt into the Rust install, anyways.</li>
+<li><a href="https://github.com/psf/black">black</a> for Python.</li>
+<li>Go just has a inbuilt <a href="https://go.dev/blog/gofmt">command</a>. No need to even install anything.</li>
+</ul>
+<p>I omitted Java, because there is no good argument for not using a Java IDE, which should come with all of the tools I mention here and more.</p>
+<p>The point is, formatting is something to give to tools.
+Standardize a config for your clang-format, not a formal specification document (specifically in the context of teaching).
+Especially when languages have begun to bundle these sorts of tools, it's absolutely silly to insist that your format is better.</p>
+<p>From a teaching and grading perspective, the formatters also can help.
+Most of these tools also have a validate mode to ensure the input code is already formatted.</p>
+<h4 id="code-formatter-pt-2">Code Formatter, pt 2</h4>
+<p>A tool which closes a bracket for you, or maybe spaces out your brackets as you hit <code>Enter</code> instead of afterwards.
+This is something I went without for a while on my Neovim config, and it was incredibly painful.</p>
+<p><img src="https://xkcd.com/comics/(.png" alt="Opening brackets need closed." /></p>
+<p><sup>Credit XKCD for the image.</sup></p>
+<h3 id="an-ending">An Ending</h3>
+<p>I consider this document to be a "standard of living" for a new programmer.
+Vim and Vim alone is a terrible strategy when we have tools to help.
+So long as those tools teach good behavior and get out of the programmer's way as much as possible, I see no reason not to use them.</p>
+<p>I will admit, it's also a personal preference.
+Helping people who don't format their code nicely until they submit pains every programming instinct I have.</p>
+
+</div>
+    </main>
+  </body>
+</html>

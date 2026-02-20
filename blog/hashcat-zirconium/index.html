@@ -1,0 +1,80 @@
+<!doctype html>
+<!-- vim: set ft=tera: -->
+<html lang="en">
+  <head>
+    
+  
+      <meta charset="utf-8" />
+      <link rel="stylesheet" href="/main.css" />
+      <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    
+  <link rel="stylesheet" href="/blog/post.css" />
+
+    
+  <title>Using Hashcat (with a Nvidia GPU) on a bootc system</title>
+
+    
+      <meta name="description" content="A place for the personal blog, projects, and wanderings of Brennen Puth.">
+      <meta property="og:title" content="Brennen Puth">
+      <meta property="og:description" content="A place for the personal blog, projects, and wanderings of Brennen Puth.">
+    
+    
+      <link rel="alternate" type="application/rss+xml" title="RSS" href="https://brennenputh.me/rss.xml">
+    
+  </head>
+
+  <body>
+    <div class="header">
+      <div class="header-left">
+        <h4>Brennen Puth</h4>
+        <a href="/">Home</a>
+        <a href="https://brennenputh.me/projects/">Projects</a>
+      </div>
+      <div class="header-right">
+        <a href="https://github.com/brennenputh">GitHub</a>
+        <a href="https://brennenputh.me/rss.xml">RSS</a>
+      </div>
+    </div>
+    <main>
+      <div class="container">
+<h1 class="title">
+  Using Hashcat (with a Nvidia GPU) on a bootc system
+</h1>
+<p class="subtitle">2026-02-06</p>
+<p>This is intended as a future reference, for myself and anyone else who runs into issues.
+I have a Nvidia 3060Ti in my desktop, and this is how I got hashcat working with it.</p>
+<h2 id="symptom">Symptom</h2>
+<p><code>hashcat</code> installed via <code>brew</code> cannot use the Nvidia GPU.
+On further inspection, even <code>clinfo</code> cannot see the Nvidia GPU.</p>
+<h2 id="solution">Solution</h2>
+<p>TL;DR: Use a container!</p>
+<h3 id="step-1">Step 1</h3>
+<p><a href="https://podman-desktop.io/docs/podman/gpu">Set up podman for Nvidia GPUs</a>.</p>
+<h3 id="step-2">Step 2</h3>
+<p>Create a container which has Nvidia integration.
+The one I chose to use is <a href="https://hub.docker.com/r/dizcza/docker-hashcat">dizcza/docker-hashcat</a>, which includes <code>hashcat</code> and provides images for all the types of GPUs. The tag I'm interested in is <code>cuda</code>.</p>
+<p>My strategy was to use <code>distrobox</code> to set up nice host integration. Use the following commands.</p>
+<pre data-lang="sh" class="language-sh "><code class="language-sh" data-lang="sh">distrobox create --nvidia --image dizcza&#x2F;docker-hashcat:cuda hashcat
+distrobox enter hashcat
+# Inside the container
+distrobox-export &#x2F;usr&#x2F;local&#x2F;bin&#x2F;hashcat
+</code></pre>
+<p>Alternatively, use the below <code>distrobox-assemble</code> config.</p>
+<pre><code>[hashcat]
+image=dizcza&#x2F;docker-hashcat:cuda
+nvidia=true
+init=true
+start_now=false
+unshare_all=true
+exported_bins=&quot;&#x2F;usr&#x2F;local&#x2F;bin&#x2F;hashcat&quot;
+additional_packages=&quot;systemd&quot;
+</code></pre>
+<h3 id="step-3">Step 3</h3>
+<p>Use <code>hashcat</code> as you normally would from your host system!  <code>distrobox</code> should take care of exporting the binary such that it's available to your terminal.</p>
+<hr />
+<p>Hopefully these steps helped.  If they didn't work, shoot me an <a href="mailto:bputh.blog@gmail.com">email</a> and I'll see what I can do to help!</p>
+
+</div>
+    </main>
+  </body>
+</html>

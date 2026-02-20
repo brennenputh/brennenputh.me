@@ -1,0 +1,532 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+      <title>Brennen Puth</title>
+      <link>https://brennenputh.me</link>
+      <description>A place for the personal blog, projects, and wanderings of Brennen Puth.</description>
+      <generator>Zola</generator>
+      <language>en</language>
+      <atom:link href="https://brennenputh.me/rss.xml" rel="self" type="application/rss+xml"/>
+      <lastBuildDate>Fri, 06 Feb 2026 00:00:00 +0000</lastBuildDate>
+      <item>
+          <title>Using Hashcat (with a Nvidia GPU) on a bootc system</title>
+          <pubDate>Fri, 06 Feb 2026 00:00:00 +0000</pubDate>
+          <author>bputh.blog@gmail.com (Brennen Puth)</author>
+          <link>https://brennenputh.me/blog/hashcat-zirconium/</link>
+          <guid>https://brennenputh.me/blog/hashcat-zirconium/</guid>
+          <description xml:base="https://brennenputh.me/blog/hashcat-zirconium/">&lt;p&gt;This is intended as a future reference, for myself and anyone else who runs into issues.
+I have a Nvidia 3060Ti in my desktop, and this is how I got hashcat working with it.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;symptom&quot;&gt;Symptom&lt;&#x2F;h2&gt;
+&lt;p&gt;&lt;code&gt;hashcat&lt;&#x2F;code&gt; installed via &lt;code&gt;brew&lt;&#x2F;code&gt; cannot use the Nvidia GPU.
+On further inspection, even &lt;code&gt;clinfo&lt;&#x2F;code&gt; cannot see the Nvidia GPU.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;solution&quot;&gt;Solution&lt;&#x2F;h2&gt;
+&lt;p&gt;TL;DR: Use a container!&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;step-1&quot;&gt;Step 1&lt;&#x2F;h3&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;podman-desktop.io&#x2F;docs&#x2F;podman&#x2F;gpu&quot;&gt;Set up podman for Nvidia GPUs&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;step-2&quot;&gt;Step 2&lt;&#x2F;h3&gt;
+&lt;p&gt;Create a container which has Nvidia integration.
+The one I chose to use is &lt;a href=&quot;https:&#x2F;&#x2F;hub.docker.com&#x2F;r&#x2F;dizcza&#x2F;docker-hashcat&quot;&gt;dizcza&#x2F;docker-hashcat&lt;&#x2F;a&gt;, which includes &lt;code&gt;hashcat&lt;&#x2F;code&gt; and provides images for all the types of GPUs. The tag I&#x27;m interested in is &lt;code&gt;cuda&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;My strategy was to use &lt;code&gt;distrobox&lt;&#x2F;code&gt; to set up nice host integration. Use the following commands.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;sh&quot; class=&quot;language-sh &quot;&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;distrobox create --nvidia --image dizcza&amp;#x2F;docker-hashcat:cuda hashcat
+distrobox enter hashcat
+# Inside the container
+distrobox-export &amp;#x2F;usr&amp;#x2F;local&amp;#x2F;bin&amp;#x2F;hashcat
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Alternatively, use the below &lt;code&gt;distrobox-assemble&lt;&#x2F;code&gt; config.&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code&gt;[hashcat]
+image=dizcza&amp;#x2F;docker-hashcat:cuda
+nvidia=true
+init=true
+start_now=false
+unshare_all=true
+exported_bins=&amp;quot;&amp;#x2F;usr&amp;#x2F;local&amp;#x2F;bin&amp;#x2F;hashcat&amp;quot;
+additional_packages=&amp;quot;systemd&amp;quot;
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;step-3&quot;&gt;Step 3&lt;&#x2F;h3&gt;
+&lt;p&gt;Use &lt;code&gt;hashcat&lt;&#x2F;code&gt; as you normally would from your host system!  &lt;code&gt;distrobox&lt;&#x2F;code&gt; should take care of exporting the binary such that it&#x27;s available to your terminal.&lt;&#x2F;p&gt;
+&lt;hr &#x2F;&gt;
+&lt;p&gt;Hopefully these steps helped.  If they didn&#x27;t work, shoot me an &lt;a href=&quot;mailto:bputh.blog@gmail.com&quot;&gt;email&lt;&#x2F;a&gt; and I&#x27;ll see what I can do to help!&lt;&#x2F;p&gt;
+</description>
+      </item>
+      <item>
+          <title>Why so many notifications, Google?</title>
+          <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+          <author>bputh.blog@gmail.com (Brennen Puth)</author>
+          <link>https://brennenputh.me/blog/google-drive-deluge/</link>
+          <guid>https://brennenputh.me/blog/google-drive-deluge/</guid>
+          <description xml:base="https://brennenputh.me/blog/google-drive-deluge/">&lt;p&gt;Occasionally I have to collaborate with myself via Google.
+Either I create the document on the wrong account or I share it with another account for easy access.
+Whatever the case, Google sends an &lt;em&gt;absurd&lt;&#x2F;em&gt; number of notifications when you share something with someone.
+I created and shared a test document to count.&lt;&#x2F;p&gt;
+&lt;p&gt;Two for my email (one for computer, one for phone, which is alright if it was the only thing)...&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;brennenputh.me&#x2F;blog&#x2F;google-drive-deluge&#x2F;email_1.png&quot; alt=&quot;Email Notification&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;one through Google Chat...&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;brennenputh.me&#x2F;blog&#x2F;google-drive-deluge&#x2F;google_chat.png&quot; alt=&quot;Google Chat Notification&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;and one through Google Drive.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;brennenputh.me&#x2F;blog&#x2F;google-drive-deluge&#x2F;google_drive.png&quot; alt=&quot;Google Drive Notification&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Why on earth do I need to know in so many ways about this one event?
+Particularly, why am I &lt;em&gt;by default&lt;&#x2F;em&gt; recieving communications on Google Chat, which I do not use?
+I can luckily uninstall the Google Chat plugin to get rid of one of the notifications.
+Google Drive and Gmail however I do not want to turn off notifications for. The former has too few to bother, the latter contains important information most of the time.&lt;&#x2F;p&gt;
+&lt;p&gt;I&#x27;ve noticed this is characteristic of many software suites. Lots of notifications about the same event, through several different channels. This is an especially insidious problem when connecting two software suites (Todoist and Google Calendar, Outlook and Webex). It&#x27;s not usually either platform&#x27;s fault but a user configuration error.&lt;&#x2F;p&gt;
+&lt;p&gt;I wonder if there&#x27;s a better way to unify notifications for a single piece of information...&lt;&#x2F;p&gt;
+</description>
+      </item>
+      <item>
+          <title>Connecting to eduroam with NetworkManager on the CLI</title>
+          <pubDate>Fri, 12 Dec 2025 00:00:00 +0000</pubDate>
+          <author>bputh.blog@gmail.com (Brennen Puth)</author>
+          <link>https://brennenputh.me/blog/eduroam-zirconium/</link>
+          <guid>https://brennenputh.me/blog/eduroam-zirconium/</guid>
+          <description xml:base="https://brennenputh.me/blog/eduroam-zirconium/">&lt;p&gt;I decided to set myself up with &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;zirconium-dev&#x2F;zirconium&quot;&gt;Zirconium&lt;&#x2F;a&gt; yesterday on my Framework 13.
+When I booted into Aurora (my chosen image to rebase from) I got the wifi working immediately.
+When I booted into Zirconium after switching, the wifi no longer worked.&lt;&#x2F;p&gt;
+&lt;p&gt;When trying to connect manually via nmtui, it would give me a message along the lines of &quot;AP security could not be confirmed&quot; and stop connecting.
+Other, non-enterprise networks worked fine.
+To fix this, I finally found &lt;a href=&quot;https:&#x2F;&#x2F;campus-rover.gitbook.io&#x2F;lab-notebook&#x2F;fiiva&#x2F;infrastructure&#x2F;linux_terminal_eduroam_setup&quot;&gt;this post&lt;&#x2F;a&gt; which describes how to connect to eduroam using &lt;code&gt;nmcli&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;The steps are as follows:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Find your network adapter with &lt;code&gt;ip link&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Create the connection with &lt;code&gt;nmcli con add type wifi con-name &quot;eduroam&quot; ifname $INTERFACE ssid &quot;eduroam&quot; wifi-sec.key-mgmt wpa-eap 802-1x.identity &quot;$USERNAME&quot; 802-1x.password &quot;$PASSWORD&quot; 802-1x.system-ca-certs yes 802-1x.eap &quot;peap&quot; 802-1x.phase2-auth mschapv2&lt;&#x2F;code&gt;.  Replace &lt;code&gt;$USERNAME&lt;&#x2F;code&gt; and &lt;code&gt;$PASSWORD&lt;&#x2F;code&gt; with the connection details you would use when connecting through a GUI.  Replace &lt;code&gt;$INTERFACE&lt;&#x2F;code&gt; with the WiFi interface you found in step 1.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Bring the connection up with &lt;code&gt;nmcli connection up eduroam --ask&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+</description>
+      </item>
+      <item>
+          <title>Programmer Things That Aren&#x27;t Building The Project</title>
+          <pubDate>Mon, 01 Dec 2025 00:00:00 +0000</pubDate>
+          <author>bputh.blog@gmail.com (Brennen Puth)</author>
+          <link>https://brennenputh.me/blog/programmer-things-that-are-not-building-the-project/</link>
+          <guid>https://brennenputh.me/blog/programmer-things-that-are-not-building-the-project/</guid>
+          <description xml:base="https://brennenputh.me/blog/programmer-things-that-are-not-building-the-project/">&lt;p&gt;Written as an extension to &lt;em&gt;&lt;a href=&quot;https:&#x2F;&#x2F;strangestloop.io&#x2F;essays&#x2F;things-that-arent-doing-the-thing&quot;&gt;things that aren&#x27;t doing the thing&lt;&#x2F;a&gt;&lt;&#x2F;em&gt; because there are a lot of things that I tend to think are building the project which are in reality not building the project&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#1&quot;&gt;1&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;Naming the project is not building the project.&lt;&#x2F;p&gt;
+&lt;p&gt;Fixing your broken Arch install is not building the project.&lt;&#x2F;p&gt;
+&lt;p&gt;Considering how your project fits with other projects is not building the project.&lt;&#x2F;p&gt;
+&lt;p&gt;Writing a blog post about how the project could be done is not building the project.&lt;&#x2F;p&gt;
+&lt;p&gt;Wondering how your project will be received is not building the project.&lt;&#x2F;p&gt;
+&lt;p&gt;Choosing a language is not building the project.&lt;&#x2F;p&gt;
+&lt;p&gt;Configuring your dev environment is not building the project.&lt;&#x2F;p&gt;
+&lt;p&gt;Running an initialization command (&lt;code&gt;cargo new&lt;&#x2F;code&gt;, or &lt;code&gt;npm init&lt;&#x2F;code&gt;, or &lt;code&gt;go mod init&lt;&#x2F;code&gt;, or any other) is not (yet) building the project.&lt;&#x2F;p&gt;
+&lt;p&gt;Letting a LLM run wild on your project is not building the project&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#2&quot;&gt;2&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;Scanning for micro-optimizations in the project is not building the project.&lt;&#x2F;p&gt;
+&lt;p&gt;All of these things may at some point be part of the project. You will know when. Most days, they&#x27;re little distractions while I avoid building the project for the first time.&lt;&#x2F;p&gt;
+&lt;hr &#x2F;&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;1&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;1&lt;&#x2F;sup&gt;
+&lt;p&gt;I might do another one of these, when I&#x27;ve built more projects. I think of a lot of things as I build the project to avoid building the project.&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;2&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;2&lt;&#x2F;sup&gt;
+&lt;p&gt;Sorry, couldn&#x27;t help myself. It might be building the project, but you&#x27;re not going to convince me it&#x27;s building the project you should be proud of.&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+</description>
+      </item>
+      <item>
+          <title>Local Digital Economy</title>
+          <pubDate>Wed, 29 Oct 2025 00:00:00 +0000</pubDate>
+          <author>bputh.blog@gmail.com (Brennen Puth)</author>
+          <link>https://brennenputh.me/blog/local-digital-economy/</link>
+          <guid>https://brennenputh.me/blog/local-digital-economy/</guid>
+          <description xml:base="https://brennenputh.me/blog/local-digital-economy/">&lt;p&gt;Over the summer, some friends and I read &lt;a href=&quot;http:&#x2F;&#x2F;storage.cloversites.com&#x2F;harvest&#x2F;documents&#x2F;Work%20of%20Local%20Culture%20.pdf&quot;&gt;this essay&lt;&#x2F;a&gt; about local communities by Wendell Berry. We also read his book named Jayber Crow which exemplifies the same values in the life of a character. His observations of a centrifugal force which pulls people into a city and kills any small country town nearby sounds eerily similar to the effect of large social media platforms on the Internet. These large platforms draw you in and entice you to stay. This kills smaller digital spaces, because it is easier to visit one place and see everything you want rather than visit five to ten places all of which may or may not be immediately pleasurable.&lt;&#x2F;p&gt;
+&lt;p&gt;I am unfortunately too young to have seen the Internet in its early days. From what I have heard, reading various blogs of lament, the Internet started out similar to the American countryside of Berry&#x27;s description&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#1&quot;&gt;1&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;. A connected group of small towns, each of them offering a few of the services you need. Anything not in your town can likely be found by taking one of the roads to the next town over. A hyperlink is the digital space equivalent to a road&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#2&quot;&gt;2&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;. I would call the collection of digital spaces and hyperlinks the geographic digital map.
+Each road you create from your space to another location provides your viewer an option, to stay where they went or to return to the source of the link. If you send them to a place designed to capture their attention, all you can expect is that one day they won&#x27;t choose to come back.&lt;&#x2F;p&gt;
+&lt;p&gt;I think our culture is finally realizing the effects of creating hyperlinks to cities, in one way or another. I have read several blog posts which are a call to revive the old Internet, where websites were run by small groups or individuals. Each space had its own culture and its own style, a way of acting which was unique to itself and the people who made up the space. This has seen some level of traction, especially with programmers like myself who desire the freedom to just write HTML. Substack as a platform espouses this value by giving each creator their own blog area on the website, although it still has an algorithmic feed so it loses points for that. In any case, the question I&#x27;m asking is: How do we stop people from moving to the cities, and revive the older Internet?&lt;&#x2F;p&gt;
+&lt;p&gt;One of Berry&#x27;s central ideas in the essay is that to have local community, you must have local economy. On the Internet, the economy consists of both regular old currency and more importantly the currency of attention. In some sense, even though I put no ads on my blog and thereby have no monetary gain from it, I am participating in the economy by holding the attention of you, the reader. You&#x27;re welcome. Hopefully I shouldn&#x27;t have to prove the attention economy too much, our culture has been buzzing with the idea&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#3&quot;&gt;3&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;.
+In order to recapture the local communities of people on the internet, we must do our best to keep the economy local.&lt;&#x2F;p&gt;
+&lt;p&gt;The issue with local economy on the Internet becomes finding the local communities as a traveler. This is quite analogous to visiting a new country for the first time.
+Say I want find a small town in England. I don&#x27;t have much knowledge of England, so I&#x27;ll go find a map.
+This is what Google gives for a quick search of &quot;England map&quot;.&lt;&#x2F;p&gt;
+&lt;img src=&quot;https:&#x2F;&#x2F;brennenputh.me&#x2F;processed_images&#x2F;england-map.b43ff6c5f2b2bee0.png&quot;&#x2F;&gt;
+&lt;p&gt;Observing this map, I can clearly see the large cities, but it won&#x27;t help me find a smaller town. Using Google for searching the Internet map creates a similar feeling. A generic search query usually only turns up the cities of the Internet. Refining my search query to around a specific area, say, around Leeds, I&#x27;ll quickly find some of the smaller towns. Unfortunately, search engines don&#x27;t quite mimic the real-life map. Speaking from personal experience, a refined query leads to a whole bunch of SEO-optimized websites and AI overviews trying to grab my attention still.
+I have a few thoughts about how the Internet map can be made more useful, especially around these smaller communities.&lt;&#x2F;p&gt;
+&lt;p&gt;As a maintainer of a digital space, I want to focus on keeping viewers on a smaller network of sites which aren&#x27;t designed to optimize the attention economy, including but not limited to my own. One of the best strategies I&#x27;ve seen for this is a &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Webring&quot;&gt;webring&lt;&#x2F;a&gt;. A webring links a whole bunch of similarly minded sites together forming a community. Unfortunately, I&#x27;m not yet cool enough to be in one&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#4&quot;&gt;4&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;. If each website represents a person, or maybe even a business, a webring would represent a town. A town would be just a bunch of shops who have agreed to be near each other for convenience, without any governing power other than the community around them (and perhaps a sheriff, if the community deems it necessary). This seems to me the easiest way forward to create roads between smaller websites and blogs, and gather them into the equivalent of a local map. Keeping the economy of attention inside the webring builds the community.&lt;&#x2F;p&gt;
+&lt;p&gt;As a viewer, my hope to run from the city and invest in small communities. My personal strategy for this is to use a RSS reader to keep tabs on my favorite blogs, where I have to intentionally go out of my way to subscribe to someone if I want to hear from them. Furthermore, I send a message through their platform if I have questions. I also might subscribe to a webring, if I want to hear from all sorts of creators in a topic area. Other strategies I&#x27;ve tried are blocking algorithmic feeds and sometimes even removing the ability to access the city-size websites entirely.&lt;&#x2F;p&gt;
+&lt;p&gt;All of that written, I&#x27;m still learning and working on it myself! I want to continue considering better strategies to steward my digital spaces, especially including this blog. If this article made you think of anything else that could be done to structure online spaces to foster the feeling of local community, &lt;a href=&quot;mailto:bputh.blog@gmail.com&quot;&gt;my inbox is open&lt;&#x2F;a&gt;. Also, definitely check out the essay linked at the beginning of the article if you&#x27;re interested in further understanding the idea. Berry writes with a clearer voice than I know how to.&lt;&#x2F;p&gt;
+&lt;hr &#x2F;&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;1&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;1&lt;&#x2F;sup&gt;
+&lt;p&gt;Could be wrong. Again, I wasn&#x27;t lucky enough to have seen it. Let me know!&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;2&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;2&lt;&#x2F;sup&gt;
+&lt;p&gt;I am tempted to use the word &quot;place&quot; here, but jury&#x27;s still out for me on whether a &quot;digital place&quot; is a real thing.&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;3&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;3&lt;&#x2F;sup&gt;
+&lt;p&gt;See media such as The Social Dilemma gaining a lot of traction.&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;4&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;4&lt;&#x2F;sup&gt;
+&lt;p&gt;Maybe I&#x27;ll start my own! The internet is full of possibilities.&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+</description>
+      </item>
+      <item>
+          <title>The Fake Social Binary</title>
+          <pubDate>Sat, 13 Sep 2025 00:00:00 +0000</pubDate>
+          <author>bputh.blog@gmail.com (Brennen Puth)</author>
+          <link>https://brennenputh.me/blog/the-social-binary/</link>
+          <guid>https://brennenputh.me/blog/the-social-binary/</guid>
+          <description xml:base="https://brennenputh.me/blog/the-social-binary/">&lt;p&gt;A few years ago, my friends and I decided to have a weekly movie night. Now, since we&#x27;re all at college and living in dorms less than a 10 minute walk from each other, that was pretty easy.
+At the beginning, we simply told each other during the day the plans for that night. That way, we don&#x27;t have to think that hard about it until the day of.
+Of course, eventually others heard about this weekly rhythm, and were slowly invited to join us for it. The issue is, word of mouth doesn&#x27;t scale very well in our culture.
+Therefore, someone creates The Group Chat. The Group Chat contains everything you need to know about our circle of friends, especially the information about this weekly rhythm. We all love The Group Chat, because what used to be a fraught process where people might be accidentally left out now by default includes everyone.&lt;&#x2F;p&gt;
+&lt;p&gt;And then people continue to be added to The Group Chat. This happens in several ways, although the all-time hits usually include &quot;You&#x27;re coming tonight? Let me add you to The Group Chat!&quot; and &quot;I&#x27;ll just invite _____ to The Group Chat, it&#x27;ll be easier that way.&quot;
+Platforms particularly seceptible to this have the (honestly nice) feature of adding someone to an existing chat, although platforms without that feature are not excluded.
+One day, I woke up and realized my small social gathering of friends has now grown to a almost corporate production, where a movie is played every week.
+The movie-watching group has grown immensely, and the post-movie time usually feels more akin to leaving class than to friendly community.
+I never know who might come to any given event, nor do I particularly care. The activity is the center of the event, not the people I am with.&lt;&#x2F;p&gt;
+&lt;p&gt;Throughout this experience, I understood deeper how community works, and specifically how technology has broken it.
+There are so many thoughts which race through my head on this topic, but I&#x27;ll restrict myself to one road for today.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;problem&quot;&gt;Problem&lt;&#x2F;h2&gt;
+&lt;p&gt;Computers work using 1s and 0s. On or off. A binary system.
+Humans are &quot;squishy&quot;. They have friends for one task, but don&#x27;t necessarily always want them around. Opinions drift over time.
+Why do we treat humans as if they will perfectly map onto computers?&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&quot;The map is not the territory&quot; - Alfred Korzybski&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;Pulling on the thread of common sense, a finite number of 1s and 0s cannot accurately represent the ability of a human to think. (I believe that would be impossible entirely, but hopefully all can agree we&#x27;re not there &lt;em&gt;yet&lt;&#x2F;em&gt;.)
+As a programmer, I hope to be making good representations of reality knowing this is true.
+Since I cannot perfectly represent the territory (human conversation) on the map (computer), I should be considering which capabilities I need in order to represent the important parts, hopefully cheaply.
+The rest of this post shifts to look at which features I think have mapped technology well, and which ones are conveniences that don&#x27;t actually fit the reality of the territory.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;observations&quot;&gt;Observations&lt;&#x2F;h2&gt;
+&lt;h3 id=&quot;quick-replies&quot;&gt;Quick Replies&lt;&#x2F;h3&gt;
+&lt;p&gt;I can give a quick yes or no to my friend. This is my #1 use for instant messaging, where I just need to communicate a quick detail or fact.
+Maps to real life decently well, because it&#x27;s similarly quick to send a yes or no message to a friend in person.  This usage mostly just shortens the feedback loop.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;announcements&quot;&gt;Announcements&lt;&#x2F;h3&gt;
+&lt;p&gt;While not everyone can write a good announcement, those who can do a masterful job of keeping their community informed.
+In the case of my movie-watching group earlier, when the group got big, messaging systems worked significantly better which is not particularly a downside.
+Even beyond the benefits of instantly sending the announcement to everyone, anyone can go back and re-read the message to make sure of what you said. Much better than word of mouth where memory is concerned, especially in this age where we&#x27;ve lost that power.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;asynchrony&quot;&gt;Asynchrony&lt;&#x2F;h3&gt;
+&lt;p&gt;Since time immemorial, humans have been writing down things so that other humans can read them later.
+Even better, so that other humans can respond to them later.
+Instant messaging gets this perfect. No one has to worry that they asked the question hours ago, someone can still get back to them when they have time.
+The efficiency of posting allows more than one question to be asked, just like in real life.  Some people are not quite fluent with the keyboard, but that seems similar to real life as well.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;overbearing-access&quot;&gt;Overbearing Access&lt;&#x2F;h3&gt;
+&lt;p&gt;At all times, I can text my friend and know he will recieve. The speed and reliability of the medium mean I can make no excuses for my friend ignoring my text, except that he may be bad at checking his phone.
+This doesn&#x27;t map real life at all, except by a simulation of being nearby another person. A short-range conversation, this exactly replicates what&#x27;s happening. A long-distance communication, there will always be some risk involved that my message won&#x27;t reach the recipient.
+This is in the neutral category because the answer is that it depends on what sort of interaction you want to mirror.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;incomplete-interaction&quot;&gt;Incomplete Interaction&lt;&#x2F;h3&gt;
+&lt;p&gt;Lots of information is lost in transport when it comes to messages. The same holds for any written communication, meaning this one maps fairly well and I don&#x27;t have much to say about it.
+We&#x27;ve found ways to deal with this in our written-first world. Emoji come to mind, along with the wonderful tone indicators such as &lt;code&gt;&#x2F;s&lt;&#x2F;code&gt; and &lt;code&gt;&#x2F;lh&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;lack-of-drift&quot;&gt;Lack of Drift&lt;&#x2F;h3&gt;
+&lt;p&gt;For good reason, friendships form and dissolve all the time. If the solution to tracking this change is to kick people out (unusual in real life under non-toxic circumstances) or create a new group (usually high friction), you&#x27;ll have a hard time mapping this to real life.
+This is the one category for which I have an experiment I want to try. Perhaps, one could create a social service where no group chats will stick around, making The Group Chat impossible to create. Of course, one would need a full text search of good quality, which sounds like a fun challenge to me.
+Ignore my digression into solutions though, and consider that reducing the friction to tracking these drifting changes in my opinion is the best way to solve this natural drift.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;&#x2F;h2&gt;
+&lt;p&gt;My words are neither exhaustive nor inerrant - I deeply hope that this will spark some discussion and perhaps begin to push the needle toward a human-centric design for instant messaging.
+I also hope that, even if you disagree with me on every point or think I wrote this poorly (to which I say, you&#x27;re probably right), you&#x27;ll use this as an opportunity for reflection on how you use these chat systems and how they influence the relationships you care about most.&lt;&#x2F;p&gt;
+</description>
+      </item>
+      <item>
+          <title>bpOS: Why and how I made my own bootable container</title>
+          <pubDate>Wed, 06 Aug 2025 00:00:00 +0000</pubDate>
+          <author>bputh.blog@gmail.com (Brennen Puth)</author>
+          <link>https://brennenputh.me/blog/bpos-why-and-what/</link>
+          <guid>https://brennenputh.me/blog/bpos-why-and-what/</guid>
+          <description xml:base="https://brennenputh.me/blog/bpos-why-and-what/">&lt;p&gt;I previously ran primarily Arch on all my systems.
+I don&#x27;t think that it was particularly thoughtful on my part, I followed the &quot;cool kids&quot; of Linux.
+Experiences of breakage were rare for me, but I realized I was doing too much playing sysadmin on my own computer.
+In the rare occasion something broke I was never sure whether the failure was on the hardware&#x27;s part or the software&#x27;s, which cost me a day of debugging.
+Granted, I enjoyed that debugging some, but I don&#x27;t have the time to assess failures on my computer &lt;em&gt;and&lt;&#x2F;em&gt; reliably do productive work on it.
+The secondary problem I found was the setup time.
+If Arch requires a reinstall, better hope you wrote a script, because getting everything the way you like it again is otherwise costs hours.&lt;&#x2F;p&gt;
+&lt;p&gt;After a particularly bad breakage, someone pointed me to the Universal Blue project.
+If you&#x27;re unfamiliar, they provide bootable containers.
+Bootable containers give you the experience of a Docker container on the desktop.
+If something breaks on the image, you can always go back to the last version without an issue, all your data stays safe.&lt;&#x2F;p&gt;
+&lt;p&gt;Universal Blue provides images for KDE and GNOME, which was fine for testing but I much prefer my tiling window manager for daily use.
+Luckily, their &lt;a href=&quot;https:&#x2F;&#x2F;universal-blue.org&#x2F;&quot;&gt;frontpage&lt;&#x2F;a&gt; mentions the awesome power of the technology they build upon.
+Anyone can create their own custom operating system image, and it takes less than 30 minutes to set up (assuming a base level of familiarity with the CLI and Git).&lt;&#x2F;p&gt;
+&lt;p&gt;So, I built my own image.
+The source is &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;brennenputh&#x2F;bpOS&quot;&gt;here&lt;&#x2F;a&gt;, although honestly it&#x27;s not that interesting.
+Which is exactly how I wanted it, because the more boring my image setup is, the less work I&#x27;ll have to do.
+I haven&#x27;t had a single day where my computer breaks entirely yet, because if it ever breaks, I just roll back to the last deployment (or, if it doesn&#x27;t boot, it does that itself).&lt;&#x2F;p&gt;
+&lt;p&gt;Quick sidenote to mention, desktop files are awesome, and now that I have a proper place I can store them, I will be making &lt;em&gt;far&lt;&#x2F;em&gt; more.
+I now have all sorts of shortcuts that I can launch right from my desktop with my application launcher.
+If you look in the repository, you&#x27;ll see I have a few set up for different web services I use.&lt;&#x2F;p&gt;
+&lt;p&gt;I really don&#x27;t have that much more to say about all of this, I just hope some more people take a look at the awesome work all the members of Universal Blue are doing, and this is my encouragement to continue on for all of them.
+If you want to check out their images for yourself, their &lt;a href=&quot;https:&#x2F;&#x2F;universal-blue.org&#x2F;&quot;&gt;website&lt;&#x2F;a&gt; is a good place to start.
+If you want to build your own image like I have, check out the &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;ublue-os&#x2F;image-template&quot;&gt;image-template&lt;&#x2F;a&gt; repository they set up.&lt;&#x2F;p&gt;
+&lt;p&gt;P.S. If you think this is awesome too and want to get involved, contributing is &lt;em&gt;super&lt;&#x2F;em&gt; easy.  Documentation, code, even just support are all great ways to help out, and the community loves to welcome new contributors in good faith.&lt;&#x2F;p&gt;
+</description>
+      </item>
+      <item>
+          <title>Smart Window Resizing in Neovim</title>
+          <pubDate>Sat, 12 Apr 2025 00:00:00 +0000</pubDate>
+          <author>bputh.blog@gmail.com (Brennen Puth)</author>
+          <link>https://brennenputh.me/blog/smart-window-resizing-nvim/</link>
+          <guid>https://brennenputh.me/blog/smart-window-resizing-nvim/</guid>
+          <description xml:base="https://brennenputh.me/blog/smart-window-resizing-nvim/">&lt;p&gt;The last day or two, I&#x27;ve been refitting my Neovim windowing config.
+Nothing too wild, just fixing a few warts here and there.
+What follows is a few different snippets for different behaviors I wanted.
+Hopefully one of these is useful to someone, even if only as a reference (something &lt;em&gt;definitely&lt;&#x2F;em&gt; needs said about the Neovim documentation searchability situation).
+If you want to see these in their context, links will be left below each example.
+The links may fall out of date, so I&#x27;ve linked them to the specific commit.&lt;&#x2F;p&gt;
+&lt;p&gt;Also, if you&#x27;re interested in this, I credit &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;chrisgrieser&quot;&gt;chrisgrieser&lt;&#x2F;a&gt; who used to run a blog called Nano Tips For Vim, which was immensely helpful to me in figuring out all of my Neovim configs but was sadly taken offline as of 2025-06-12.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;turn-off-line-numbers-for-small-windows&quot;&gt;Turn Off Line Numbers for Small Windows&lt;&#x2F;h2&gt;
+&lt;pre data-linenos data-lang=&quot;lua&quot; class=&quot;language-lua &quot;&gt;&lt;code class=&quot;language-lua&quot; data-lang=&quot;lua&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;1&lt;&#x2F;td&gt;&lt;td&gt;local set_numbers = function(value, window)
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;2&lt;&#x2F;td&gt;&lt;td&gt;	vim.api.nvim_set_option_value(&amp;quot;number&amp;quot;, value, { win = window })
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;3&lt;&#x2F;td&gt;&lt;td&gt;	vim.api.nvim_set_option_value(&amp;quot;relativenumber&amp;quot;, value, { win = window })
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;4&lt;&#x2F;td&gt;&lt;td&gt;end
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;5&lt;&#x2F;td&gt;&lt;td&gt;local window_size_threshold = 40
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;6&lt;&#x2F;td&gt;&lt;td&gt;
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;7&lt;&#x2F;td&gt;&lt;td&gt;vim.api.nvim_create_autocmd(&amp;quot;WinResized&amp;quot;, {
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;8&lt;&#x2F;td&gt;&lt;td&gt;	callback = function()
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;9&lt;&#x2F;td&gt;&lt;td&gt;		for _, win in ipairs(vim.api.nvim_list_wins()) do
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;10&lt;&#x2F;td&gt;&lt;td&gt;			local width = vim.api.nvim_win_get_width(win)
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;11&lt;&#x2F;td&gt;&lt;td&gt;			if width &amp;lt; window_size_threshold then
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;12&lt;&#x2F;td&gt;&lt;td&gt;				set_numbers(false, win)
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;13&lt;&#x2F;td&gt;&lt;td&gt;			else
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;14&lt;&#x2F;td&gt;&lt;td&gt;				set_numbers(true, win)
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;15&lt;&#x2F;td&gt;&lt;td&gt;			end
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;16&lt;&#x2F;td&gt;&lt;td&gt;		end
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;17&lt;&#x2F;td&gt;&lt;td&gt;	end,
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;18&lt;&#x2F;td&gt;&lt;td&gt;})
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;&#x2F;tbody&gt;&lt;&#x2F;table&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;brennenputh&#x2F;dotfiles&#x2F;blob&#x2F;cf2246d3eea2f0b1a14ca31be448d00a74fe16ae&#x2F;nvim&#x2F;lua&#x2F;autocmds.lua#L67-L86&quot;&gt;See it in context!&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;bring-window-into-focus&quot;&gt;Bring Window Into Focus&lt;&#x2F;h2&gt;
+&lt;pre data-linenos data-lang=&quot;lua&quot; class=&quot;language-lua &quot;&gt;&lt;code class=&quot;language-lua&quot; data-lang=&quot;lua&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;1&lt;&#x2F;td&gt;&lt;td&gt;local win_focus = function()
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;2&lt;&#x2F;td&gt;&lt;td&gt;    -- Uncomment if you use either of these plugins
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;3&lt;&#x2F;td&gt;&lt;td&gt;	-- require(&amp;quot;dapui&amp;quot;).close()
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;4&lt;&#x2F;td&gt;&lt;td&gt;	-- require(&amp;quot;nvim-tree.api&amp;quot;).tree.close()
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;5&lt;&#x2F;td&gt;&lt;td&gt;
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;6&lt;&#x2F;td&gt;&lt;td&gt;	local current_win = vim.api.nvim_get_current_win()
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;7&lt;&#x2F;td&gt;&lt;td&gt;	local windows = vim.api.nvim_list_wins()
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;8&lt;&#x2F;td&gt;&lt;td&gt;	vim.api.nvim_win_set_width(0, vim.o.columns - (#windows * 20))
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;9&lt;&#x2F;td&gt;&lt;td&gt;	for _, win in ipairs(windows) do
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;10&lt;&#x2F;td&gt;&lt;td&gt;		if win ~= current_win then
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;11&lt;&#x2F;td&gt;&lt;td&gt;			vim.api.nvim_win_set_width(win, 20)
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;12&lt;&#x2F;td&gt;&lt;td&gt;		end
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;13&lt;&#x2F;td&gt;&lt;td&gt;	end
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;14&lt;&#x2F;td&gt;&lt;td&gt;end
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;15&lt;&#x2F;td&gt;&lt;td&gt;
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;16&lt;&#x2F;td&gt;&lt;td&gt;keymap(&amp;quot;n&amp;quot;, &amp;quot;&amp;lt;leader&amp;gt;rs&amp;quot;, function()
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;17&lt;&#x2F;td&gt;&lt;td&gt;	vim.api.nvim_win_set_width(0, 20)
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;18&lt;&#x2F;td&gt;&lt;td&gt;end)
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;19&lt;&#x2F;td&gt;&lt;td&gt;keymap(&amp;quot;n&amp;quot;, &amp;quot;&amp;lt;leader&amp;gt;rf&amp;quot;, win_focus)
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;&#x2F;tbody&gt;&lt;&#x2F;table&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;brennenputh&#x2F;dotfiles&#x2F;blob&#x2F;cf2246d3eea2f0b1a14ca31be448d00a74fe16ae&#x2F;nvim&#x2F;lua&#x2F;keymaps.lua#L50-L73&quot;&gt;See it in context!&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;resizing-mappings&quot;&gt;Resizing Mappings&lt;&#x2F;h2&gt;
+&lt;p&gt;This requires the &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;pogyomo&#x2F;winresize.nvim&quot;&gt;winresize.nvim&lt;&#x2F;a&gt; plugin.&lt;&#x2F;p&gt;
+&lt;pre data-linenos data-lang=&quot;lua&quot; class=&quot;language-lua &quot;&gt;&lt;code class=&quot;language-lua&quot; data-lang=&quot;lua&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;1&lt;&#x2F;td&gt;&lt;td&gt;local win_resize = function(win, amt, dir)
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;2&lt;&#x2F;td&gt;&lt;td&gt;	return function()
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;3&lt;&#x2F;td&gt;&lt;td&gt;		require(&amp;quot;winresize&amp;quot;).resize(win, amt, dir)
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;4&lt;&#x2F;td&gt;&lt;td&gt;	end
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;5&lt;&#x2F;td&gt;&lt;td&gt;end
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;6&lt;&#x2F;td&gt;&lt;td&gt;
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;7&lt;&#x2F;td&gt;&lt;td&gt;wk_add(&amp;quot;&amp;lt;leader&amp;gt;r&amp;quot;, &amp;quot;Window Resize&amp;quot;)
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;8&lt;&#x2F;td&gt;&lt;td&gt;keymap(&amp;quot;n&amp;quot;, &amp;quot;&amp;lt;leader&amp;gt;rh&amp;quot;, win_resize(0, 10, &amp;quot;left&amp;quot;))
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;9&lt;&#x2F;td&gt;&lt;td&gt;keymap(&amp;quot;n&amp;quot;, &amp;quot;&amp;lt;leader&amp;gt;rj&amp;quot;, win_resize(0, 3, &amp;quot;down&amp;quot;))
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;10&lt;&#x2F;td&gt;&lt;td&gt;keymap(&amp;quot;n&amp;quot;, &amp;quot;&amp;lt;leader&amp;gt;rk&amp;quot;, win_resize(0, 3, &amp;quot;up&amp;quot;))
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;11&lt;&#x2F;td&gt;&lt;td&gt;keymap(&amp;quot;n&amp;quot;, &amp;quot;&amp;lt;leader&amp;gt;rl&amp;quot;, win_resize(0, 10, &amp;quot;right&amp;quot;))
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;12&lt;&#x2F;td&gt;&lt;td&gt;keymap(&amp;quot;n&amp;quot;, &amp;quot;&amp;lt;leader&amp;gt;r=&amp;quot;, &amp;quot;&amp;lt;C-w&amp;gt;=&amp;quot;, { desc = &amp;quot;Equalize Windows&amp;quot; })
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;&#x2F;tbody&gt;&lt;&#x2F;table&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;brennenputh&#x2F;dotfiles&#x2F;blob&#x2F;cf2246d3eea2f0b1a14ca31be448d00a74fe16ae&#x2F;nvim&#x2F;lua&#x2F;keymaps.lua#L43-L68&quot;&gt;See it in context!&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+</description>
+      </item>
+      <item>
+          <title>Thoughts on Teaching Text Editing</title>
+          <pubDate>Wed, 19 Mar 2025 00:00:00 +0000</pubDate>
+          <author>bputh.blog@gmail.com (Brennen Puth)</author>
+          <link>https://brennenputh.me/blog/teaching-text-editing/</link>
+          <guid>https://brennenputh.me/blog/teaching-text-editing/</guid>
+          <description xml:base="https://brennenputh.me/blog/teaching-text-editing/">&lt;h3 id=&quot;why&quot;&gt;Why?&lt;&#x2F;h3&gt;
+&lt;p&gt;A friend recently asked me the question that&#x27;s been around since the dawn of editors: &quot;Is it best to teach someone programming with a pure text editor or with an IDE?&quot;
+There is some bias to the formation of the question.
+No one who did not believe a text editor was objectively better for one reason or another would ask it with that wording.
+In response, I tried to take a reasonable position allowing both IDEs and text editors for teaching.
+Our short discussion spawned another in my opinion more interesting question in my mind, however.&lt;&#x2F;p&gt;
+&lt;p&gt;What editing tools &lt;strong&gt;should&lt;&#x2F;strong&gt; be taught to programming students?&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;how&quot;&gt;How?&lt;&#x2F;h3&gt;
+&lt;p&gt;My mind immediately cries out that they should start with the basics.
+Nothing but a empty Vim buffer and a small cheatsheet for whatever language they&#x27;re being taught first.
+Then, they learn the fundamentals of exactly which character goes where, and they have a deep understanding of the syntax.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;Wait.&lt;&#x2F;strong&gt; Of the &lt;em&gt;syntax&lt;&#x2F;em&gt;?&lt;&#x2F;p&gt;
+&lt;p&gt;Perhaps I&#x27;ll write up my full opinions on this later, but suffice it to say for now that syntax should not be the goal of teaching programming.
+Of course, you need a framework, so you teach someone how to express something in syntax.
+I&#x27;m not insane enough (yet) to propose a pure pseudocode curriculum, and besides, that would only swap one sort of syntax for another.&lt;&#x2F;p&gt;
+&lt;p&gt;What I want is for the syntax and design of the language not to get in the way of learning.
+Unfortunately, there is no way around syntax at a fundamental level.
+At some point the language must be in the learning programmer&#x27;s way, and I don&#x27;t think that&#x27;s a bad thing.
+So if we can&#x27;t improve the language, the tooling is the next best thing.
+I believe there exist a few tools which both do not inhibit learning and are ubiquitous among languages (unless you write your own, I suppose).&lt;&#x2F;p&gt;
+&lt;h4 id=&quot;in-editor-code-analysis&quot;&gt;In-Editor Code Analysis&lt;&#x2F;h4&gt;
+&lt;p&gt;I can hear the comments now. &quot;You&#x27;ve practically just allowed an IDE!&quot;
+Look. There comes a time to make people watch their syntax carefully as they write it.
+It&#x27;s not while you&#x27;re learning how a computer thinks.&lt;&#x2F;p&gt;
+&lt;p&gt;The faster the feedback loop, the better the learning.
+The amount of people I&#x27;ve helped who waited to compile until they were done typing a whole bunch of incorrect code, simply because compiling takes a lot of keystrokes, is insane.
+While teaching &quot;compile and test often&quot; is good, &lt;em&gt;it should not take 20 keystrokes to check your syntax is right&lt;&#x2F;em&gt;.&lt;&#x2F;p&gt;
+&lt;h4 id=&quot;code-formatter&quot;&gt;Code Formatter&lt;&#x2F;h4&gt;
+&lt;p&gt;Cedarville (where I&#x27;m getting my bachelors), at the very least, has a C++ and Java programming format policy.
+I highly appreciate the effort.
+Only, code formatters solved that problem a while ago.
+There&#x27;s an opinionated formatter for basically every commonly taught language, and it should be standard to leave most of the formatting to it.&lt;&#x2F;p&gt;
+&lt;p&gt;Some examples in modern (and not modern) programming languages:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;docs.kernel.org&#x2F;dev-tools&#x2F;clang-format.html&quot;&gt;clang-format&lt;&#x2F;a&gt; for C++.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;rust-lang&#x2F;rustfmt&quot;&gt;rustfmt&lt;&#x2F;a&gt; for Rust.  It&#x27;s inbuilt into the Rust install, anyways.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;psf&#x2F;black&quot;&gt;black&lt;&#x2F;a&gt; for Python.&lt;&#x2F;li&gt;
+&lt;li&gt;Go just has a inbuilt &lt;a href=&quot;https:&#x2F;&#x2F;go.dev&#x2F;blog&#x2F;gofmt&quot;&gt;command&lt;&#x2F;a&gt;. No need to even install anything.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;I omitted Java, because there is no good argument for not using a Java IDE, which should come with all of the tools I mention here and more.&lt;&#x2F;p&gt;
+&lt;p&gt;The point is, formatting is something to give to tools.
+Standardize a config for your clang-format, not a formal specification document (specifically in the context of teaching).
+Especially when languages have begun to bundle these sorts of tools, it&#x27;s absolutely silly to insist that your format is better.&lt;&#x2F;p&gt;
+&lt;p&gt;From a teaching and grading perspective, the formatters also can help.
+Most of these tools also have a validate mode to ensure the input code is already formatted.&lt;&#x2F;p&gt;
+&lt;h4 id=&quot;code-formatter-pt-2&quot;&gt;Code Formatter, pt 2&lt;&#x2F;h4&gt;
+&lt;p&gt;A tool which closes a bracket for you, or maybe spaces out your brackets as you hit &lt;code&gt;Enter&lt;&#x2F;code&gt; instead of afterwards.
+This is something I went without for a while on my Neovim config, and it was incredibly painful.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;xkcd.com&#x2F;comics&#x2F;(.png&quot; alt=&quot;Opening brackets need closed.&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;sup&gt;Credit XKCD for the image.&lt;&#x2F;sup&gt;&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;an-ending&quot;&gt;An Ending&lt;&#x2F;h3&gt;
+&lt;p&gt;I consider this document to be a &quot;standard of living&quot; for a new programmer.
+Vim and Vim alone is a terrible strategy when we have tools to help.
+So long as those tools teach good behavior and get out of the programmer&#x27;s way as much as possible, I see no reason not to use them.&lt;&#x2F;p&gt;
+&lt;p&gt;I will admit, it&#x27;s also a personal preference.
+Helping people who don&#x27;t format their code nicely until they submit pains every programming instinct I have.&lt;&#x2F;p&gt;
+</description>
+      </item>
+      <item>
+          <title>590 Thousand If Statements, For the Web</title>
+          <pubDate>Sun, 11 Aug 2024 00:00:00 +0000</pubDate>
+          <author>bputh.blog@gmail.com (Brennen Puth)</author>
+          <link>https://brennenputh.me/blog/590-thousand-if-statements/</link>
+          <guid>https://brennenputh.me/blog/590-thousand-if-statements/</guid>
+          <description xml:base="https://brennenputh.me/blog/590-thousand-if-statements/">&lt;p&gt;This post was almost entirely inspired by &lt;a href=&quot;https:&#x2F;&#x2F;andreasjhkarlsson.github.io&#x2F;jekyll&#x2F;update&#x2F;2023&#x2F;12&#x2F;27&#x2F;4-billion-if-statements.html&quot;&gt;Andreas Karlson&#x27;s blog post&lt;&#x2F;a&gt; where he details how he created the worst version of an &lt;code&gt;isOdd&lt;&#x2F;code&gt; function ever to visit this land.
+Andreas&#x27;s 4 billion if statements cover the whole of 32-bit integers, and ultimately were written in Assembly to avoid compiler limits from C++.
+Of course, when I saw this post, I wondered, how crippled would a browser be to read a 4 billion if statement WASM program?&lt;&#x2F;p&gt;
+&lt;p&gt;I started my exploration in a similar way: I attempted to write a Rust program that compiled to WASM for the simplest solution.
+Using a Python script to generate the if statements, I used the first wasm-pack base I found and gave Rust a shot.
+This went well for smaller numbers (under 2^20 or so).  After reaching 2^20, the Rust compile times became absurdly long.
+The file with 2^8 if statements compiled in about 10 seconds.  The file with 2^16 took about 8 minutes.
+When I tried the file with 2^24 if statements, the Rust compiler still tried, but ultimately I had to go to bed and shut it down after about three hours.
+This isn&#x27;t too surprising, since the Rust compiler is optimized for safety, but I did want a WASM file with 4 billion if statements before the end of the millenia still.&lt;&#x2F;p&gt;
+&lt;p&gt;When Rust took too long, I decided the C&#x2F;C++ to WASM route was probably also improbable for the same reason as in the original rendition.  The compiler won&#x27;t like a 330GB code file.
+I may also have decided this because I really wanted to mess with writing binaries, but that&#x27;s not the point here.
+The point here is that the plan was to write the WASM by hand.&lt;&#x2F;p&gt;
+&lt;p&gt;Since I didn&#x27;t have any prior experience with working with binary formats, I started by compiling a simple WASM program which did a single comparison, and parsed that in order to understand what was going on.
+With a single if statement, I was able to begin understanding the binary format.  Here&#x27;s the quick explanation:&lt;&#x2F;p&gt;
+&lt;p&gt;WASM files all start with the following bytes, the first four are a special sequence (equivalent to &lt;code&gt;\0asm&lt;&#x2F;code&gt;) and the latter four are a version number.  WASM is on version one at the time of writing.&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code&gt;00 61 73 6D 01 00 00 00
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The next step is the types section.  Quick detour about sections, every one starts with a id and then a &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;LEB128&quot;&gt;LEB128 encoded number&lt;&#x2F;a&gt; which defines the length of the section.
+The type section has an id of &lt;code&gt;3&lt;&#x2F;code&gt; and will contain a single function type, taking a i32 parameter and returning a i32.  Booleans in WASM are represented by i32, returning a &lt;code&gt;0&lt;&#x2F;code&gt; or &lt;code&gt;1&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code&gt;01 06 01 60 01 7F 01 7F
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;I won&#x27;t go too far into the details of the type here, you can take a look at the &lt;a href=&quot;https:&#x2F;&#x2F;webassembly.github.io&#x2F;spec&#x2F;core&#x2F;appendix&#x2F;index-instructions.html&quot;&gt;WASM instruction list&lt;&#x2F;a&gt; yourself if you get curious.&lt;&#x2F;p&gt;
+&lt;p&gt;The function also has to be defined separately in the function section, which is simple enough.&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code&gt;03 02 01 00
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;To translate, we are declaring we are in section id 3, giving it a length of 2, and reporting which types the function has in the func section of the module.
+I don&#x27;t fully understand this bit either, don&#x27;t worry.  All that&#x27;s important here is that the compiler expects it.&lt;&#x2F;p&gt;
+&lt;p&gt;Finally, the function needs a name, given in the export section.  This is also the section that makes the function available from JavaScript.&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code&gt;07 09 01 05 69 73 4F 64 64 00 00
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The gist of this one is that the ASCII for the function name &lt;code&gt;isOdd&lt;&#x2F;code&gt; is encoded into the bytes of the section.&lt;&#x2F;p&gt;
+&lt;p&gt;All of this can come together into a simple Python script to write the preamble for our code.&lt;&#x2F;p&gt;
+&lt;pre data-linenos data-lang=&quot;py&quot; class=&quot;language-py &quot;&gt;&lt;code class=&quot;language-py&quot; data-lang=&quot;py&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;1&lt;&#x2F;td&gt;&lt;td&gt;filename = &amp;#x27;isodd.wasm&amp;#x27;
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;2&lt;&#x2F;td&gt;&lt;td&gt;
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;3&lt;&#x2F;td&gt;&lt;td&gt;start_bin = bytes([0x00, 0x61, 0x73, 0x6D, 0x01, 0x00, 0x00, 0x00,
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;4&lt;&#x2F;td&gt;&lt;td&gt;                   0x01, 0x06, 0x01, 0x60, 0x01, 0x7F, 0x01, 0x7F,
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;5&lt;&#x2F;td&gt;&lt;td&gt;                   0x03, 0x02, 0x01, 0x00,
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;6&lt;&#x2F;td&gt;&lt;td&gt;                   0x07, 0x09, 0x01, 0x05, 0x69, 0x73, 0x4F, 0x64, 0x64, 0x00, 0x00,
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;7&lt;&#x2F;td&gt;&lt;td&gt;                   0x0A])
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;8&lt;&#x2F;td&gt;&lt;td&gt;
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;9&lt;&#x2F;td&gt;&lt;td&gt;with open(filename, &amp;#x27;wb+&amp;#x27;) as f:
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;10&lt;&#x2F;td&gt;&lt;td&gt;    f.write(start_bin)
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;&#x2F;tbody&gt;&lt;&#x2F;table&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The final &lt;code&gt;0A&lt;&#x2F;code&gt; byte is to start the code section.&lt;&#x2F;p&gt;
+&lt;p&gt;With all that tedious work out of the way, now comes the fun part.  Unlike in raw Assembly, the resulting WASM file is exporting a function.  WASM doesn&#x27;t have anything to the effect of &lt;code&gt;return true&lt;&#x2F;code&gt; that we can use.
+The easy version of the code in a sane language would&#x27;ve looked like this.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;c++&quot; class=&quot;language-c++ &quot;&gt;&lt;code class=&quot;language-c++&quot; data-lang=&quot;c++&quot;&gt;if (x == 1) return true;
+if (x == 2) return false;
+...
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Instead, WASM forces us into a paradigm that looks more like this.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;c++&quot; class=&quot;language-c++ &quot;&gt;&lt;code class=&quot;language-c++&quot; data-lang=&quot;c++&quot;&gt;if (x == 1) return true;
+else {
+    if (x == 2) return false;
+    else { ... }
+}
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;This isn&#x27;t a huge issue, but it forces a slightly different code structure where we have to end all of those else statements at some point.&lt;&#x2F;p&gt;
+&lt;p&gt;The other issue is that we can&#x27;t have all 4 billion if statements in memory at once, or my Linux environment likes to freeze up and kill the process.  Instead, we write byte by byte appending into the file.
+This doesn&#x27;t seem like an issue until you remember that we don&#x27;t really know how long the code is until we generate it, and I don&#x27;t want to go back and write into a specific byte of the file because I&#x27;m lazy and don&#x27;t feel like it.
+We&#x27;ll solve that issue later, though, and just focus on getting the code written for now.  I&#x27;ll pretend I have it solved by making a variable and dealing with it later.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;py&quot; class=&quot;language-py &quot;&gt;&lt;code class=&quot;language-py&quot; data-lang=&quot;py&quot;&gt;function_size = 32 # This is incredibly wrong
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;For the actual code part, the concept is simple.  WASM is a stack-based language, which means you do operations by pushing values onto the stack.
+To do the simple comparison (&lt;code&gt;if (x == 1)&lt;&#x2F;code&gt;), it takes four steps.  First, grab the local variable (&lt;code&gt;x&lt;&#x2F;code&gt;) with the bytes &lt;code&gt;20 00&lt;&#x2F;code&gt;, &lt;code&gt;20&lt;&#x2F;code&gt; meaning get a local variable, and &lt;code&gt;00&lt;&#x2F;code&gt; being the first one.
+Second, push the constant value to compare with onto the stack with &lt;code&gt;41 ??&lt;&#x2F;code&gt;, &lt;code&gt;41&lt;&#x2F;code&gt; being load constant and &lt;code&gt;??&lt;&#x2F;code&gt; being our number to load.  The number is encoded in LEB128 format, which will make life a little harder later, but not much.
+Third, compare the two and leave that value on the stack with &lt;code&gt;46&lt;&#x2F;code&gt;, which is the instruction for &lt;code&gt;==&lt;&#x2F;code&gt; in WASM.
+Fourth, the if statement is represented with &lt;code&gt;04 7F&lt;&#x2F;code&gt;, with &lt;code&gt;04&lt;&#x2F;code&gt; being the if and &lt;code&gt;7F&lt;&#x2F;code&gt; being the return type of i32.
+Fifth, to write our code inside this if statement, &lt;code&gt;41 ??&lt;&#x2F;code&gt; returns whether the value resulted in true or false.
+Finally, the end of the if statement is capped off with a &lt;code&gt;else&lt;&#x2F;code&gt;, with &lt;code&gt;05&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;The only thing left to do then is create one more branch for anything that doesn&#x27;t fit these values, and cap off all those if statements with end statements.
+The full code for all of this is below.&lt;&#x2F;p&gt;
+&lt;pre data-linenos data-lang=&quot;py&quot; class=&quot;language-py &quot;&gt;&lt;code class=&quot;language-py&quot; data-lang=&quot;py&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;1&lt;&#x2F;td&gt;&lt;td&gt;with open(filename, &amp;#x27;ab&amp;#x27;) as f:
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;2&lt;&#x2F;td&gt;&lt;td&gt;    # section size
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;3&lt;&#x2F;td&gt;&lt;td&gt;    f.write(leb128.u.encode(function_size + 1 + len(leb128.u.encode(function_size))))
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;4&lt;&#x2F;td&gt;&lt;td&gt;    # locals passed
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;5&lt;&#x2F;td&gt;&lt;td&gt;    f.write(bytes([0x01]))
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;6&lt;&#x2F;td&gt;&lt;td&gt;    # function size
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;7&lt;&#x2F;td&gt;&lt;td&gt;    f.write(leb128.u.encode(function_size))
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;8&lt;&#x2F;td&gt;&lt;td&gt;    # no-op
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;9&lt;&#x2F;td&gt;&lt;td&gt;    f.write(bytes([0x00]))
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;10&lt;&#x2F;td&gt;&lt;td&gt;
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;11&lt;&#x2F;td&gt;&lt;td&gt;    for i in range(0, limit):
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;12&lt;&#x2F;td&gt;&lt;td&gt;        # local.get 0
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;13&lt;&#x2F;td&gt;&lt;td&gt;        f.write(bytes([0x20, 0x00]))
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;14&lt;&#x2F;td&gt;&lt;td&gt;        # i32.const i
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;15&lt;&#x2F;td&gt;&lt;td&gt;        f.write(bytes([0x41]) + leb128.u.encode(i))
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;16&lt;&#x2F;td&gt;&lt;td&gt;        # i32.eq
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;17&lt;&#x2F;td&gt;&lt;td&gt;        f.write(bytes([0x46]))
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;18&lt;&#x2F;td&gt;&lt;td&gt;        # if (return i32)
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;19&lt;&#x2F;td&gt;&lt;td&gt;        f.write(bytes([0x04, 0x7F]))
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;20&lt;&#x2F;td&gt;&lt;td&gt;        # if block
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;21&lt;&#x2F;td&gt;&lt;td&gt;        f.write(bytes([0x41]) + leb128.u.encode((i) % 2))
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;22&lt;&#x2F;td&gt;&lt;td&gt;        # else
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;23&lt;&#x2F;td&gt;&lt;td&gt;        f.write(bytes([0x05]))
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;24&lt;&#x2F;td&gt;&lt;td&gt;        # else block is the next if
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;25&lt;&#x2F;td&gt;&lt;td&gt;
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;26&lt;&#x2F;td&gt;&lt;td&gt;    f.write(bytes([0x41, 0x02]))
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;27&lt;&#x2F;td&gt;&lt;td&gt;
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;28&lt;&#x2F;td&gt;&lt;td&gt;    for i in range(0, limit + 1):
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;29&lt;&#x2F;td&gt;&lt;td&gt;        f.write(bytes([0x0B]))
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;&#x2F;tbody&gt;&lt;&#x2F;table&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Now it is time to return to the issue earlier of figuring out the code size before we&#x27;ve written the code.  Turns out, this is a simple enough problem to solve iteratively, and since I&#x27;m lazy, I did that.
+There might be a smarter mathematical way of doing this.&lt;&#x2F;p&gt;
+&lt;pre data-linenos data-lang=&quot;py&quot; class=&quot;language-py &quot;&gt;&lt;code class=&quot;language-py&quot; data-lang=&quot;py&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;1&lt;&#x2F;td&gt;&lt;td&gt;function_size = 4
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;2&lt;&#x2F;td&gt;&lt;td&gt;for i in range(0, limit):
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;3&lt;&#x2F;td&gt;&lt;td&gt;    function_size += 10
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;4&lt;&#x2F;td&gt;&lt;td&gt;    if i != 0:
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;5&lt;&#x2F;td&gt;&lt;td&gt;        function_size += 1 + math.floor((math.log2(i)) &amp;#x2F; 7)
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;6&lt;&#x2F;td&gt;&lt;td&gt;    else:
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;7&lt;&#x2F;td&gt;&lt;td&gt;        function_size += 1
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;&#x2F;tbody&gt;&lt;&#x2F;table&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The reason for the &lt;code&gt;math.floor&lt;&#x2F;code&gt; bit is because of the LEB128 encoding.  Every time the number grows by 7 powers of 2, it gains an extra byte of code size per if statement.&lt;&#x2F;p&gt;
+&lt;p&gt;After all this, I finally have a Python script capable of writing the program I want.
+You&#x27;ll notice I have a &lt;code&gt;limit&lt;&#x2F;code&gt; variable used in the earlier two snippets for convenience, so I can quickly change the number of if statements.&lt;&#x2F;p&gt;
+&lt;p&gt;Let&#x27;s start with a size of 2^8 if statements, just to make sure it&#x27;s working.&lt;&#x2F;p&gt;
+&lt;pre data-linenos data-lang=&quot;bash&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;1&lt;&#x2F;td&gt;&lt;td&gt;&amp;gt; python generator.py
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;2&lt;&#x2F;td&gt;&lt;td&gt;Calculating function size...
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;3&lt;&#x2F;td&gt;&lt;td&gt;Total time for calculating function size: 5.4430000091088004e-05s
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;4&lt;&#x2F;td&gt;&lt;td&gt;Writing file...
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;5&lt;&#x2F;td&gt;&lt;td&gt;Writing file... progress: 32&amp;#x2F;2980 bytes
+&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;&#x2F;tbody&gt;&lt;&#x2F;table&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;When I run it using a quick index.js I whipped up with &lt;code&gt;isOdd(1)&lt;&#x2F;code&gt;, I get a value of &lt;code&gt;true&lt;&#x2F;code&gt;.  Exactly what I wanted, and the WASM parses correctly!
+A quick test with 2^16 gives the same result, so I decide to go ahead and try a value of 2^32.
+After an hour, it&#x27;s still running.  Must be stuck writing the file, right?  Nope, it&#x27;s stuck in the &lt;code&gt;function_size&lt;&#x2F;code&gt; bit.&lt;&#x2F;p&gt;
+&lt;p&gt;I tried in vain to optimize it to the point where it won&#x27;t take many hours to calculate the function size, but while testing, I stumbled across something unfortunate.
+A limit of 2^24 causes the WASM compiler within Firefox to give up.  Turns out, WASM has a hard limit on the size of a function body.
+There was no need to finish optimizing so that I could have my 2^32 WASM file, my dreams have been dashed.
+I did some playing to reach the exact number, and the max limit I could reach via this strategy was &lt;code&gt;590063&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;Within the time I set aside for this project, I couldn&#x27;t quite solve this.  The only idea I have to get around this hard limit is to start dividing into multiple functions.
+For that, though, you have to dynamically generate the functions as well, so I decided to let this one rest for now.  Perhaps I shall return someday, and a browser will load a WASM file containing all 4 billion if statements.&lt;&#x2F;p&gt;
+</description>
+      </item>
+    </channel>
+</rss>

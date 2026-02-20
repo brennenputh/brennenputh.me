@@ -1,0 +1,66 @@
+<!doctype html>
+<!-- vim: set ft=tera: -->
+<html lang="en">
+  <head>
+    
+  
+      <meta charset="utf-8" />
+      <link rel="stylesheet" href="/main.css" />
+      <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    
+  <link rel="stylesheet" href="/blog/post.css" />
+
+    
+  <title>Connecting to eduroam with NetworkManager on the CLI</title>
+
+    
+      <meta name="description" content="A place for the personal blog, projects, and wanderings of Brennen Puth.">
+      <meta property="og:title" content="Brennen Puth">
+      <meta property="og:description" content="A place for the personal blog, projects, and wanderings of Brennen Puth.">
+    
+    
+      <link rel="alternate" type="application/rss+xml" title="RSS" href="https://brennenputh.me/rss.xml">
+    
+  </head>
+
+  <body>
+    <div class="header">
+      <div class="header-left">
+        <h4>Brennen Puth</h4>
+        <a href="/">Home</a>
+        <a href="https://brennenputh.me/projects/">Projects</a>
+      </div>
+      <div class="header-right">
+        <a href="https://github.com/brennenputh">GitHub</a>
+        <a href="https://brennenputh.me/rss.xml">RSS</a>
+      </div>
+    </div>
+    <main>
+      <div class="container">
+<h1 class="title">
+  Connecting to eduroam with NetworkManager on the CLI
+</h1>
+<p class="subtitle">2025-12-12</p>
+<p>I decided to set myself up with <a href="https://github.com/zirconium-dev/zirconium">Zirconium</a> yesterday on my Framework 13.
+When I booted into Aurora (my chosen image to rebase from) I got the wifi working immediately.
+When I booted into Zirconium after switching, the wifi no longer worked.</p>
+<p>When trying to connect manually via nmtui, it would give me a message along the lines of "AP security could not be confirmed" and stop connecting.
+Other, non-enterprise networks worked fine.
+To fix this, I finally found <a href="https://campus-rover.gitbook.io/lab-notebook/fiiva/infrastructure/linux_terminal_eduroam_setup">this post</a> which describes how to connect to eduroam using <code>nmcli</code>.</p>
+<p>The steps are as follows:</p>
+<ol>
+<li>
+<p>Find your network adapter with <code>ip link</code>.</p>
+</li>
+<li>
+<p>Create the connection with <code>nmcli con add type wifi con-name "eduroam" ifname $INTERFACE ssid "eduroam" wifi-sec.key-mgmt wpa-eap 802-1x.identity "$USERNAME" 802-1x.password "$PASSWORD" 802-1x.system-ca-certs yes 802-1x.eap "peap" 802-1x.phase2-auth mschapv2</code>.  Replace <code>$USERNAME</code> and <code>$PASSWORD</code> with the connection details you would use when connecting through a GUI.  Replace <code>$INTERFACE</code> with the WiFi interface you found in step 1.</p>
+</li>
+<li>
+<p>Bring the connection up with <code>nmcli connection up eduroam --ask</code>.</p>
+</li>
+</ol>
+
+</div>
+    </main>
+  </body>
+</html>
