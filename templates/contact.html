@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+<!-- vim: set ft=tera: -->
+
+{% block head %}
+  {{ super() }}
+{% endblock head %}
+
+{% block title %}
+  <title>Contact</title>
+{% endblock title %}
+
+{% block content %}
+{{ section.content | safe }}
+{% endblock content %}

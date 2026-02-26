@@ -21,17 +21,12 @@
   </head>
 
   <body>
-    <div class="header">
-      <div class="header-left">
-        <h4>Brennen Puth</h4>
-        <a href="/">Home</a>
-        <a href="{{ get_url(path='@/projects/_index.md')}}">Projects</a>
-      </div>
-      <div class="header-right">
-        <a href="https://github.com/brennenputh">GitHub</a>
-        <a href="{{ get_url(path="rss.xml", trailing_slash=false) }}">RSS</a>
-      </div>
-    </div>
+    <header>
+      <h4>Brennen Puth</h4>
+      <a href="/">Home</a>
+      <a href="{{ get_url(path='@/projects/_index.md')}}">Projects</a>
+      <a href="{{ get_url(path='@/contact/_index.md')}}">Contact</a>
+    </header>
     <main>
       <div class="container">{% block content %} {% endblock %}</div>
     </main>
