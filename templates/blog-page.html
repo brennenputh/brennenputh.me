@@ -1,6 +1,12 @@
 {% extends "base.html" %}
 <!-- vim: set ft=tera: -->
 
+{% block opengraph %}
+  <meta property="og:title" content="{{ page.title }}">
+  <meta property="og:description" content="{{ page.content | striptags | truncate(length=150) }}">
+  <meta property="og:type" content="article">
+{% endblock opengraph %}
+
 {% block title %}
   <title>{{ page.title }}</title>
 {% endblock title %}

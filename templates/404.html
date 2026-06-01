@@ -1,6 +1,14 @@
 {% extends "base.html" %} 
 <!-- vim: set ft=tera: -->
 
+{% block metadata %}
+{% endblock metadata %}
+
+{% block opengraph %}
+  <meta property="og:title" content="{{ config.title }}: 404">
+  <meta property="og:description" content="Content not found.">
+{% endblock opengraph %}
+
 {% block title %}
   <title>404 Error</title>
 {% endblock title %}
