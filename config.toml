@@ -15,10 +15,11 @@ build_search_index = true
 generate_feeds = true
 feed_filenames = ["rss.xml"]
 
+[markdown]
+bottom_footnotes = true
 
 [markdown.highlighting]
 theme = 'catppuccin-mocha'
-bottom_footnotes = true
 error_on_missing_languages = true
 
 # Configuration of the link checker.
