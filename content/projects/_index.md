@@ -3,7 +3,7 @@ title = "Projects"
 template = "projects.html"
 +++
 
-## Personal
+## Personal Projects
 
 <div class="project-type">
 

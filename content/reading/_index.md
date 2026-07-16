@@ -1,6 +1,7 @@
 +++
-title = "Blog"
+title = "Reading"
+render = true
 sort_by = "date"
-template = "blog.html"
+template = "reading.html"
 page_template = "blog-page.html"
 +++

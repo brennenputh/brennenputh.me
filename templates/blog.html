@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+<!-- vim: set ft=tera: -->
+
+{% block title %}
+  <title>Blog</title>
+{% endblock title %}
+
+{% block content %}
+<h2>Blog Posts</h2>
+{% for page in section.pages %}
+<a href="{{ page.permalink | safe }}">
+  <div class="page-item">
+    <h3 class="page-title">{{page.title}}</h3>
+    <div class="page-info">
+      {{ page.date }} | Reading Time: {{ page.reading_time }}m
+    </div>
+  </div>
+</a>
+{% endfor %}
+{% endblock content %}

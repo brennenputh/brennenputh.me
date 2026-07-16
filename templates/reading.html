@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+<!-- vim: set ft=tera: -->
+
+{% block content %}
+<h2>Reading Notes</h2>
+
+<p>
+I use this section to post my notes on various books or articles I read, which have valuable ideas
+without having giving me enough new thoughts for a full blog post.
+My notes are just my takeaways from the book, but all the books I put here I recommend reading.
+</p>
+
+{% for page in section.pages %}
+<a href="{{ page.permalink | safe }}">
+  <div class="reading-page-item">
+    <h3 class="reading-page-title">{{page.title}}</h3>
+    <div class="reading-page-info">
+    </div>
+  </div>
+</a>
+{% endfor %}
+{% endblock content %}

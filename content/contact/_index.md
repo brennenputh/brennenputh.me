@@ -3,7 +3,7 @@ title = "Contact"
 template = "contact.html"
 +++
 
-### Contacts & Social
+## Contacts & Social
 
 Email: <a href="mailto:bputh.blog@gmail.com">bputh.blog@gmail.com</a>
 <br>
