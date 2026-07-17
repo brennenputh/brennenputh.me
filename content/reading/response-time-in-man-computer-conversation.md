@@ -3,6 +3,8 @@ title = "Response time in man-computer conversational transactions - Robert Mill
 date = 2026-07-15
 +++
 
+[PDF Source](dl.acm.org/doi/epdf/10.1145/1476589.1476628)
+
 This little paper quantifies humans and computers experiencing delay differently. It's one of those papers I wish I had considered searching for sooner, but now that I've found it it makes a lot of sense.
 
 It imposes an interesting restriction on form inputs. If the user has made an error, this places a *minimum* of two seconds delay on the response. The reason is that if the user is still mid-input, he may be annoyed or distracted by an error response.
