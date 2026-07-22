@@ -1,0 +1,64 @@
+<!doctype html>
+<!-- vim: set ft=tera: -->
+<html lang="en">
+  <head>
+    
+  
+      <meta charset="utf-8" />
+      <link rel="stylesheet" href="/main.css" />
+      <meta name="color-scheme" content="light dark" />
+      <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    
+  <link rel="stylesheet" href="/blog/post.css" />
+
+    
+  <title>Response time in man-computer conversational transactions - Robert Miller</title>
+
+    
+      <meta name="description" content="A place for the personal blog, projects, and wanderings of Brennen Puth.">
+      <meta property="og:url" content="https:&#x2F;&#x2F;brennenputh.me&#x2F;reading&#x2F;response-time-in-man-computer-conversation&#x2F;">
+      <meta property="og:site_name" content="Brennen Puth">
+      <link rel="canonical" href="https:&#x2F;&#x2F;brennenputh.me&#x2F;reading&#x2F;response-time-in-man-computer-conversation&#x2F;" />
+    
+    
+  <meta property="og:title" content="Response time in man-computer conversational transactions - Robert Miller">
+  <meta property="og:description" content="PDF Source
+This little paper quantifies humans and computers experiencing delay differently. It&#x27;s one of those papers I wish I had considered searching for sooner, but now that I&#x27;ve found it it makes …">
+  <meta property="og:type" content="article">
+
+    
+      <link rel="alternate" type="application/rss+xml" title="RSS" href="https://brennenputh.me/rss.xml">
+    
+  </head>
+
+  <body>
+    <header>
+      <h4>Brennen Puth</h4>
+      <a href="/">Home</a>
+      <a href="https://brennenputh.me/projects/">Projects</a>
+      <a href="https://brennenputh.me/contact/">Contact</a>
+    </header>
+    <main>
+      <div class="container">
+<h1 class="title">
+  Response time in man-computer conversational transactions - Robert Miller
+</h1>
+<p class="subtitle">2026-07-15</p>
+<p><a href="https://brennenputh.me/reading/response-time-in-man-computer-conversation/dl.acm.org/doi/epdf/10.1145/1476589.1476628">PDF Source</a></p>
+<p>This little paper quantifies humans and computers experiencing delay differently. It's one of those papers I wish I had considered searching for sooner, but now that I've found it it makes a lot of sense.</p>
+<p>It imposes an interesting restriction on form inputs. If the user has made an error, this places a <em>minimum</em> of two seconds delay on the response. The reason is that if the user is still mid-input, he may be annoyed or distracted by an error response.</p>
+<p>A lot of web forms get this wrong, by immediately providing feedback. In one sense, it makes it feel snappy, but in another sense does contribute to my general annoyance. I wonder if one can change a JS <code>input</code> handler to wait at least a second after the input begins. Probably not too hard with something like the following:</p>
+<pre data-lang="js" class="language-js "><code class="language-js" data-lang="js">const delayedResponse = (inp) =&gt; {
+	inp.addEventListener(&quot;input&quot;, () =&gt; {
+		setTimeout(() =&gt; {
+			inp.setCustomValidity(&quot;Bad input!&quot;)
+		}, 2000)
+	})
+}
+</code></pre>
+<p>In topic 10, he talks about the time delay between pages of the same document not being more than a single second. If you consider online documentation written for in-order consumption (i.e. <a href="https://doc.rust-lang.org/stable/book/title-page.html">The Rust Book</a> or the <a href="https://docs.wpilib.org/en/stable/docs/zero-to-robot/introduction.html">WPILib Zero-To-Robot</a>), would it count as "the same document" enough for this purpose?</p>
+
+</div>
+    </main>
+  </body>
+</html>
