@@ -1,6 +1,7 @@
 +++
 title = "The Problem With Suggested Summaries"
 date = 2026-05-10
+description = "A short rant about the indignity of being suggested summaries for friends' conversations."
 +++
 
 I usually ignore the various AI popups included in all of my apps. If a human wrote it, I'd rather read it in full. Today, I've finally found one that felt insulting and intentionally isolating. GroupMe decided that a private message deserves a button at the bottom to request a summary from a LLM. 

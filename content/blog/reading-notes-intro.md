@@ -1,6 +1,7 @@
 +++
 title = "My New Reading Notes Section"
 date = 2026-07-17
+description = "The introduction and purpose of my new reading notes section."
 +++
 
 I added a [reading notes section](@/reading/_index.md) to this website. The purpose of it is to help me track all my readings and hopefully offer some useful notes on them. Maybe they'll only be useful to myself, time will tell.

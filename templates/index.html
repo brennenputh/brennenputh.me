@@ -27,18 +27,23 @@
   Latest Blog Posts
 </h3>
 {% set blog_section = get_section(path="blog/_index.md") %}
-{% for page in blog_section.pages %}
-  {% if loop.index <= 3 %}
-    <a href="{{ page.permalink | safe }}">
-      <div class="page-item">
-        <h3 class="page-title">{{ page.title }}</h3>
-        <div class="page-info">
-          {{ page.date }} | Reading Time: {{ page.reading_time }}m
+<div class="page-container">
+  {% for page in blog_section.pages %}
+    {% if loop.index <= 3 %}
+      <a href="{{ page.permalink }}">
+        <div class="page-item">
+            <h3 class="page-title">{{ page.title }}</h3>
+            <div class="page-info">
+              {{ page.date }} | Reading Time: {{ page.reading_time }}m
+            </div>
+            <div class="page-description">
+              {{ page.description | safe }}
+            </div>
         </div>
-      </div>
-    </a>
-  {% endif %}
-{% endfor %}
+      </a>
+    {% endif %}
+  {% endfor %}
+</div>
 
 <a href="{{ get_url(path="@/blog/_index.md")}}">All Posts</a>
 
@@ -49,18 +54,22 @@
 </h3>
 
 {% set reading_section = get_section(path="reading/_index.md") %}
-{% for page in reading_section.pages %}
-  {% if loop.index <= 3 %}
-      <a href="{{ page.permalink | safe }}">
-        <div class="page-item">
-          <h3 class="page-title">{{ page.title }}</h3>
-          <div class="page-info">
-            {{ page.date }}
+<div class="page-container">
+  {% for page in reading_section.pages %}
+    {% if loop.index <= 3 %}
+        <a href="{{ page.permalink }}">
+          <div class="page-item">
+              <h3 class="page-title">{{ page.title }}</h3>
+              <div class="page-info">
+                {{ page.date }} | Reading Time: {{ page.reading_time }}m
+              </div>
+              <div class="page-description">
+                {{ page.description | safe }}
+              </div>
           </div>
-        </div>
-      </a>
-  {% endif %}
-{% endfor %}
+        </a>  {% endif %}
+  {% endfor %}
+</div>
 
 <a href="{{ get_url(path="@/reading/_index.md")}}">All Notes</a>
 

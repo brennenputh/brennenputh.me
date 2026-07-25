@@ -1,6 +1,7 @@
 +++
 title = "A Definition Of Mastery"
 date = 2026-06-22
+description = "An attempt to define mastery apart from a pure skill-based view."
 +++
 
 Christianity is full of seeming contradictions. Joy through suffering, receiving through giving, gaining through losing, and more. Among them is freedom through servitude. St. Augustine focuses on this issue while writing of his conversion[^1], when he discusses how the will must be unified in one purpose to find freedom. After the story of his conversion, he writes: "By your gift I had come totally not to will what I willed but to will what You willed."
