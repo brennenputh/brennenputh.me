@@ -20,4 +20,12 @@
 </h1>
 <p class="subtitle">{{ page.date }}</p>
 {{ page.content | safe }}
+
+<footer>
+  <hr/>
+  <p>
+    If you have questions or thoughts on the post I'd love to <a href="{{ get_url(path='@/contact/_index.md')}}">hear about it!</a>
+    I'm also currently looking for work in the northeastern US, seeing as I'll be graduating with my bachelor's in CS in a few months. Any leads are appreciated.
+  </p>
+</footer>
 {% endblock content %}
