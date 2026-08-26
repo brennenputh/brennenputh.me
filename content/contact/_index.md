@@ -8,5 +8,3 @@ template = "contact.html"
 Email: <a href="mailto:bputh.blog@gmail.com">bputh.blog@gmail.com</a>
 <br>
 GitHub: <a href="https://github.com/brennenputh">brennenputh</a>
-<br>
-Discord: `@bp_____` (5 underscores)
