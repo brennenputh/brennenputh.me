@@ -12,6 +12,7 @@ template = "projects.html"
 ### bpOS
 
 A bootc container image based on Universal Blue's offerings customized for my own personal needs. I run this on my personal computers.
+Note, I have stripped it down to be incredibly minimal at this point.
 
 <a class="action" href="https://github.com/brennenputh/bpOS">View the Repo</a>
 
@@ -79,7 +80,7 @@ The PR process was simple and easy, and fish's inbuilt primitives for suggestion
 
 ### Clickable Phone Numbers for ntfy
 
-ntfy is an awesome project which I use constantly to notify myself when scripts finish. Nothing beats the simplicity of `curl -d "Done" https://ntfy.sh/topic`.
+ntfy is a project which I use constantly to notify myself when scripts finish. Nothing beats the simplicity of `curl -d "Done" https://ntfy.sh/topic`.
 
 <a class="action" href="https://github.com/binwiederhier/ntfy-android/pull/71">See the PR</a>
 
