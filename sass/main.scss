@@ -1,5 +1,3 @@
-@use "header";
-
 :root {
   --primary-color: light-dark(#fff, #222);
   --secondary-color: light-dark(#dadada, #3a3a3a);
@@ -19,6 +17,24 @@
 
 main {
   margin-inline: auto;
+}
+
+header {
+  padding: 10px 10px;
+  font-size: 16pt;
+  display: flex;
+
+  border-radius: 0px 0px 10px 10px;
+  box-shadow: 0 0 5px var(--secondary-color);
+
+  > * {
+    vertical-align: center;
+    margin: auto 5px;
+  }
+}
+
+footer {
+  font-size: 11pt;
 }
 
 body {
