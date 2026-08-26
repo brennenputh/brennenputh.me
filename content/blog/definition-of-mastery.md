@@ -26,7 +26,7 @@ Unfortunately for us, that perspective only comes with experience. Often, it has
 
 I would like to point out here that mastery comes fastest through the working out of humility. Advisors are one cure to a rigid perspective, true self-forgetfulness is another. Since we shall not have the latter perfected on earth, both are required. Humility also appears in the definition of mastery itself. In order to subject yourself to an object's reality, it can require a great deal of humility.
 
-Mastery is therefore twofold. By requiring humility, mastery becomes about discovering the limits of what you are mastering. When you inevitably misjudge those limits, adjust your knowledge of the rules, and grow in wisdom by [not repeating your mistakes](https://thecodelesscode.com/case/100).
+Mastery is therefore twofold. By requiring humility, mastery becomes about discovering the limits of what you are mastering. When you inevitably misjudge those limits, adjust your knowledge of the rules, and grow in wisdom by not repeating your mistakes[^6].
 
 ---
 
@@ -39,3 +39,5 @@ Mastery is therefore twofold. By requiring humility, mastery becomes about disco
 [^4]: Although, I would prescribe a degree of mastery before trying to take ownership of anything, to protect one's health.
 
 [^5]: This would also be why you should usually accept rules at face value unless you've seen why, in the precise context, it is valuable or not. Yes, I was the rule-follower kid, why do you ask?
+
+[^6]: This used to link out to The Codeless Code case 100. The website's security certificate seems to have expired. I've sent an email to the author in the hopes of getting it restored!
