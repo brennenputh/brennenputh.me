@@ -22,7 +22,7 @@ Note, I have stripped it down to be incredibly minimal at this point.
 
 ### Dotfiles
 
-My personal dotfiles collection.
+My personal dotfiles collection, including my NeoVim config.
 
 <a class="action" href="https://github.com/brennenputh/dotfiles">View the Repo</a>
 
