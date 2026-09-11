@@ -33,10 +33,6 @@ header {
   }
 }
 
-footer {
-  font-size: 11pt;
-}
-
 body {
   max-width: min(1000px, 100% - 4rem);
   font-size: 1.25rem;
@@ -106,6 +102,15 @@ p > code {
   margin: 10px 0px;
 }
 
+.job-search {
+  p {
+    margin: 0;
+  }
+  font-size: 11pt;
+  background-color: color-mix(in srgb, var(--secondary-color), white 5%);
+  padding: 10px 5px;
+}
+
 a:has(.page-item) {
   text-decoration: none;
 }
@@ -163,5 +168,3 @@ a:has(.page-item) {
     }
   }
 }
-
-
