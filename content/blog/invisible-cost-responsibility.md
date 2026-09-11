@@ -41,4 +41,4 @@ $$R = S \times D + E$$
 
 Evaluating tools this way helps to see that hidden cost, which drives so much pain for even discerning inventors.
 
-As a postscript, I offer a challenge. I am unsure that responsibility is the right language to describe this hidden cost. If anyone else can find a better word for what I have described as responsiblity I am describing and explain why, send me an email!
+As a postscript, I offer a challenge. I am unsure that responsibility is the right language to describe this hidden cost. If anyone else can find a better word for what I have described as responsiblity and explain why it is better, send me an email!
