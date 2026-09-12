@@ -107,9 +107,19 @@ p > code {
   p {
     margin: 0;
   }
-  font-size: 1.10rem;
+
+  font-size: 1.1rem;
   background-color: color-mix(in srgb, var(--secondary-color), white 5%);
   padding: 0.3em 0.5em;
+}
+
+@media (width > 600px) {
+  .job-search > summary {
+    display: none;
+  }
+  .job-search::details-content {
+    content-visibility: visible;
+  }
 }
 
 a:has(.page-item) {
