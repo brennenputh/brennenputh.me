@@ -38,9 +38,6 @@
             <div class="page-info">
               {{ page.date }} | Reading Time: {{ page.reading_time }}m
             </div>
-            <div class="page-description">
-              {{ page.description | safe }}
-            </div>
         </div>
       </a>
     {% endif %}
@@ -64,9 +61,6 @@
               <h3 class="page-title">{{ page.title }}</h3>
               <div class="page-info">
                 {{ page.date }} | Reading Time: {{ page.reading_time }}m
-              </div>
-              <div class="page-description">
-                {{ page.description | safe }}
               </div>
           </div>
         </a>  {% endif %}

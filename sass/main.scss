@@ -36,7 +36,7 @@ header {
 body {
   max-width: min(1000px, 100% - 4rem);
   font-size: 1.25rem;
-  margin: 0px auto 50px;
+  margin: 0 auto 1em;
   line-height: 1.4;
 }
 
@@ -51,21 +51,22 @@ a {
 
 blockquote {
   margin-left: 0px;
-  padding: 10px 10px;
-  border-left: 2px solid gray;
+  padding: 0.3em 0.3em;
+  border-left: 0.1em solid gray;
 
   > p {
-    padding: 0px 0px;
-    margin: 0px;
+    padding: 0;
+    margin: 0;
   }
 }
 
 .giallo-ln {
-  padding-right: 10px;
+  padding-right: 0.5em;
+  padding-left: 0.2em;
 }
 
 .giallo {
-  padding: 3px;
+  padding: 0.2em;
   border-radius: 5px;
   background-color: var(--codeblock-color) !important;
   overflow: auto;
@@ -89,9 +90,9 @@ blockquote {
 
 code {
   display: inline-block;
-  padding: 1px 5px;
+  padding: 0.05em 0.2em;
   background-color: #1e1e1e;
-  border-radius: 1px;
+  border-radius: 5px;
 }
 
 p > code {
@@ -99,16 +100,16 @@ p > code {
 }
 
 .title {
-  margin: 10px 0px;
+  margin: 0.1em 0;
 }
 
 .job-search {
   p {
     margin: 0;
   }
-  font-size: 11pt;
+  font-size: 1.10rem;
   background-color: color-mix(in srgb, var(--secondary-color), white 5%);
-  padding: 10px 5px;
+  padding: 0.3em 0.5em;
 }
 
 a:has(.page-item) {
@@ -116,9 +117,9 @@ a:has(.page-item) {
 }
 
 .page-item {
-  margin: 2px 0px;
+  margin: 0.3em 0;
   background-color: var(--secondary-color);
-  padding: 5px 10px;
+  padding: 0.3em 0.5em;
   border-radius: 5px;
 
   &:hover {
@@ -134,12 +135,12 @@ a:has(.page-item) {
     overflow-y: hidden;
     color: var(--text-color);
     font-size: 12pt;
-    margin: 0px;
+    margin: 0;
   }
 
   .page-title {
     color: var(--text-color);
-    margin: 0px;
+    margin: 0;
   }
 
   .page-info {
@@ -147,24 +148,5 @@ a:has(.page-item) {
 
     color: var(--secondary-text-color);
     font-size: 75%;
-  }
-}
-
-@media (width > 800px) {
-  .page-container {
-    display: grid;
-    grid-template-columns: auto auto auto;
-    gap: 5px;
-    overflow-y: hidden;
-    max-height: 350px;
-
-    .page-item {
-      height: 100%;
-      overflow-y: hidden;
-
-      .page-description {
-        display: block;
-      }
-    }
   }
 }
