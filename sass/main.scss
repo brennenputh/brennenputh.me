@@ -33,6 +33,12 @@ header {
   }
 }
 
+@media (width < 550px) {
+  header {
+    flex-direction: column;
+  }
+}
+
 body {
   max-width: min(1000px, 100% - 4rem);
   font-size: 1.25rem;
@@ -113,7 +119,7 @@ p > code {
   padding: 0.3em 0.5em;
 }
 
-@media (width > 600px) {
+@media (width > 550px) {
   .job-search > summary {
     display: none;
   }
