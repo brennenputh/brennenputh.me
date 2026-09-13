@@ -119,7 +119,7 @@ p > code {
   padding: 0.3em 0.5em;
 }
 
-@media (max-width: 550px) {
+@media (min-width: 550px) {
   .job-search > summary {
     display: none;
   }
