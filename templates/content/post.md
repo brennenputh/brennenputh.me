@@ -2,6 +2,5 @@
 # FIXME
 title = ""
 date =
-description = ""
 +++
 
