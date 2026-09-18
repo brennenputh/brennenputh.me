@@ -10,6 +10,8 @@
   --text-color: light-dark(black, white);
   --secondary-text-color: light-dark(#222, #aaa);
 
+  --site-width: min(1000px, 100% - 4rem);
+
   color-scheme: dark light;
   background-color: var(--primary-color);
   font: 100% sans-serif;
@@ -40,7 +42,7 @@ header {
 }
 
 body {
-  max-width: min(1000px, 100% - 4rem);
+  max-width: var(--site-width);
   font-size: 1.25rem;
   margin: 0 auto 1em;
   line-height: 1.4;
@@ -76,20 +78,14 @@ blockquote {
   border-radius: 5px;
   background-color: var(--codeblock-color) !important;
   overflow: auto;
+  max-width: var(--site-width);
 
-  table {
+  code {
     width: 100%;
     border-collapse: collapse;
 
-    td {
+    span {
       padding: 0;
-
-      &:nth-of-type(1) {
-        vertical-align: top;
-        user-select: none;
-        padding-right: 0.3rem;
-        filter: brightness(50%);
-      }
     }
   }
 }
