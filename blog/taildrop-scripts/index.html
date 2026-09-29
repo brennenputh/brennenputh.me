@@ -1,0 +1,137 @@
+<!doctype html>
+<!-- vim: set ft=tera: -->
+
+<!-- vim: set ft=tera: -->
+
+<html lang="en">
+  <head>
+    
+  
+      <meta charset="utf-8" />
+      <link rel="stylesheet" href="/main.css" />
+      <meta name="color-scheme" content="light dark" />
+      <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    
+  <link rel="stylesheet" href="/blog/post.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.18.4/dist/katex.min.css" integrity="sha384-u1zONI5gPXUx0UKI62c75/zww972y0v2rSK5ZYlVdS6xEuWDeZWUI66v6t1gvlXJ" crossorigin="anonymous">
+
+  <!-- KaTeX Support -->
+  <!-- The loading of KaTeX is deferred to speed up page rendering -->
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.18.4/dist/katex.min.js" integrity="sha384-ykMNcWQhhTUb0YV9SPpPUFURHZ+tWmubkakGBP+OgNK/UXdO2gtzglWx0Rj9hnO3" crossorigin="anonymous"></script>
+  <!-- To automatically render math in text elements, include the auto-render extension: -->
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.18.4/dist/contrib/auto-render.min.js" integrity="sha384-bjyGPfbij8/NDKJhSGZNP/khQVgtHUE5exjm4Ydllo42FwIgYsdLO2lXGmRBf5Mz" crossorigin="anonymous"
+      onload="renderMathInElement(document.body);"></script>
+
+    
+  <title>Handy Taildrop Scripts</title>
+
+    
+      <meta name="description" content="A place for the personal blog, projects, and wanderings of Brennen Puth.">
+      <meta property="og:url" content="https://brennenputh.me/blog/taildrop-scripts/">
+      <meta property="og:site_name" content="Brennen Puth">
+      <link rel="canonical" href="https://brennenputh.me/blog/taildrop-scripts/" />
+    
+    
+  <meta property="og:title" content="Handy Taildrop Scripts">
+  <meta property="og:description" content="
+Yesterday, I found out about Tailscale&#39;s Taildrop. This feature is literally the solution to the classical internet problem of xkcd 949.
+I wish I had picked up on it sooner, because I would be using …">
+  <meta property="og:type" content="article">
+
+    
+      <link rel="alternate" type="application/rss+xml" title="RSS" href="https://brennenputh.me/rss.xml">
+    
+  </head>
+
+  <body>
+    <header>
+      <h4>Brennen Puth</h4>
+      <a href="/">Home</a>
+      <a href="https://brennenputh.me/projects/">Projects</a>
+      <a href="https://brennenputh.me/contact/">Contact</a>
+    </header>
+    <main>
+      <div class="container">
+<h1 class="title">
+  Handy Taildrop Scripts
+</h1>
+<p class="subtitle">2026-09-29</p>
+
+<details class="job-search">
+  <summary>I'm looking for work! (click to expand)</summary>
+  <div>
+    <p>
+      If you have questions or thoughts on the post I'd love to <a href="https://brennenputh.me/contact/">hear about it!</a>
+      I'm currently looking for work in the northeastern US. I'll be graduating with a BS in both Computer Science and Cyber Operations at the end of the school year.
+      I have worked in web application development and Java, and I have experience in Rust, C++, Python, and various other languages.
+      If you're curious about what I've done in the past, I keep up a short list of projects <a href="https://brennenputh.me/projects/">here</a> or <a href="https://brennenputh.me/contact/">contact me</a> to give me a place to send my resume.
+      I figure anyone who reads my posts will have an interesting offer, so all leads are appreciated!
+    </p>
+  </div>
+</details>
+
+<p><img style="float: right; height: 22em; margin-left: 1em" src="https://imgs.xkcd.com/comics/file_transfer.png"></img></p>
+<p>Yesterday, I found out about Tailscale's <a rel="external" href="https://tailscale.com/docs/features/taildrop">Taildrop</a>. This feature is literally the solution to the classical internet problem of <a rel="external" href="https://xkcd.com/949/">xkcd 949</a>.</p>
+<p>I wish I had picked up on it sooner, because I would be using it all over the place. My tailnet includes all of my personal machines and my phone<sup class="footnote-reference" id="fr-1-1"><a href="https://brennenputh.me/blog/taildrop-scripts/#fn-1">[1]</a></sup>, so I can really take advantage of this. How much time could've been saved waiting for Google Drive to sync from my phone if I knew about this sooner! If you are working with Android it's nearly seamless.</p>
+<p>Unfortunately, the user experience is not quite as awesome as it could be on Linux. On Linux, everything needs to go through the CLI, which has a slightly awkward interface. Getting files onto your computer is <code>tailscale file get &lt;location&gt;</code>, and sending them is <code>tailscale file cp &lt;file&gt; &lt;destination&gt;:</code>. The issue is, that's a lot of typing for something that's supposed to be really quick and easy. Given this is an alpha feature though, I don't mind too much. I suspect if this feature ever graduates beyond alpha, the interface will be improved.</p>
+<p>So what does one do in the meantime? Script around it! Here's my script for recieving files, which I call <code>tailget</code>.</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;" ><code data-lang="shellscript"><span class="giallo-l"><span style="color: #F5C2E7;font-style: italic;">#!/bin/bash</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Workaround for https://github.com/tailscale/tailscale/issues/18294</span></span>
+<span class="giallo-l"><span>CURRENT_OP</span><span style="color: #94E2D5;">=</span><span style="color: #9399B2;">$(</span><span style="color: #89B4FA;font-style: italic;">tailscale</span><span style="color: #A6E3A1;"> debug prefs</span><span style="color: #94E2D5;"> |</span><span style="color: #89B4FA;font-style: italic;"> jq</span><span style="color: #A6E3A1;"> &#39;.OperatorUser&#39;</span><span style="color: #94E2D5;"> |</span><span style="color: #89B4FA;font-style: italic;"> sed</span><span style="color: #A6E3A1;"> &#39;s/&quot;//g&#39;</span><span style="color: #9399B2;">)</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">if</span><span style="color: #9399B2;"> [</span><span> $CURRENT_OP</span><span style="color: #94E2D5;"> =</span><span style="color: #A6E3A1;"> &quot;null&quot;</span><span style="color: #9399B2;"> ];</span><span style="color: #CBA6F7;"> then</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">  sudo</span><span style="color: #A6E3A1;"> tailscale set --operator=</span><span>$USER</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">fi</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>DOWNLOAD_FOLDER</span><span style="color: #94E2D5;">=</span><span style="color: #A6E3A1;">&quot;.&quot;</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">if</span><span style="color: #9399B2;"> [</span><span> -v </span><span style="color: #FAB387;">1</span><span style="color: #9399B2;"> ];</span><span style="color: #CBA6F7;"> then</span></span>
+<span class="giallo-l"><span>  DOWNLOAD_FOLDER</span><span style="color: #94E2D5;">=</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #EBA0AC;font-style: italic;">$1</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">fi</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">tailscale</span><span style="color: #A6E3A1;"> file get --verbose --wait &quot;</span><span>$DOWNLOAD_FOLDER</span><span style="color: #A6E3A1;">&quot;</span></span></code></pre>
+<p>One can remove the <code>--wait</code> if you always run this command <em>after</em> starting to send something from another device. You can use the script via a simple <code>tailget</code> to download into the current directory or you can specify a location like <code>tailget ~/Downloads</code>. Super easy.</p>
+<p>Of course, I couldn't help but make one for sending files too. The main annoyance I have with the default syntax is having to remember what I named each device on my tailnet. Piping the available devices through <code>fzf</code> works like a charm. Even better, one could add a <code>grep</code> in between the <code>tailscale</code> and <code>awk</code> calls to exclude offline devices. Given my laptop technically goes offline when I close it, I didn't feel the need to. I call this one <code>tailsend</code> for easy access.</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;" ><code data-lang="shellscript"><span class="giallo-l"><span style="color: #F5C2E7;font-style: italic;">#!/bin/bash</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Workaround for https://github.com/tailscale/tailscale/issues/18294</span></span>
+<span class="giallo-l"><span>CURRENT_OP</span><span style="color: #94E2D5;">=</span><span style="color: #9399B2;">$(</span><span style="color: #89B4FA;font-style: italic;">tailscale</span><span style="color: #A6E3A1;"> debug prefs</span><span style="color: #94E2D5;"> |</span><span style="color: #89B4FA;font-style: italic;"> jq</span><span style="color: #A6E3A1;"> &#39;.OperatorUser&#39;</span><span style="color: #94E2D5;"> |</span><span style="color: #89B4FA;font-style: italic;"> sed</span><span style="color: #A6E3A1;"> &#39;s/&quot;//g&#39;</span><span style="color: #9399B2;">)</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">if</span><span style="color: #9399B2;"> [</span><span> $CURRENT_OP</span><span style="color: #94E2D5;"> =</span><span style="color: #A6E3A1;"> &quot;null&quot;</span><span style="color: #9399B2;"> ];</span><span style="color: #CBA6F7;"> then</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">  sudo</span><span style="color: #A6E3A1;"> tailscale set --operator=</span><span>$USER</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">fi</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>FILE</span><span style="color: #94E2D5;">=</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #EBA0AC;font-style: italic;">$1</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span>TO</span><span style="color: #94E2D5;">=</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #9399B2;">$(</span><span style="color: #89B4FA;font-style: italic;">tailscale</span><span style="color: #A6E3A1;"> status</span><span style="color: #94E2D5;"> |</span><span style="color: #89B4FA;font-style: italic;"> awk</span><span style="color: #A6E3A1;"> &#39;{ print $2 }&#39;</span><span style="color: #94E2D5;"> |</span><span style="color: #89B4FA;font-style: italic;"> fzf</span><span style="color: #9399B2;">)</span><span style="color: #A6E3A1;">:&quot;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">tailscale</span><span style="color: #A6E3A1;"> file cp --verbose &quot;</span><span>$FILE</span><span style="color: #A6E3A1;">&quot; &quot;</span><span>$TO</span><span style="color: #A6E3A1;">&quot;</span></span></code></pre>
+<p>The usage for this one is also very simple. <code>tailsend &lt;file&gt;</code> to send a file and it'll pop up the chooser for you.</p>
+<p>All in all, I'm very glad Tailscale can do this, even if it's a little awkward on Linux at the moment. I hope to see further improvements to this feature!</p>
+<h3 id="p-s-tailscale-developers">P.S.: Tailscale Developers</h3>
+<p>A few things I noticed for any Tailscale developers who happen to read this:</p>
+<ol>
+<li>
+<p>The Android app doesn't have a notification pop-up if the transfer fails because no destination folder is selected in the app settings. This was really confusing for a little while.</p>
+</li>
+<li>
+<p>The Android app <a rel="external" href="https://github.com/tailscale/tailscale/issues/16101">does not give notifications</a> when something has been taildropped<sup class="footnote-reference" id="fr-2-1"><a href="https://brennenputh.me/blog/taildrop-scripts/#fn-2">[2]</a></sup> to you. The docs make it seem like this should be the case, so a fix would be greatly appreciated!</p>
+</li>
+<li>
+<p>The verbose output on the Linux CLI is a little ugly. A few newlines and a little bit of elbow grease would go a long way. Given that Tailscale is open source, I might look into this and contribute if I can!</p>
+</li>
+</ol>
+<hr />
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn-1">
+<p>On my tailnet, I have two Linux desktops, a Linux server, a Android phone, and a single Windows device (begrudgingly). <a href="https://brennenputh.me/blog/taildrop-scripts/#fr-1-1">↩</a></p>
+</li>
+<li id="fn-2">
+<p>Is this a new word? <a href="https://brennenputh.me/blog/taildrop-scripts/#fr-2-1">↩</a></p>
+</li>
+</ol>
+</section>
+
+
+</div>
+    </main>
+  </body>
+</html>
