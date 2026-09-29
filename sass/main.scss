@@ -78,7 +78,7 @@ blockquote {
   border-radius: 5px;
   background-color: var(--codeblock-color) !important;
   overflow: auto;
-  max-width: var(--site-width);
+  width: 100%;
 
   code {
     width: 100%;
