@@ -3,6 +3,12 @@
 <!-- vim: set ft=tera: -->
 {% endblock fake %}
 
+{% component resize_image_relative(path: string, scale: float) -%}
+{% set mdata = get_image_metadata(path=path) %}
+{% set image = resize_image(path=path, width=(mdata.width * scale)|int, op="fit_width") %}
+<img src="{{ image.url }}" />
+{%- endcomponent %}
+
 {% block opengraph %}
   <meta property="og:title" content="{{ page.title }}">
   <meta property="og:description" content="{{ page.content | striptags | truncate(length=200) }}">

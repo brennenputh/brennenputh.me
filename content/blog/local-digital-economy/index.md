@@ -17,7 +17,7 @@ The issue with local economy on the Internet becomes finding the local communiti
 Say I want find a small town in England. I don't have much knowledge of England, so I'll go find a map.
 This is what Google gives for a quick search of "England map".
 
-{{ resize_image(path="@/blog/local-digital-economy/england-map.png", width=100, height=400, op="fit_height") }}
+{{ <resize_image_relative path="@/blog/local-digital-economy/england-map.png" scale={1.0} /> }}
 
 Observing this map, I can clearly see the large cities, but it won't help me find a smaller town. Using Google for searching the Internet map creates a similar feeling. A generic search query usually only turns up the cities of the Internet. Refining my search query to around a specific area, say, around Leeds, I'll quickly find some of the smaller towns. Unfortunately, search engines don't quite mimic the real-life map. Speaking from personal experience, a refined query leads to a whole bunch of SEO-optimized websites and AI overviews trying to grab my attention still.
 I have a few thoughts about how the Internet map can be made more useful, especially around these smaller communities.
