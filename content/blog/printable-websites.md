@@ -70,5 +70,8 @@ You can see the effects of this snippet by hitting CTRL-P or the print button on
 3. Adjusting font sizes for print is very important. The variable-scale text which I use on my website looks awful on a printed page. `12pt` is a fairly well accepted size, so I figured it'll do. A slightly larger size for the headers makes sense as well.
 4. The `giallo` tweaks are for codeblocks. Honestly, codeblocks are still the ugliest part even after some tweaking. They want to come out as one chunk and not break over page borders, and if anyone has a solution to that I'd be greatly appreciative.
 5. Blue links, as much as I like them on the site, look awful in grayscale. Turning them the same color as other text is fine.
+Feel free to pull any code you like from the CSS, I'm not protective of it. I would personally love to experience more webpages that think about how printing works.
 
+On the other hand, I am sympathetic for those who wouldn't prioritize printing after this experience. Hiding and showing all the right things in print took me an entire morning. I also doubt how many people regularly print webpages out. I might be the only one. 
 
+Still, if all your website consists of is text, you might as well allow people to experience the text better in this way. I find the road to good software is paved with kindnesses from software engineers to their users. One day, perhaps someone shall find this kindness and smile, even if just for a fleeting moment.
