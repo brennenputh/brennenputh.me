@@ -1,0 +1,36 @@
+.onlyPrint {
+  display: none;
+}
+
+@media print {
+  .noPrint {
+    display: none;
+  }
+
+  .onlyPrint {
+    display: inline;
+  }
+
+  p,
+  ol {
+    font-size: 12pt;
+  }
+
+  span {
+    font-size: 11pt;
+  }
+
+  h2 {
+    font-size: 14pt;
+  }
+
+  .giallo {
+    border: 3px solid black;
+  }
+
+  @media not color {
+    a {
+      color: black !important;
+    }
+  }
+}

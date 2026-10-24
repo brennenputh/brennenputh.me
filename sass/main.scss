@@ -1,3 +1,5 @@
+@use "./print.scss";
+
 :root {
   --primary-color: light-dark(#fff, #222);
   --secondary-color: light-dark(#dadada, #3a3a3a);
@@ -101,8 +103,23 @@ p > code {
   background-color: var(--secondary-color);
 }
 
+.titleblock {
+  display: flex;
+  justify-content: space-between;
+  margin: 0.3em 0;
+
+  img {
+    width: 1.5em;
+    margin: auto 0;
+    padding: 2px;
+    background-color: var(--accent-color);
+    border-radius: 100%;
+  }
+}
+
 .title {
-  margin: 0.1em 0;
+  font-size: 24pt;
+  margin: 0;
 }
 
 .job-search {

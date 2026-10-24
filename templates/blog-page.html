@@ -25,12 +25,15 @@
       onload="renderMathInElement(document.body);"></script>
 {% endblock head %}
 {% block content %}
-<h1 class="title">
-  {{ page.title }}
-</h1>
-<p class="subtitle">{{ page.date }}</p>
+<div class="titleblock">
+  <h1 class="title">
+    {{ page.title }}
+  </h1>
+  <img class="noPrint" src="/print_icon.svg" onclick="window.print()">
+</div>
+<p class="subtitle"><span class="onlyPrint">Brennen Puth | </span>{{ page.date }}</p>
 
-<details class="job-search">
+<details class="job-search noPrint">
   <summary>I'm looking for work! (click to expand)</summary>
   <div>
     <p>
