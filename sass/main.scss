@@ -114,6 +114,9 @@ p > code {
     padding: 2px;
     background-color: var(--accent-color);
     border-radius: 100%;
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
 

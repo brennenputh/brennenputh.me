@@ -9,6 +9,66 @@ Luckily for me, printed documents were a major focus of web design a while ago. 
 
 TODO: insert image of cluttered webpage
 
-This is an entirely text-based website. There's no reason it should be this hard to print out an article of pure text. I then tested on my own webpage. It wasn't all that much better, although you can see all the content. The text was too big by about 2 levels, the header looks awful when printed, and my links look awfully gray in black-and-white.
+This is an entirely text-based website. There's no reason it should be this hard to print out an article of pure text. TODO: more details once an image is captured
+
+I then tested on my own webpage, foolishly thinking I would outdo these websites with no effort.
+
+TODO: insert before image
+
+It wasn't all that much better, although you can at least see all the content. The text was too big by about 2 levels, the header looks awful when printed, and my links look awfully gray in black-and-white. Totally unacceptable.
+
+Luckily, the web community has had this aforementioned focus on printing documents from HTML pages. CSS has selectors to allow styling specifically printed content, and they can be useful. Here's my snippet for this page now:
+
+```css
+.onlyPrint {
+  display: none;
+}
+
+@media print {
+  .noPrint {
+    display: none;
+  }
+
+  .onlyPrint {
+    display: inline;
+  }
+
+  p,
+  ol {
+    font-size: 12pt;
+  }
+
+  h3, h4 {
+    font-size: 13pt;
+  }
+
+  h2 {
+    font-size: 14pt;
+  }
+
+  h1 {
+    font-size: 16pt;
+  }
+
+  .giallo {
+    border: 3px solid black;
+  }
+
+  .giallo-l {
+    font-size: 11pt;
+  }
+
+  a {
+    color: black !important;
+  }
+}
+```
+
+You can see the effects of this snippet by hitting CTRL-P or the print button on this page. Here's the functions this does for me, in order:
+1. `onlyPrint` can be added as a class to allow elements which only show up in the printed document. Right now, that means tagging a small author attribution to the subtitle.
+2. `noPrint` is used to remove something from the printed website. I put it on the header, because it looks honestly very ugly in printed format.
+3. Adjusting font sizes for print is very important. The variable-scale text which I use on my website looks awful on a printed page. `12pt` is a fairly well accepted size, so I figured it'll do. A slightly larger size for the headers makes sense as well.
+4. The `giallo` tweaks are for codeblocks. Honestly, codeblocks are still the ugliest part even after some tweaking. They want to come out as one chunk and not break over page borders, and if anyone has a solution to that I'd be greatly appreciative.
+5. Blue links, as much as I like them on the site, look awful in grayscale. Turning them the same color as other text is fine.
 
 
