@@ -12,6 +12,8 @@ I tested this on my own webpage, foolishly thinking I would have a decent print 
 
 It wasn't great, although you can at least see all the content. The text was too big by about 2 levels, the header looks awful when printed, and my links look awfully gray in black-and-white. Totally unacceptable.
 
+### Making Things Printable
+
 Luckily, the web community has had this aforementioned focus on printing documents from HTML pages. CSS has selectors to allow styling specifically printed content, and they can be useful. Here's my print-related snippet for this page now:
 
 ```css
@@ -67,6 +69,8 @@ You can see the effects of this snippet by hitting CTRL-P or the print button on
 5. Blue links, as much as I like them on the site, look awful in grayscale. Turning them the same color as other text is fine.
 Feel free to pull any code you like from the CSS, I'm not protective of it. I would personally love to experience more webpages that think about how printing works.
 
-On the other hand, I am sympathetic for those who wouldn't prioritize printing after this experience. Hiding and showing all the right things in print took me an entire morning. I also doubt how many people regularly print webpages out. I might be the only one. 
+### Why You Should Do This
 
-Still, if all your website consists of is text, you might as well allow people to experience the text better in this way. I find the road to good software is paved with kindnesses from software engineers to their users. One day, perhaps someone shall find this kindness and smile, even if just for a fleeting moment.
+I am sympathetic for those who wouldn't prioritize printing after this experience. Hiding and showing all the right things in print took me an entire morning. I also doubt how many people regularly print webpages out. I might be the only one. 
+
+Still, if all your website consists of is text, allowing people to experience the text in their favorite medium is never a bad thing. The digital medium allows a lot of flexibility. The road to good software is paved with kindnesses from software engineers to their users. One day, perhaps someone shall find this kindness and smile, even if just for a fleeting moment. And that will be worth it.
