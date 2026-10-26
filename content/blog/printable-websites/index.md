@@ -74,3 +74,7 @@ Feel free to pull any code you like from the CSS, I'm not protective of it. I wo
 After attempting to optimize my website in this way, I am sympathetic for those who wouldn't prioritize printing. Hiding and showing all the right things in print took me a decent chunk of my morning. My site isn't very complex. I also doubt how many people regularly print webpages out. I might be the only one. 
 
 Still, if all your website consists of is text, allowing people to experience the text in their favorite medium is never a bad thing. The digital medium allows a lot of flexibility. The road to good software is paved with kindnesses from software engineers to their users. One day, perhaps someone shall find this kindness and smile, even if just for a fleeting moment. And that will be worth it.
+
+---
+
+**Edit 2026-10-26:** I was informed by a friend that this post ended up on the front page of HN and lobste.rs after I submitted it. Fun! Despite the several flaws I am now informed of in my CSS, I hope this article at least pushes a few to consider this medium more carefully. Thanks all for reading!
