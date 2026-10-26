@@ -5,7 +5,7 @@
 
 {% component resize_image_relative(path: string, scale: float) -%}
 {% set mdata = get_image_metadata(path=path) %}
-{% set image = resize_image(path=path, width=(mdata.width * scale)|int, op="fit_width") %}
+{% set image = resize_image(path=path, height=(mdata.height * scale)|round(precision=0)|int, op="fit_height") %}
 <img src="{{ image.url }}" />
 {%- endcomponent %}
 

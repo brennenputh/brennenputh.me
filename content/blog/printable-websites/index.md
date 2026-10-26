@@ -8,7 +8,7 @@ I read a lot of printed papers these days. While I enjoy reading on a laptop as 
 Luckily for me, printed documents were a major focus of web design a while ago. You can print any webpage you like, by hitting CTRL-P and hoping your printer driver decides to cooperate today.
 I tested this on my own webpage, foolishly thinking I would have a decent print job without any effort.
 
-{{ <resize_image_relative path="@/blog/printable-websites/original_printed.png" scale={1.0} /> }}
+{{ <resize_image_relative path="@/blog/printable-websites/original_printed.png" scale={0.5} /> }}
 
 It wasn't great, although you can at least see all the content. The text was too big by about 2 levels, the header looks awful when printed, and my links look awfully gray in black-and-white. Totally unacceptable.
 
