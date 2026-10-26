@@ -31,12 +31,9 @@
       onload="renderMathInElement(document.body);"></script>
 {% endblock head %}
 {% block content %}
-<div class="titleblock">
-  <h1 class="title">
-    {{ page.title }}
-  </h1>
-  <img class="noPrint" src="/print_icon.svg" onclick="window.print()">
-</div>
+<h1 class="title">
+  {{ page.title }}
+</h1>
 <p class="subtitle"><span class="onlyPrint">Brennen Puth | </span>{{ page.date }}</p>
 
 <details class="job-search noPrint">

@@ -11,6 +11,7 @@
   // For elements which need the extra style
   --text-color: light-dark(black, white);
   --secondary-text-color: light-dark(#222, #aaa);
+  --inline-code-color: white;
 
   --site-width: min(1000px, 100% - 4rem);
 
@@ -45,7 +46,6 @@ header {
 
 body {
   max-width: var(--site-width);
-  font-size: 1.25rem;
   margin: 0 auto 1em;
   line-height: 1.4;
 }
@@ -94,7 +94,8 @@ blockquote {
 
 code {
   padding: 0.05em 0.2em;
-  background-color: #1e1e1e;
+  background-color: var(--codeblock-color);
+  color: var(--inline-code-color);
   border-radius: 5px;
 }
 
@@ -102,25 +103,7 @@ p > code {
   background-color: var(--secondary-color);
 }
 
-.titleblock {
-  display: flex;
-  justify-content: space-between;
-  margin: 0.3em 0;
-
-  img {
-    width: 1.5em;
-    margin: auto 0;
-    padding: 2px;
-    background-color: var(--accent-color);
-    border-radius: 100%;
-    &:hover {
-      cursor: pointer;
-    }
-  }
-}
-
 .title {
-  font-size: 24pt;
   margin: 0;
 }
 
@@ -129,7 +112,6 @@ p > code {
     margin: 0;
   }
 
-  font-size: 1.1rem;
   background-color: color-mix(in srgb, var(--secondary-color), white 5%);
   padding: 0.3em 0.5em;
 }

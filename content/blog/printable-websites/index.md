@@ -10,8 +10,8 @@ I tested this on my own webpage, foolishly thinking I would have a decent print 
 
 <style>
 img {
-    width: 100%;
-    max-width: 50%;
+    max-width: 100%;
+    min-width: 400px;
     height: auto;
 }
 </style>
