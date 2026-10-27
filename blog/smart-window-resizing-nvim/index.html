@@ -1,0 +1,141 @@
+<!doctype html>
+<!-- vim: set ft=tera: -->
+
+<!-- vim: set ft=tera: -->
+
+<html lang="en">
+  <head>
+    
+  
+      <meta charset="utf-8" />
+      <link rel="stylesheet" href="/main.css" />
+      <meta name="color-scheme" content="light dark" />
+      <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    
+  <link rel="stylesheet" href="/blog/post.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.18.4/dist/katex.min.css" integrity="sha384-u1zONI5gPXUx0UKI62c75/zww972y0v2rSK5ZYlVdS6xEuWDeZWUI66v6t1gvlXJ" crossorigin="anonymous">
+
+  <!-- KaTeX Support -->
+  <!-- The loading of KaTeX is deferred to speed up page rendering -->
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.18.4/dist/katex.min.js" integrity="sha384-ykMNcWQhhTUb0YV9SPpPUFURHZ+tWmubkakGBP+OgNK/UXdO2gtzglWx0Rj9hnO3" crossorigin="anonymous"></script>
+  <!-- To automatically render math in text elements, include the auto-render extension: -->
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.18.4/dist/contrib/auto-render.min.js" integrity="sha384-bjyGPfbij8/NDKJhSGZNP/khQVgtHUE5exjm4Ydllo42FwIgYsdLO2lXGmRBf5Mz" crossorigin="anonymous"
+      onload="renderMathInElement(document.body);"></script>
+
+    
+  <title>Smart Window Resizing in Neovim</title>
+
+    
+      <meta name="description" content="A place for the personal blog, projects, and wanderings of Brennen Puth.">
+      <meta property="og:url" content="https://brennenputh.me/blog/smart-window-resizing-nvim/">
+      <meta property="og:site_name" content="Brennen Puth">
+      <link rel="canonical" href="https://brennenputh.me/blog/smart-window-resizing-nvim/" />
+    
+    
+  <meta property="og:title" content="Smart Window Resizing in Neovim">
+  <meta property="og:description" content="The last day or two, I&#39;ve been refitting my Neovim windowing config.
+Nothing too wild, just fixing a few warts here and there.
+What follows is a few different snippets for different behaviors I wanted…">
+  <meta property="og:type" content="article">
+
+    
+      <link rel="alternate" type="application/rss+xml" title="RSS" href="https://brennenputh.me/rss.xml">
+    
+  </head>
+
+  <body>
+    <header>
+      <h4>Brennen Puth</h4>
+      <a href="/">Home</a>
+      <a href="https://brennenputh.me/projects/">Projects</a>
+      <a href="https://brennenputh.me/contact/">Contact</a>
+    </header>
+    <main>
+      <div class="container">
+<h1 class="title">
+  Smart Window Resizing in Neovim
+</h1>
+<p class="subtitle">2025-04-12</p>
+
+<details class="job-search">
+  <summary>I'm looking for work! (click to expand)</summary>
+  <div>
+    <p>
+      If you have questions or thoughts on the post I'd love to <a href="https://brennenputh.me/contact/">hear about it!</a>
+      I'm currently looking for work in the northeastern US. I'll be graduating with a BS in both Computer Science and Cyber Operations at the end of the school year.
+      I have worked in web application development and Java, and I have experience in Rust, C++, Python, and various other languages.
+      If you're curious about what I've done in the past, I keep up a short list of projects <a href="https://brennenputh.me/projects/">here</a> or <a href="https://brennenputh.me/contact/">contact me</a> to give me a place to send my resume.
+      I figure anyone who reads my posts will have an interesting offer, so all leads are appreciated!
+    </p>
+  </div>
+</details>
+
+<p>The last day or two, I've been refitting my Neovim windowing config.
+Nothing too wild, just fixing a few warts here and there.
+What follows is a few different snippets for different behaviors I wanted.
+Hopefully one of these is useful to someone, even if only as a reference (something <em>definitely</em> needs said about the Neovim documentation searchability situation).
+If you want to see these in their context, links will be left below each example.
+The links may fall out of date, so I've linked them to the specific commit.</p>
+<p>Also, if you're interested in this, I credit <a rel="external" href="https://github.com/chrisgrieser">chrisgrieser</a> who used to run a blog called Nano Tips For Vim, which was immensely helpful to me in figuring out all of my Neovim configs but was sadly taken offline as of 2025-06-12.</p>
+<h2 id="turn-off-line-numbers-for-small-windows">Turn Off Line Numbers for Small Windows</h2>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;" ><code data-lang="lua"><span class="giallo-l"><span aria-hidden="true" class="giallo-ln" style="color: #7F849C;"> 1</span><span style="color: #CBA6F7;">local</span><span style="color: #89B4FA;font-style: italic;"> set_numbers</span><span style="color: #94E2D5;"> =</span><span style="color: #CBA6F7;"> function</span><span style="color: #9399B2;">(</span><span style="color: #EBA0AC;font-style: italic;">value</span><span style="color: #9399B2;">,</span><span style="color: #EBA0AC;font-style: italic;"> window</span><span style="color: #9399B2;">)</span></span>
+<span class="giallo-l"><span aria-hidden="true" class="giallo-ln" style="color: #7F849C;"> 2</span><span>	vim.api.</span><span style="color: #89B4FA;font-style: italic;">nvim_set_option_value</span><span>(</span><span style="color: #A6E3A1;">&quot;number&quot;</span><span>, value, { win</span><span style="color: #94E2D5;"> =</span><span> window })</span></span>
+<span class="giallo-l"><span aria-hidden="true" class="giallo-ln" style="color: #7F849C;"> 3</span><span>	vim.api.</span><span style="color: #89B4FA;font-style: italic;">nvim_set_option_value</span><span>(</span><span style="color: #A6E3A1;">&quot;relativenumber&quot;</span><span>, value, { win</span><span style="color: #94E2D5;"> =</span><span> window })</span></span>
+<span class="giallo-l"><span aria-hidden="true" class="giallo-ln" style="color: #7F849C;"> 4</span><span style="color: #CBA6F7;">end</span></span>
+<span class="giallo-l"><span aria-hidden="true" class="giallo-ln" style="color: #7F849C;"> 5</span><span style="color: #CBA6F7;">local</span><span> window_size_threshold</span><span style="color: #94E2D5;"> =</span><span style="color: #FAB387;"> 40</span></span>
+<span class="giallo-l"><span aria-hidden="true" class="giallo-ln" style="color: #7F849C;"> 6</span></span>
+<span class="giallo-l"><span aria-hidden="true" class="giallo-ln" style="color: #7F849C;"> 7</span><span>vim.api.</span><span style="color: #89B4FA;font-style: italic;">nvim_create_autocmd</span><span>(</span><span style="color: #A6E3A1;">&quot;WinResized&quot;</span><span>, {</span></span>
+<span class="giallo-l"><span aria-hidden="true" class="giallo-ln" style="color: #7F849C;"> 8</span><span style="color: #89B4FA;font-style: italic;">	callback</span><span style="color: #94E2D5;"> =</span><span style="color: #CBA6F7;"> function</span><span style="color: #9399B2;">()</span></span>
+<span class="giallo-l"><span aria-hidden="true" class="giallo-ln" style="color: #7F849C;"> 9</span><span style="color: #CBA6F7;">		for</span><span> _, win</span><span style="color: #CBA6F7;"> in</span><span style="color: #89B4FA;font-style: italic;"> ipairs</span><span>(vim.api.</span><span style="color: #89B4FA;font-style: italic;">nvim_list_wins</span><span>()) </span><span style="color: #CBA6F7;">do</span></span>
+<span class="giallo-l"><span aria-hidden="true" class="giallo-ln" style="color: #7F849C;">10</span><span style="color: #CBA6F7;">			local</span><span> width</span><span style="color: #94E2D5;"> =</span><span> vim.api.</span><span style="color: #89B4FA;font-style: italic;">nvim_win_get_width</span><span>(win)</span></span>
+<span class="giallo-l"><span aria-hidden="true" class="giallo-ln" style="color: #7F849C;">11</span><span style="color: #CBA6F7;">			if</span><span> width</span><span style="color: #94E2D5;"> &lt;</span><span> window_size_threshold</span><span style="color: #CBA6F7;"> then</span></span>
+<span class="giallo-l"><span aria-hidden="true" class="giallo-ln" style="color: #7F849C;">12</span><span style="color: #89B4FA;font-style: italic;">				set_numbers</span><span>(</span><span style="color: #F38BA8;">false</span><span>, win)</span></span>
+<span class="giallo-l"><span aria-hidden="true" class="giallo-ln" style="color: #7F849C;">13</span><span style="color: #CBA6F7;">			else</span></span>
+<span class="giallo-l"><span aria-hidden="true" class="giallo-ln" style="color: #7F849C;">14</span><span style="color: #89B4FA;font-style: italic;">				set_numbers</span><span>(</span><span style="color: #F38BA8;">true</span><span>, win)</span></span>
+<span class="giallo-l"><span aria-hidden="true" class="giallo-ln" style="color: #7F849C;">15</span><span style="color: #CBA6F7;">			end</span></span>
+<span class="giallo-l"><span aria-hidden="true" class="giallo-ln" style="color: #7F849C;">16</span><span style="color: #CBA6F7;">		end</span></span>
+<span class="giallo-l"><span aria-hidden="true" class="giallo-ln" style="color: #7F849C;">17</span><span style="color: #CBA6F7;">	end</span><span>,</span></span>
+<span class="giallo-l"><span aria-hidden="true" class="giallo-ln" style="color: #7F849C;">18</span><span>})</span></span></code></pre>
+<p><a rel="external" href="https://github.com/brennenputh/dotfiles/blob/cf2246d3eea2f0b1a14ca31be448d00a74fe16ae/nvim/lua/autocmds.lua#L67-L86">See it in context!</a></p>
+<h2 id="bring-window-into-focus">Bring Window Into Focus</h2>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;" ><code data-lang="lua"><span class="giallo-l"><span aria-hidden="true" class="giallo-ln" style="color: #7F849C;"> 1</span><span style="color: #CBA6F7;">local</span><span style="color: #89B4FA;font-style: italic;"> win_focus</span><span style="color: #94E2D5;"> =</span><span style="color: #CBA6F7;"> function</span><span style="color: #9399B2;">()</span></span>
+<span class="giallo-l"><span aria-hidden="true" class="giallo-ln" style="color: #7F849C;"> 2</span><span style="color: #9399B2;font-style: italic;">    -- Uncomment if you use either of these plugins</span></span>
+<span class="giallo-l"><span aria-hidden="true" class="giallo-ln" style="color: #7F849C;"> 3</span><span style="color: #9399B2;font-style: italic;">	-- require(&quot;dapui&quot;).close()</span></span>
+<span class="giallo-l"><span aria-hidden="true" class="giallo-ln" style="color: #7F849C;"> 4</span><span style="color: #9399B2;font-style: italic;">	-- require(&quot;nvim-tree.api&quot;).tree.close()</span></span>
+<span class="giallo-l"><span aria-hidden="true" class="giallo-ln" style="color: #7F849C;"> 5</span></span>
+<span class="giallo-l"><span aria-hidden="true" class="giallo-ln" style="color: #7F849C;"> 6</span><span style="color: #CBA6F7;">	local</span><span> current_win</span><span style="color: #94E2D5;"> =</span><span> vim.api.</span><span style="color: #89B4FA;font-style: italic;">nvim_get_current_win</span><span>()</span></span>
+<span class="giallo-l"><span aria-hidden="true" class="giallo-ln" style="color: #7F849C;"> 7</span><span style="color: #CBA6F7;">	local</span><span> windows</span><span style="color: #94E2D5;"> =</span><span> vim.api.</span><span style="color: #89B4FA;font-style: italic;">nvim_list_wins</span><span>()</span></span>
+<span class="giallo-l"><span aria-hidden="true" class="giallo-ln" style="color: #7F849C;"> 8</span><span>	vim.api.</span><span style="color: #89B4FA;font-style: italic;">nvim_win_set_width</span><span>(</span><span style="color: #FAB387;">0</span><span>, vim.o.columns</span><span style="color: #94E2D5;"> -</span><span> (</span><span style="color: #94E2D5;">#</span><span>windows</span><span style="color: #94E2D5;"> *</span><span style="color: #FAB387;"> 20</span><span>))</span></span>
+<span class="giallo-l"><span aria-hidden="true" class="giallo-ln" style="color: #7F849C;"> 9</span><span style="color: #CBA6F7;">	for</span><span> _, win</span><span style="color: #CBA6F7;"> in</span><span style="color: #89B4FA;font-style: italic;"> ipairs</span><span>(windows) </span><span style="color: #CBA6F7;">do</span></span>
+<span class="giallo-l"><span aria-hidden="true" class="giallo-ln" style="color: #7F849C;">10</span><span style="color: #CBA6F7;">		if</span><span> win</span><span style="color: #94E2D5;"> ~=</span><span> current_win</span><span style="color: #CBA6F7;"> then</span></span>
+<span class="giallo-l"><span aria-hidden="true" class="giallo-ln" style="color: #7F849C;">11</span><span>			vim.api.</span><span style="color: #89B4FA;font-style: italic;">nvim_win_set_width</span><span>(win, </span><span style="color: #FAB387;">20</span><span>)</span></span>
+<span class="giallo-l"><span aria-hidden="true" class="giallo-ln" style="color: #7F849C;">12</span><span style="color: #CBA6F7;">		end</span></span>
+<span class="giallo-l"><span aria-hidden="true" class="giallo-ln" style="color: #7F849C;">13</span><span style="color: #CBA6F7;">	end</span></span>
+<span class="giallo-l"><span aria-hidden="true" class="giallo-ln" style="color: #7F849C;">14</span><span style="color: #CBA6F7;">end</span></span>
+<span class="giallo-l"><span aria-hidden="true" class="giallo-ln" style="color: #7F849C;">15</span></span>
+<span class="giallo-l"><span aria-hidden="true" class="giallo-ln" style="color: #7F849C;">16</span><span style="color: #89B4FA;font-style: italic;">keymap</span><span>(</span><span style="color: #A6E3A1;">&quot;n&quot;</span><span>, </span><span style="color: #A6E3A1;">&quot;&lt;leader&gt;rs&quot;</span><span>, </span><span style="color: #CBA6F7;">function</span><span style="color: #9399B2;">()</span></span>
+<span class="giallo-l"><span aria-hidden="true" class="giallo-ln" style="color: #7F849C;">17</span><span>	vim.api.</span><span style="color: #89B4FA;font-style: italic;">nvim_win_set_width</span><span>(</span><span style="color: #FAB387;">0</span><span>, </span><span style="color: #FAB387;">20</span><span>)</span></span>
+<span class="giallo-l"><span aria-hidden="true" class="giallo-ln" style="color: #7F849C;">18</span><span style="color: #CBA6F7;">end</span><span>)</span></span>
+<span class="giallo-l"><span aria-hidden="true" class="giallo-ln" style="color: #7F849C;">19</span><span style="color: #89B4FA;font-style: italic;">keymap</span><span>(</span><span style="color: #A6E3A1;">&quot;n&quot;</span><span>, </span><span style="color: #A6E3A1;">&quot;&lt;leader&gt;rf&quot;</span><span>, win_focus)</span></span></code></pre>
+<p><a rel="external" href="https://github.com/brennenputh/dotfiles/blob/cf2246d3eea2f0b1a14ca31be448d00a74fe16ae/nvim/lua/keymaps.lua#L50-L73">See it in context!</a></p>
+<h2 id="resizing-mappings">Resizing Mappings</h2>
+<p>This requires the <a rel="external" href="https://github.com/pogyomo/winresize.nvim">winresize.nvim</a> plugin.</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;" ><code data-lang="lua"><span class="giallo-l"><span aria-hidden="true" class="giallo-ln" style="color: #7F849C;"> 1</span><span style="color: #CBA6F7;">local</span><span style="color: #89B4FA;font-style: italic;"> win_resize</span><span style="color: #94E2D5;"> =</span><span style="color: #CBA6F7;"> function</span><span style="color: #9399B2;">(</span><span style="color: #EBA0AC;font-style: italic;">win</span><span style="color: #9399B2;">,</span><span style="color: #EBA0AC;font-style: italic;"> amt</span><span style="color: #9399B2;">,</span><span style="color: #EBA0AC;font-style: italic;"> dir</span><span style="color: #9399B2;">)</span></span>
+<span class="giallo-l"><span aria-hidden="true" class="giallo-ln" style="color: #7F849C;"> 2</span><span style="color: #CBA6F7;">	return function</span><span style="color: #9399B2;">()</span></span>
+<span class="giallo-l"><span aria-hidden="true" class="giallo-ln" style="color: #7F849C;"> 3</span><span style="color: #89B4FA;font-style: italic;">		require</span><span>(</span><span style="color: #A6E3A1;">&quot;winresize&quot;</span><span>).</span><span style="color: #89B4FA;font-style: italic;">resize</span><span>(win, amt, dir)</span></span>
+<span class="giallo-l"><span aria-hidden="true" class="giallo-ln" style="color: #7F849C;"> 4</span><span style="color: #CBA6F7;">	end</span></span>
+<span class="giallo-l"><span aria-hidden="true" class="giallo-ln" style="color: #7F849C;"> 5</span><span style="color: #CBA6F7;">end</span></span>
+<span class="giallo-l"><span aria-hidden="true" class="giallo-ln" style="color: #7F849C;"> 6</span></span>
+<span class="giallo-l"><span aria-hidden="true" class="giallo-ln" style="color: #7F849C;"> 7</span><span style="color: #89B4FA;font-style: italic;">wk_add</span><span>(</span><span style="color: #A6E3A1;">&quot;&lt;leader&gt;r&quot;</span><span>, </span><span style="color: #A6E3A1;">&quot;Window Resize&quot;</span><span>)</span></span>
+<span class="giallo-l"><span aria-hidden="true" class="giallo-ln" style="color: #7F849C;"> 8</span><span style="color: #89B4FA;font-style: italic;">keymap</span><span>(</span><span style="color: #A6E3A1;">&quot;n&quot;</span><span>, </span><span style="color: #A6E3A1;">&quot;&lt;leader&gt;rh&quot;</span><span>, </span><span style="color: #89B4FA;font-style: italic;">win_resize</span><span>(</span><span style="color: #FAB387;">0</span><span>, </span><span style="color: #FAB387;">10</span><span>, </span><span style="color: #A6E3A1;">&quot;left&quot;</span><span>))</span></span>
+<span class="giallo-l"><span aria-hidden="true" class="giallo-ln" style="color: #7F849C;"> 9</span><span style="color: #89B4FA;font-style: italic;">keymap</span><span>(</span><span style="color: #A6E3A1;">&quot;n&quot;</span><span>, </span><span style="color: #A6E3A1;">&quot;&lt;leader&gt;rj&quot;</span><span>, </span><span style="color: #89B4FA;font-style: italic;">win_resize</span><span>(</span><span style="color: #FAB387;">0</span><span>, </span><span style="color: #FAB387;">3</span><span>, </span><span style="color: #A6E3A1;">&quot;down&quot;</span><span>))</span></span>
+<span class="giallo-l"><span aria-hidden="true" class="giallo-ln" style="color: #7F849C;">10</span><span style="color: #89B4FA;font-style: italic;">keymap</span><span>(</span><span style="color: #A6E3A1;">&quot;n&quot;</span><span>, </span><span style="color: #A6E3A1;">&quot;&lt;leader&gt;rk&quot;</span><span>, </span><span style="color: #89B4FA;font-style: italic;">win_resize</span><span>(</span><span style="color: #FAB387;">0</span><span>, </span><span style="color: #FAB387;">3</span><span>, </span><span style="color: #A6E3A1;">&quot;up&quot;</span><span>))</span></span>
+<span class="giallo-l"><span aria-hidden="true" class="giallo-ln" style="color: #7F849C;">11</span><span style="color: #89B4FA;font-style: italic;">keymap</span><span>(</span><span style="color: #A6E3A1;">&quot;n&quot;</span><span>, </span><span style="color: #A6E3A1;">&quot;&lt;leader&gt;rl&quot;</span><span>, </span><span style="color: #89B4FA;font-style: italic;">win_resize</span><span>(</span><span style="color: #FAB387;">0</span><span>, </span><span style="color: #FAB387;">10</span><span>, </span><span style="color: #A6E3A1;">&quot;right&quot;</span><span>))</span></span>
+<span class="giallo-l"><span aria-hidden="true" class="giallo-ln" style="color: #7F849C;">12</span><span style="color: #89B4FA;font-style: italic;">keymap</span><span>(</span><span style="color: #A6E3A1;">&quot;n&quot;</span><span>, </span><span style="color: #A6E3A1;">&quot;&lt;leader&gt;r=&quot;</span><span>, </span><span style="color: #A6E3A1;">&quot;&lt;C-w&gt;=&quot;</span><span>, { desc</span><span style="color: #94E2D5;"> =</span><span style="color: #A6E3A1;"> &quot;Equalize Windows&quot; </span><span>})</span></span></code></pre>
+<p><a rel="external" href="https://github.com/brennenputh/dotfiles/blob/cf2246d3eea2f0b1a14ca31be448d00a74fe16ae/nvim/lua/keymaps.lua#L43-L68">See it in context!</a></p>
+
+
+</div>
+    </main>
+  </body>
+</html>

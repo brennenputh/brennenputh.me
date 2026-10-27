@@ -1,0 +1,147 @@
+<!doctype html>
+<!-- vim: set ft=tera: -->
+
+<!-- vim: set ft=tera: -->
+
+<html lang="en">
+  <head>
+    
+  
+      <meta charset="utf-8" />
+      <link rel="stylesheet" href="/main.css" />
+      <meta name="color-scheme" content="light dark" />
+      <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    
+  <link rel="stylesheet" href="/blog/post.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.18.4/dist/katex.min.css" integrity="sha384-u1zONI5gPXUx0UKI62c75/zww972y0v2rSK5ZYlVdS6xEuWDeZWUI66v6t1gvlXJ" crossorigin="anonymous">
+
+  <!-- KaTeX Support -->
+  <!-- The loading of KaTeX is deferred to speed up page rendering -->
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.18.4/dist/katex.min.js" integrity="sha384-ykMNcWQhhTUb0YV9SPpPUFURHZ+tWmubkakGBP+OgNK/UXdO2gtzglWx0Rj9hnO3" crossorigin="anonymous"></script>
+  <!-- To automatically render math in text elements, include the auto-render extension: -->
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.18.4/dist/contrib/auto-render.min.js" integrity="sha384-bjyGPfbij8/NDKJhSGZNP/khQVgtHUE5exjm4Ydllo42FwIgYsdLO2lXGmRBf5Mz" crossorigin="anonymous"
+      onload="renderMathInElement(document.body);"></script>
+
+    
+  <title>Websites Should Be Printable</title>
+
+    
+      <meta name="description" content="A place for the personal blog, projects, and wanderings of Brennen Puth.">
+      <meta property="og:url" content="https://brennenputh.me/blog/printable-websites/">
+      <meta property="og:site_name" content="Brennen Puth">
+      <link rel="canonical" href="https://brennenputh.me/blog/printable-websites/" />
+    
+    
+  <meta property="og:title" content="Websites Should Be Printable">
+  <meta property="og:description" content="I read a lot of printed papers these days. While I enjoy reading on a laptop as much as the next guy, marking up a printed document engages me better. Also, there&#39;s something about sitting with a whit…">
+  <meta property="og:type" content="article">
+
+    
+      <link rel="alternate" type="application/rss+xml" title="RSS" href="https://brennenputh.me/rss.xml">
+    
+  </head>
+
+  <body>
+    <header>
+      <h4>Brennen Puth</h4>
+      <a href="/">Home</a>
+      <a href="https://brennenputh.me/projects/">Projects</a>
+      <a href="https://brennenputh.me/contact/">Contact</a>
+    </header>
+    <main>
+      <div class="container">
+<h1 class="title">
+  Websites Should Be Printable
+</h1>
+<p class="subtitle">2026-10-24</p>
+
+<details class="job-search">
+  <summary>I'm looking for work! (click to expand)</summary>
+  <div>
+    <p>
+      If you have questions or thoughts on the post I'd love to <a href="https://brennenputh.me/contact/">hear about it!</a>
+      I'm currently looking for work in the northeastern US. I'll be graduating with a BS in both Computer Science and Cyber Operations at the end of the school year.
+      I have worked in web application development and Java, and I have experience in Rust, C++, Python, and various other languages.
+      If you're curious about what I've done in the past, I keep up a short list of projects <a href="https://brennenputh.me/projects/">here</a> or <a href="https://brennenputh.me/contact/">contact me</a> to give me a place to send my resume.
+      I figure anyone who reads my posts will have an interesting offer, so all leads are appreciated!
+    </p>
+  </div>
+</details>
+
+<p>I read a lot of printed papers these days. While I enjoy reading on a laptop as much as the next guy, marking up a printed document engages me better. Also, there's something about sitting with a whiteboard and a printed document that makes me rightly feel like I'm doing something important. So I've been thinking about how to best allow others to enjoy this medium for content that I write.</p>
+<p>Luckily for me, printed documents were a major focus of web design a while ago. You can print any webpage you like, by hitting CTRL-P and hoping your printer driver decides to cooperate today.
+I tested this on my own webpage, foolishly thinking I would have a decent print job without any effort.</p>
+<style>
+img {
+    max-width: 100%;
+    min-width: 400px;
+    height: auto;
+}
+</style>
+<img src="https://brennenputh.me/processed_images/original_printed.81c3aa95a909b4ab.png" />
+<p>It wasn't great, although you can at least see all the content. The text was too big by about 2 levels, the header looks awful when printed, and my links look awfully gray in black-and-white. Totally unacceptable.</p>
+<h3 id="making-things-printable">Making Things Printable</h3>
+<p><strong>Edit 2026-10-26:</strong> I feel it's relevant to say, this has almost entirely changed already because of feedback I received from people both on lobste.rs and HN about obvious things I'd missed. I'm currently simplifying my stylesheet as much as I can. Thanks!</p>
+<p>Luckily, the web community has had this aforementioned focus on printing documents from HTML pages. CSS has selectors to allow styling specifically printed content, and they can be useful. Here's my print-related snippet for this page now:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;" ><code data-lang="css"><span class="giallo-l"><span style="color: #9399B2;">.</span><span style="color: #F9E2AF;">onlyPrint</span><span style="color: #9399B2;"> {</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;">  display</span><span style="color: #94E2D5;">:</span><span> none</span><span style="color: #9399B2;">;</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">@media</span><span> print</span><span style="color: #9399B2;"> {</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">  .</span><span style="color: #F9E2AF;">noPrint</span><span style="color: #9399B2;"> {</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;">    display</span><span style="color: #94E2D5;">:</span><span> none</span><span style="color: #9399B2;">;</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">  }</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;">  .</span><span style="color: #F9E2AF;">onlyPrint</span><span style="color: #9399B2;"> {</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;">    display</span><span style="color: #94E2D5;">:</span><span> inline</span><span style="color: #9399B2;">;</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">  }</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89B4FA;">  p</span><span style="color: #9399B2;">,</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;">  ol</span><span style="color: #9399B2;"> {</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;">    font-size</span><span style="color: #94E2D5;">:</span><span style="color: #FAB387;"> 12</span><span style="color: #CBA6F7;">pt</span><span style="color: #9399B2;">;</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">  }</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89B4FA;">  h3</span><span style="color: #9399B2;">,</span><span style="color: #89B4FA;"> h4</span><span style="color: #9399B2;"> {</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;">    font-size</span><span style="color: #94E2D5;">:</span><span style="color: #FAB387;"> 13</span><span style="color: #CBA6F7;">pt</span><span style="color: #9399B2;">;</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">  }</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89B4FA;">  h2</span><span style="color: #9399B2;"> {</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;">    font-size</span><span style="color: #94E2D5;">:</span><span style="color: #FAB387;"> 14</span><span style="color: #CBA6F7;">pt</span><span style="color: #9399B2;">;</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">  }</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89B4FA;">  h1</span><span style="color: #9399B2;"> {</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;">    font-size</span><span style="color: #94E2D5;">:</span><span style="color: #FAB387;"> 16</span><span style="color: #CBA6F7;">pt</span><span style="color: #9399B2;">;</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">  }</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;">  .</span><span style="color: #F9E2AF;">giallo</span><span style="color: #9399B2;"> {</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;">    border</span><span style="color: #94E2D5;">:</span><span style="color: #FAB387;"> 3</span><span style="color: #CBA6F7;">px</span><span> solid black</span><span style="color: #9399B2;">;</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">  }</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;">  .</span><span style="color: #F9E2AF;">giallo-l</span><span style="color: #9399B2;"> {</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;">    font-size</span><span style="color: #94E2D5;">:</span><span style="color: #FAB387;"> 11</span><span style="color: #CBA6F7;">pt</span><span style="color: #9399B2;">;</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">  }</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89B4FA;">  a</span><span style="color: #9399B2;"> {</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;">    color</span><span style="color: #94E2D5;">:</span><span> black</span><span style="color: #CBA6F7;"> !important</span><span style="color: #9399B2;">;</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">  }</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">}</span></span></code></pre>
+<p>You can see the effects of this snippet by hitting CTRL-P or the print button on this page. Here's the functions this does for me, in order:</p>
+<ol>
+<li><code>onlyPrint</code> can be added as a class to allow elements which only show up in the printed document. Right now, that means tagging a small author attribution to the subtitle.</li>
+<li><code>noPrint</code> is used to remove something from the printed website. I put it on the header, because it looks honestly very ugly in printed format.</li>
+<li>Adjusting font sizes for print is very important. The variable-scale text which I use on my website looks awful on a printed page. <code>12pt</code> is a fairly well accepted size, so I figured it'll do. A slightly larger size for the headers makes sense as well.</li>
+<li>The <code>giallo</code> tweaks are for codeblocks. Honestly, codeblocks are still the ugliest part even after some tweaking. They want to come out as one chunk and not break over page borders, and if anyone has a solution to that I'd be greatly appreciative.</li>
+<li>Blue links, as much as I like them on the site, look awful in grayscale. Turning them the same color as other text is fine.
+Feel free to pull any code you like from the CSS, I'm not protective of it. I would personally love to experience more webpages that think about how printing works.</li>
+</ol>
+<h3 id="why-you-should-do-this">Why You Should Do This</h3>
+<p>After attempting to optimize my website in this way, I am sympathetic for those who wouldn't prioritize printing. Hiding and showing all the right things in print took me a decent chunk of my morning. My site isn't very complex. I also doubt how many people regularly print webpages out. I might be the only one.</p>
+<p>Still, if all your website consists of is text, allowing people to experience the text in their favorite medium is never a bad thing. The digital medium allows a lot of flexibility. The road to good software is paved with kindnesses from software engineers to their users. One day, perhaps someone shall find this kindness and smile, even if just for a fleeting moment. And that will be worth it.</p>
+<hr />
+<p><strong>Edit 2026-10-26:</strong> I was informed by a friend that this post ended up on the front page of HN and lobste.rs after I submitted it. Fun! Despite the several flaws I am now informed of in my CSS, I hope this article at least pushes a few to consider this medium more carefully. Thanks all for reading!</p>
+
+
+</div>
+    </main>
+  </body>
+</html>
