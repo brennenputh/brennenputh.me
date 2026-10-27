@@ -44,7 +44,9 @@
   {% endfor %}
 </div>
 
-<a href="{{ get_url(path="@/blog/_index.md")}}">All Posts</a>
+<a href="{{ get_url(path="@/blog/_index.md")}}">
+  <div class="all-link">All Posts</div>
+</a>
 
 <hr />
 
@@ -67,7 +69,9 @@
   {% endfor %}
 </div>
 
-<a href="{{ get_url(path="@/reading/_index.md")}}">All Notes</a>
+<a href="{{ get_url(path="@/reading/_index.md")}}">
+  <div class="all-link">All Notes</div>
+</a>
 
 
 {% endblock content %}

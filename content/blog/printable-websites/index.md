@@ -21,6 +21,8 @@ It wasn't great, although you can at least see all the content. The text was too
 
 ### Making Things Printable
 
+**Edit 2026-10-26:** I feel it's relevant to say, this has almost entirely changed already because of feedback I received from people both on lobste.rs and HN about obvious things I'd missed. I'm currently simplifying my stylesheet as much as I can. Thanks!
+
 Luckily, the web community has had this aforementioned focus on printing documents from HTML pages. CSS has selectors to allow styling specifically printed content, and they can be useful. Here's my print-related snippet for this page now:
 
 ```css

@@ -11,7 +11,7 @@
   --secondary-text-color: light-dark(#222, #aaa);
   --inline-code-color: white;
 
-  --site-width: min(1000px, 100% - 4rem);
+  --site-width: min(750px, 100% - 4rem);
 
   color-scheme: dark light;
   background-color: var(--primary-color);
@@ -28,7 +28,8 @@ header {
   display: flex;
 
   border-radius: 0px 0px 10px 10px;
-  box-shadow: 0 0 5px var(--secondary-color);
+  border: 5px var(--secondary-color) solid;
+  border-top: 0;
 
   > * {
     vertical-align: center;
@@ -44,7 +45,7 @@ header {
 
 body {
   max-width: var(--site-width);
-  margin: 0 auto 1em;
+  margin: 0 auto 2em;
   line-height: 1.4;
 }
 
@@ -79,6 +80,7 @@ blockquote {
   background-color: var(--codeblock-color) !important;
   overflow: auto;
   width: 100%;
+  font-size: large;
 
   code {
     width: 100%;
@@ -127,11 +129,10 @@ a:has(.page-item) {
   text-decoration: none;
 }
 
-.page-item {
+.page-item, .all-link {
   margin: 0.3em 0;
   background-color: var(--secondary-color);
   padding: 0.3em 0.5em;
-  border-radius: 5px;
 
   &:hover {
     background-color: color-mix(in srgb, var(--secondary-color), white 20%);
@@ -139,13 +140,6 @@ a:has(.page-item) {
 
   > * {
     margin: 2px 0;
-  }
-
-  .page-description {
-    display: none;
-    overflow-y: hidden;
-    color: var(--text-color);
-    margin: 0;
   }
 
   .page-title {
@@ -160,10 +154,15 @@ a:has(.page-item) {
   }
 }
 
+.all-link {
+  text-align: center;
+  font-size: large;
+}
+
 @media print {
   header {
     padding: 0;
-    box-shadow: none;
+    border: none;
 
     h4 {
       margin-left: 0;
