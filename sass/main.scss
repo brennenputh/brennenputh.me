@@ -1,5 +1,3 @@
-@use "./print.scss";
-
 :root {
   --primary-color: light-dark(#fff, #222);
   --secondary-color: light-dark(#dadada, #3a3a3a);
@@ -26,7 +24,7 @@ main {
 
 header {
   padding: 10px 10px;
-  font-size: 16pt;
+  font-size: x-large;
   display: flex;
 
   border-radius: 0px 0px 10px 10px;
@@ -147,7 +145,6 @@ a:has(.page-item) {
     display: none;
     overflow-y: hidden;
     color: var(--text-color);
-    font-size: 12pt;
     margin: 0;
   }
 
@@ -160,6 +157,24 @@ a:has(.page-item) {
     display: flex;
 
     color: var(--secondary-text-color);
-    font-size: 75%;
+  }
+}
+
+@media print {
+  header {
+    padding: 0;
+    box-shadow: none;
+
+    h4 {
+      margin-left: 0;
+    }
+  }
+
+  .job-search {
+    display: none;
+  }
+
+  .giallo {
+    border: 2px solid black;
   }
 }
