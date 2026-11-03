@@ -149,7 +149,6 @@ a:has(.page-item) {
 
   .page-info {
     display: flex;
-
     color: var(--secondary-text-color);
   }
 }
@@ -175,5 +174,17 @@ a:has(.page-item) {
 
   .giallo {
     border: 2px solid black;
+  }
+
+  .giallo, code, .giallo-l {
+    background-color: white !important;
+  }
+
+  .giallo-l {
+    border: none;
+  }
+    
+  .giallo-l > span, code {
+    color: black !important;
   }
 }
